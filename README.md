@@ -5,7 +5,9 @@ An immediate mode (IM) procedural 2D drawing package for Unity. It's usefull for
 
 Tested with Unity 2023.3 and supporting BiRP, URP, and HDRP.
 
-![Using Static](https://raw.githubusercontent.com/cecarlsen/Plot_DEV/master/ReadmeImages/Plot_01API_01UsingStatic.png?token=GHSAT0AAAAAACVKYLKP5QYPSFLWPEMB63G2ZVY2ANA)
+<img width="804" alt="Plot_01API_01UsingStatic" src="https://github.com/user-attachments/assets/605211a4-2810-49bf-a33c-02b264ba4915">
+
+![Using Static](https://github.com/user-attachments/assets/605211a4-2810-49bf-a33c-02b264ba4915)
 
 ## Installment
 
