@@ -1,7 +1,7 @@
 
 # Plot
 
-An immediate mode (IM) procedural 2D drawing package for Unity. It's usefull for smaller data visualisations, visual code sketches, and for learning how to code.
+An immediate mode (IM) procedural 2D drawing package for Unity. Usefull for smaller data visualisations, visual code sketches, and for learning how to code.
 
 Tested with Unity 2023.3 and supporting BiRP, URP, and HDRP.
 
