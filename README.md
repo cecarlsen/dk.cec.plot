@@ -18,7 +18,7 @@ Plot depends on TextMeshPro, which should be installed automatically when you dr
 
 ### Included dependencies
 
-Plot contains adaped and stripped down versions of these additional sources:  
+Plot contains adapted and stripped down versions of these additional sources:  
 
 - [Earcut.net](https://github.com/oberbichler/earcut.net) by Thomas Oberbichler, for triangulation (ISC license).
 - [Chroma.js](https://github.com/gka/chroma.js) by Gregor Aisch, for JCh color conversion (BSD license).
