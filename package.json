@@ -1,0 +1,23 @@
+{
+  "name": "dk.cec.plot",
+  "version": "0.0.12",
+  "displayName": "Plot",
+  "description": "Immediate mode procedural 2D drawing in Unity.",
+  "author": {
+    "name": "Carl Emil Carlsen",
+    "email": "public@cec.dk",
+    "url": "https://cec.dk"
+  },
+  "unity": "2023.3",
+  "type": "code",
+  "samples": [
+    {
+      "displayName": "Samples",
+      "description": "All samples.",
+      "path": "Samples~"
+    }
+  ],
+  "dependencies": {
+    "com.unity.textmeshpro": ""
+  }
+}
