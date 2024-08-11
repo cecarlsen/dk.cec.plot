@@ -52,7 +52,7 @@ Shrinking without flicker (except for the polygon).
 Perceptual Colors.
 ![Perceptually Uniform Colors](https://github.com/user-attachments/assets/abd7df86-be0d-4f75-81d3-3f3ea52aa27a)
 
-Examples of donut chart variations.
+Examples of donut chart style variations.
 ![Donut Charts](https://github.com/user-attachments/assets/81435328-fab2-4d63-9d56-42d483210e4f)
 
 Recursive Tree.
