@@ -1,12 +1,18 @@
 # License
 
-[Plot](https://github.com/cecarlsen/dk.cec.plot), an immediate mode (IM) procedural 2D drawing package for Unity, is released under the standard MIT license – however, it depends on the following third party code with other licenses:
+[Plot](https://github.com/cecarlsen/dk.cec.plot), an immediate mode (IM) procedural 2D drawing package for Unity, is released under the standard MIT license – however, it depends on the following third party code that happens to have other licenses:
 
 - [Earcut.net](https://github.com/oberbichler/earcut.net) by Thomas Oberbichler, for triangulation (ISC license).
 - [Chroma.js](https://github.com/gka/chroma.js) by Gregor Aisch, for JCh color conversion (BSD license).
 
-Plot license:
-	
+In practice, this means you need to:
+
+- Include all licenses below in your code projects.
+- Include the Chroma.js BSD lincese with your products/builds/apps.
+
+
+## Plot License
+
 	MIT License
 	
 	Copyright (c) 2020-2024 Carl Emil Carlsen (https://cec.dk)
