@@ -46,8 +46,8 @@ Please read the [LICENSE.md](https://github.com/cecarlsen/dk.cec.plot/blob/main/
 Shape functions: Rect, Circle, Ring, Arc, Polygon, Polyline, Line.
 ![Components](https://github.com/user-attachments/assets/e2534cac-e30a-460e-97af-e8c8ee2c213d)
 
-Shinking shapes without flicker.
-![Shink Without Flicker](https://github.com/user-attachments/assets/43f7dc8a-fe3b-4956-b32f-c8b3affb0f44)
+Shrinking without flicker (except for the polygon).
+![Shrink Without Flicker](https://github.com/user-attachments/assets/43f7dc8a-fe3b-4956-b32f-c8b3affb0f44)
 
 Perceptual Colors.
 ![Perceptually Uniform Colors](https://github.com/user-attachments/assets/abd7df86-be0d-4f75-81d3-3f3ea52aa27a)
