@@ -4,6 +4,10 @@
 	Albuquerque, New Mexico
 	complexification.net
 
+	Processing 0085 Beta syntax update
+	j.tarbell   April, 2005
+
+	Code originating from:
 	http://www.complexification.net/gallery/machines/substrate/
 
 	Ported to Unity and Plot by Carl Emil Carlsen 2021.
