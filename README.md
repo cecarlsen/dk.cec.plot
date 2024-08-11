@@ -10,7 +10,7 @@ Tested with Unity 2023.3 and supporting BiRP, URP, and HDRP.
 
 ## Installment
 
-Plot is contained in a custom Unity package. Download the whole reposity and place the folder inside */Packages* in your Unity project. Then have a look at the scenes inside */Packages/Plot/Samples*.
+This repository is structed as a custom Unity package, just download the entire thing and place the folder inside */Packages* in your Unity project.
 
 ### Package dependencies
 
@@ -38,7 +38,7 @@ Plot is written by [Carl Emil Carlsen](https://cec.dk).
 
 ## License
 
-Please read the LICENSE.md file.
+Please read the [LICENSE.md](https://github.com/cecarlsen/dk.cec.plot/blob/main/LICENSE.md) file.
 
 
 ## Screenshots
