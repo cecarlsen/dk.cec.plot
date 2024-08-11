@@ -1,21 +1,24 @@
-##0.0.12 (2022/08/XX)
+# Changelog
 
-**Changes**
+
+## [0.0.13] - 2024-08-11
+
+- Updated to Unity 2022.3.
+- Moved project to custom package.
+
+
+## [0.0.12] - 2022-08-01
 
 - Updated to Unity 2022.1.
 - Fixed Polygon not rendering stroke.
 
 
-##0.0.11 (2021/11/18)
-
-**Changes**
+## [0.0.11] - 2021-11-18
 
 - Split the Plot class into partial classes and separated out TextMeshPro.
 
 
-##0.0.10 (2021/09/19)
-
-**Fixes**
+## [0.0.10] 2021-09-19
 
 - Added DrawToRenderTexture example.
 - Added J. Tarbells Substrate as example.
@@ -25,18 +28,14 @@
 - Arc angles now follows trigonometry (right is zero, increasing anti-clockwise) rather than mimicking a clock.
 
 
-##0.0.9 (2021/08/01)
-
-**CHANGES**
+## [0.0.9] 2021-08-01
 
 - Updated all plot components.
 - Added Plot.SetLayer() supporting layers
 - Added RotateCanvas() overrides for 3-axus euler and quaternion.
 
 
-##0.0.8 (2021/07/27)
-
-**CHANGES**
+## [0.0.8] 2021-07-27
 
 - Added PlotRect and PlotRing components.
 - Labels are now hidden in hierarchy by default.
@@ -44,9 +43,7 @@
 - Fixed long standing issue with arc anti-aliasing.
 
 
-##0.0.7 (2021/01/01)
-
-**CHANGES**
+## [0.0.7] 2021-01-01
 
  - Added Arc argument constrainAngleSpanToRoundness.
  - Added field size argument for DrawText().
@@ -55,16 +52,12 @@
  - Added more argument options for SetFillTextureTint().
 
 
-##0.0.6 (2020/12/01)
-
-**CHANGES**
+## [0.0.6] 2020-12-01
 
  - Renamed LineRenderer to LinePRenderer to avoid name collision.
 
 
-##0.0.5 (2020/12/02)
-
-**CHANGES**
+## [0.0.5] 2020-12-02
 
 - Added SetFillTexture support (except for Polygon).
 - Added SetStrokeCornerProfile.
@@ -84,18 +77,14 @@
 - Fixed transformations with strokes not scaling correctly.
 
 
-##0.0.4 (2020/10/05)
-
-**CHANGES**
+## [0.0.4] 2020-10-05
 
 - Fixed SetNoFill issue.
 - Added checks for unnecessary matrix operations.
 - Implemented antialiasing for polygons without stroke.
 
 
-##0.0.3 (2020/10/04)
-
-**CHANGES**
+## [0.0.3] 2020-10-04
 
 - Optimised polygon triangulation.
 - Fixed NoStroke issue.
@@ -105,9 +94,7 @@
 - Moved DrawLinePoints, DrawPolylinePoints and DrawPolygonLinePoints into a static DrawDebug class.
 
 
-##0.0.2 (2020/09/30)
-
-**CHANGES**
+## [0.0.2] 2020-09-30
 
 - Added SetAntialiasing option.
 - Implemented caps and CapAlignment for Polyline.
@@ -116,8 +103,6 @@
 - Improved the Earcut triangulation for Unity.
 
 
-##0.0.1 (2020/09/29)
+## [0.0.1] 2020-09-29
 
-**CHANGES**
-
-- First public version, for educational use.
+- First version, for educational use only.

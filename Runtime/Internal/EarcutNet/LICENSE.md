@@ -1,8 +1,8 @@
 ISC License
 
-Copyright (c) 2018, Thomas Oberbichler
+Copyright (c) 2018, Thomas Oberbichler.
 
-Adapted slightly to Unity by Carl Emil Carlsen (2020).
+Modified 2020, Carl Emil Carlsen.
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice

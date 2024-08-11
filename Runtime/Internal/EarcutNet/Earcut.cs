@@ -2,11 +2,15 @@
 	Earcut.NET
 	https://github.com/oberbichler/earcut.net
 
-	Earcut.NET is a port of earcut.js by Mapbox, both of which are under ISC license.
+	Earcut.net is a port of earcut.js by Mapbox, both of which are under ISC license.
+
+	_________________________________________________________________________________
+
+	ISC License
 
 	Copyright (c) 2018, Thomas Oberbichler.
 
-	Adapted slightly to Unity by Carl Emil Carlsen (2020-2021).
+	Modified 2020, Carl Emil Carlsen.
 
 	Permission to use, copy, modify, and/or distribute this software for any purpose
 	with or without fee is hereby granted, provided that the above copyright notice

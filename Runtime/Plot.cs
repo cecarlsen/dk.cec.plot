@@ -7,7 +7,7 @@
 	=========
 	
 	Shapes are Rendered using PRenderers, each having their own shader. For exampe, 
-	circles and rings are rendered using RingPRenderer (Ring.shader). To handle multipe 
+	circles and rings are rendered using RingPRenderer (Ring.shader). To handle multiple 
 	shader features (multi compile), each PRenderer keeps a pool of materials. Some style
 	modifiers, like SetFillTexture, will enable a shader feature. When features change
 	from one draw call to the next, naturally, instancing won't work.
