@@ -31,6 +31,13 @@ Please go through the scenes located in *dk.cec.plot/Samples* in chronological o
 API docs are in the making!
 
 
+## Known issues
+
+- Polygons will flicker when very small and moving (not going to be fixed).
+- The combination of StrokeCornerProfile.Round and StrokeAlignment.Inside or Edge does not work for Rects and Polygons.
+- SetFillTexture not implemented for Polygon. 
+
+
 ## Author
 
 Plot is written by [Carl Emil Carlsen](https://cec.dk).
