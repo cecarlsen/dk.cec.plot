@@ -5,9 +5,8 @@ An immediate mode (IM) procedural 2D drawing package for Unity. It's usefull for
 
 Tested with Unity 2023.3 and supporting BiRP, URP, and HDRP.
 
-<img width="804" alt="Plot_01API_01UsingStatic" src="https://github.com/user-attachments/assets/605211a4-2810-49bf-a33c-02b264ba4915">
-
 ![Using Static](https://github.com/user-attachments/assets/605211a4-2810-49bf-a33c-02b264ba4915)
+
 
 ## Installment
 
@@ -31,6 +30,7 @@ Please go through the scenes located in *dk.cec.plot/Samples* in chronological o
 
 API docs are in the making!
 
+
 ## Author
 
 Plot is written by [Carl Emil Carlsen](https://cec.dk).
@@ -40,18 +40,20 @@ Plot is written by [Carl Emil Carlsen](https://cec.dk).
 
 Please read the LICENSE.md file.
 
+
 ## Screenshots
 
 Shape functions: Rect, Circle, Ring, Arc, Polygon, Polyline, Line.
-![Components](https://raw.githubusercontent.com/cecarlsen/Plot_DEV/master/ReadmeImages/Plot_01API_02PlotComponents.png?token=GHSAT0AAAAAACVKYLKPA4SY6AVSA3XE5VOUZVY2CUA)
+![Components](https://github.com/user-attachments/assets/e2534cac-e30a-460e-97af-e8c8ee2c213d)
 
 Shinking shapes without flicker.
-![Shink Without Flicker](https://raw.githubusercontent.com/cecarlsen/Plot_DEV/master/ReadmeImages/Plot_01API_07%20ShinkWithoutFlicker.png?token=GHSAT0AAAAAACVKYLKPCFMYZ4K5QQESXFKWZVY2E4Q)
+![Shink Without Flicker](https://github.com/user-attachments/assets/43f7dc8a-fe3b-4956-b32f-c8b3affb0f44)
 
 Perceptual Colors.
-![Shink Without Flicker](https://raw.githubusercontent.com/cecarlsen/Plot_DEV/master/ReadmeImages/Plot_01API_08PerceptualColors_02PerceptuallyUniformColors.png?token=GHSAT0AAAAAACVKYLKPSMO22KBBKGTNFLR4ZVY2GKQ)
+![Perceptually Uniform Colors](https://github.com/user-attachments/assets/abd7df86-be0d-4f75-81d3-3f3ea52aa27a)
 
 Examples of donut chart variations.
-![Shink Without Flicker](https://github.com/cecarlsen/Plot_DEV/blob/master/ReadmeImages/Plot_02Vis_02DonutChart.png)
+![Donut Charts](https://github.com/user-attachments/assets/81435328-fab2-4d63-9d56-42d483210e4f)
 
-https://github.com/cecarlsen/Plot_DEV/blob/master/ReadmeImages/Plot_02Vis_02DonutChart.png
+Recursive Tree.
+![Shink Without Flicker](https://github.com/user-attachments/assets/bfadbb8a-2d61-4d7d-a3e8-f9bbd405fd6b)
