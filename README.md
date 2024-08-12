@@ -10,7 +10,7 @@ Tested with Unity 2023.3 and supporting BiRP, URP, and HDRP.
 
 ## Installment
 
-This repository is structed as a custom Unity package, so just download the entire thing and place it inside */Packages* in your Unity project.
+This repository is structured as a custom Unity package, so just download the entire thing and place it inside */Packages* in your Unity project.
 
 ### Package dependencies
 
