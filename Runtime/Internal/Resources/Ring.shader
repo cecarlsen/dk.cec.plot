@@ -113,7 +113,7 @@ Shader "Hidden/Draw/Ring"
 					o.uv = ( o.vertex.xy + 0.5 ) * texST.xy + texST.zw;
 				#endif
 
-				// Compute world space pizel size at transformed position as seen by camera.
+				// Compute world space pixel size at transformed position as seen by camera.
 				float pixelSizeWS = GetWorldSpacePixelSizeRelativeToCamera( o.vertex );
 
 				// Compute min size preserving expansion.

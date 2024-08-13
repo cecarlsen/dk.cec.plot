@@ -33,9 +33,10 @@ API docs are in the making!
 
 ## Known issues
 
-- Polygons will flicker when very small and moving (not going to be fixed).
 - The combination of StrokeCornerProfile.Round and StrokeAlignment.Inside or Edge does not work for Rects and Polygons.
+- Shrinking without flicker needs a review. See comment in Ring Shader.
 - SetFillTexture not implemented for Polygon. 
+- Polygons will flicker when very small and moving (won't fix).
 
 
 ## Author
