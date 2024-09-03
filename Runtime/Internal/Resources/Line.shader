@@ -57,13 +57,14 @@ Shader "Hidden/Draw/Line"
 			UNITY_INSTANCING_BUFFER_START( Props )
 				UNITY_DEFINE_INSTANCED_PROP( half4, _Data ) // x: meshExtentsX, y: meshExtentsY, z: roundedBeginCapFlag, w: rounedEndCapFlag,
 				UNITY_DEFINE_INSTANCED_PROP( half4, _StrokeColor )
+				//UNITY_DEFINE_INSTANCED_PROP( half4, _StrokeEndColor )
 			UNITY_INSTANCING_BUFFER_END( Props )
 
 
 			// Similar to sdRoundedBox. https://iquilezles.org/www/articles/distfunctions/distfunctions.htm
 			float SdCenteredHorizontalLineSegment( float2 p, half2 extents, half2 roundCapFlags )
 			{
-				float r = ( ( p.x < 0.0 ) ? roundCapFlags.x : roundCapFlags.y ) * extents.y;
+				float r = ( p.x < 0.0 ? roundCapFlags.x : roundCapFlags.y ) * extents.y;
 				float2 q = abs( p ) - extents + r;
 				return min( max( q.x, q.y ), 0.0 ) + length( max( q, 0.0 ) ) - r;
 			}
@@ -118,7 +119,12 @@ Shader "Hidden/Draw/Line"
 				
 				// Read properties.
 				half4 data = UNITY_ACCESS_INSTANCED_PROP( Props, _Data );
-				fixed4 strokeCol = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeColor );
+				half4 strokeCol = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeColor );
+				//half4 strokeEndCol = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeEndColor );
+
+				// Interpolate end color. (WORK IN PROGRESS)
+				//float startEndT = saturate( ( i.posSS.x / data.x ) * 0.5 + 0.5 );
+				//strokeCol = lerp( strokeCol, strokeEndCol, startEndT );
 
 				// Compute fragment size in shape space. We presume uniform shape space, so we only have to measure one dimension.
 				float fSizeShape = fwidth( i.posSS.y );

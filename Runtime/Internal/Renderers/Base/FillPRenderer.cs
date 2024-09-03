@@ -24,7 +24,7 @@ namespace PlotInternals
 		}
 
 
-		public FillPRenderer( string name,  bool antialias, Plot.Blend blend, Texture fillTexture, Plot.FillTextureBlend fillTextureBlend ) : base( name, antialias, blend )
+		public FillPRenderer( string name, bool antialias, Plot.Blend blend, Texture fillTexture, Plot.FillTextureBlend fillTextureBlend ) : base( name, antialias, blend )
 		{
 			_fillTexture = fillTexture;
 			_fillTextureBlend = fillTextureBlend;

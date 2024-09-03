@@ -14,7 +14,7 @@ public partial class Plot
 	{
 		// Notes to self:
 		//	1) We want this struct to be as light weight as possible because it will be copied a lot. Store no temporary computations.
-		//  2) This class is public to users, to don't put any rendering related stuff here.
+		//  2) This class is public to users, so don't put any rendering related stuff here.
 
 		public StrokeAlignment strokeAlignment;
 		public StrokeCornerProfile strokeCornerProfile;
@@ -43,7 +43,7 @@ public partial class Plot
 
 		public static Style GetDefault()
 		{
-			Style s = new Style();
+			var s = new Style();
 			s.antialias = defaultAntialias;
 			s.blend = defaultBlend;
 			s.fillColor = defaultFillColor;

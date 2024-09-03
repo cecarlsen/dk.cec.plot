@@ -146,7 +146,7 @@ half4 EvaluateFillStrokeColor
 		// Check for discard.
 		if( d > strokeWidth ) discard;
 
-		// Swtich between fill and stroke colors.
+		// Switch between fill and stroke colors.
 		half4 col = lerp( fillCol, strokeCol, saturate( ceil( d ) ) );
 	#endif
 
