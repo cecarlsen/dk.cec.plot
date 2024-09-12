@@ -86,7 +86,7 @@ namespace PlotInternals
 				//Debug.Log( _material.enableInstancing + " " + _material.GetHashCode() );
 				_propBlock.SetVector( ShaderIDs.vertData, vertData );
 				_propBlock.SetVector( ShaderIDs.fragData, fragData );
-				Graphics.DrawMesh( mesh, matrix, _material, style.layer, null, 0, _propBlock, false, false, false );
+				Graphics.DrawMesh( mesh, matrix, _material, style.layer, camera: null, submeshIndex: 0, _propBlock, false, false, false );
 			}
 		}
 
@@ -98,9 +98,10 @@ namespace PlotInternals
 			const int vertexCount = cornerCount * 2;
 			const int indexCount = cornerCount * 4;
 
-			mesh = new Mesh();
-			mesh.name = "Ring";
-			mesh.hideFlags = HideFlags.HideAndDontSave;
+			mesh = new Mesh(){
+				name = "Ring",
+				hideFlags = HideFlags.HideAndDontSave
+			};
 
 			VertexAttributeDescriptor[] vertexDataLayout = new VertexAttributeDescriptor[] {
 				new VertexAttributeDescriptor( VertexAttribute.Position, VertexAttributeFormat.Float32, 4 ) // ( outwards.xy, radiusMult, outerFlag )

@@ -28,7 +28,7 @@ namespace PlotExamples
 			const int count = 10;
 			Random.InitState( 0 );
 			for( int i = 0; i < count; i++ ) {
-				TranslateCanvas( 0, 0, 0.1f );
+				TranslateCanvas( 0, 0, 0.1f ); // You need to separate shapes along the z axis to avoid z-fighting.
 				Vector2 position = Random.insideUnitCircle * 2;
 				SetFillColor( Color.HSVToRGB( Random.value * 0.2f, 1, 1 ), 0.9f );
 				DrawCircle( position, 1 );
