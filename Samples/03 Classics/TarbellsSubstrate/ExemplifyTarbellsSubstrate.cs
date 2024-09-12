@@ -73,7 +73,7 @@ namespace PlotExamples
 		void Update()
 		{
 			BeginDrawNowToTexture( _rt );
-			SetNoStroke();
+			SetNoStrokeColor();
 
 			// crack all cracks
 			for( int n = 0; n < _num; n++ ) _cracks[ n ].Move( this );

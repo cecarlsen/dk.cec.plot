@@ -22,7 +22,7 @@ namespace PlotExamples
 			PushCanvas();
 			PushStyle();
 
-			SetNoStroke();
+			SetNoStrokeColor();
 			SetBlend( blend );
 
 			const int count = 10;

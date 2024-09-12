@@ -230,7 +230,7 @@ public partial class Plot
 	/// Set no fill for subsequently drawn shapes.
 	/// This will effectively set the fill color to (0,0,0,0) and forget the fill texture;
 	/// </summary>
-	public static void SetNoFill()
+	public static void SetNoFillColor()
 	{
 		Instance();
 		_p._style.fillColor = Color.clear;
@@ -259,7 +259,7 @@ public partial class Plot
 	/// <summary>
 	/// Set no stroke for subsequently drawn shapes.
 	/// </summary>
-	public static void SetNoStroke()
+	public static void SetNoStrokeColor()
 	{
 		Instance();
 		_p._style.strokeColor = Color.clear;

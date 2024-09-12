@@ -60,7 +60,7 @@ public class PlotArc : MonoBehaviour
 				SetFillTextureBlend( fillTextureBlend );
 			}
 		} else {
-			SetNoFill();
+			SetNoFillColor();
 		}
 
 		if( stroke ) {
@@ -69,7 +69,7 @@ public class PlotArc : MonoBehaviour
 			SetStrokeAlignement( strokeAlignment );
 			SetStrokeCornerProfile( strokeCornerProfile );
 		} else {
-			SetNoStroke();
+			SetNoStrokeColor();
 		}
 
 		DrawArc( 0, 0, innerDiameter, outerDiameter, beginAngle, endAngle, cutoff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness );

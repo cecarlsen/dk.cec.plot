@@ -85,7 +85,7 @@ public partial class Plot
 			PushStyle();
 			PushCanvas();
 			TranslateCanvas( 0, 0, -0.001f );
-			SetNoFill();
+			SetNoFillColor();
 			SetStrokeAlignement( StrokeAlignment.Edge );
 			SetStrokeCornerProfile( StrokeCornerProfile.Hard );
 			SetStrokeColor( Color.green );
@@ -96,7 +96,7 @@ public partial class Plot
 			// Then draw pivot.
 			TranslateCanvas( 0, 0, -0.001f );
 			SetPivot( Pivot.Center );
-			SetNoStroke();
+			SetNoStrokeColor();
 			SetFillColor( Color.red );
 			DrawCircle( x, y, debugSize * 4 );
 			PopCanvas();

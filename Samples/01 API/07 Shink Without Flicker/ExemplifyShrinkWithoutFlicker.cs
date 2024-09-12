@@ -67,13 +67,13 @@ namespace PlotExamples
 				y -= offsetY * 0.5f;
 
 				if( !stroke ){
-					SetNoStroke();
+					SetNoStrokeColor();
 				} else {
 					SetStrokeWidth( ( scaledCanvasInsteadOfShapeSize ? 1 : thickness ) * 0.1f );
 					SetStrokeColor( fill ? Color.black : Color.white );
 				}
 				if( fill ) SetFillColor( Color.white );
-				else SetNoFill();
+				else SetNoFillColor();
 
 				PushCanvas();
 				TranslateCanvas( x, y -= offsetY );

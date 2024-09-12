@@ -15,7 +15,7 @@ namespace PlotExamples
 
 		void Update()
 		{
-			P.SetNoStroke();
+			P.SetNoStrokeColor();
 			P.SetFillColor( color );
 
 			P.PushCanvas();

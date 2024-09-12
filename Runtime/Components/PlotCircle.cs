@@ -48,7 +48,7 @@ public class PlotCircle : MonoBehaviour
 			SetStrokeWidth( strokeWidth );
 			SetStrokeAlignement( strokeAlignment );
 		} else {
-			SetNoStroke();
+			SetNoStrokeColor();
 		}
 
 		if( fill ) {
@@ -60,7 +60,7 @@ public class PlotCircle : MonoBehaviour
 				SetFillTextureBlend( fillTextureBlend );
 			}
 		} else {
-			SetNoFill();
+			SetNoFillColor();
 		}
 
 		DrawCircle( 0, 0, diameter );

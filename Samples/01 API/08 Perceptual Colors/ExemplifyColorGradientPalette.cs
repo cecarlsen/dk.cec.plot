@@ -26,7 +26,7 @@ namespace PlotExamples
 		{
 			PushStyle();
 			SetAntiAliasing( false ); // We need perfect alignment between shape edges, and that is not possible when shape antialiasing is enabled and blend mode is Blend.Transparent.
-			SetNoStroke();
+			SetNoStrokeColor();
 			SetPivot( Pivot.Center );
 
 			PushCanvas();

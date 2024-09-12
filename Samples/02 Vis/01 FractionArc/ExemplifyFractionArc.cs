@@ -112,7 +112,7 @@ namespace PlotExamples
 			SetCanvas( transform );
 
 			// Setup shared drawing style.
-			SetNoStroke();
+			SetNoStrokeColor();
 			SetAntiAliasing( antiAliasing );
 
 			// Compute proportions.

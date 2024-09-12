@@ -28,7 +28,7 @@ namespace PlotExamples
 
 			SetAntiAliasing( antiAliasing );
 			SetBlend( blend );
-			SetNoStroke();
+			SetNoStrokeColor();
 
 			SetFillColor( color );
 			DrawSquare( -extents, -extents, size, roundness, 0, 0, 0 );	// Lower-Left

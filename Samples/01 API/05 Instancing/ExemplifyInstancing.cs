@@ -35,7 +35,7 @@ namespace PlotExamples
 
 		void Update()
 		{
-			SetNoStroke();
+			SetNoStrokeColor();
 
 			if( _positions?.Length != count || _dirtyPhylotaxis ) GeneratePhyllotaxis();
 			if( _shapeLookup?.Length != count || _selectedMode != mode ) UpdateShapeLookup();

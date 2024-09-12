@@ -54,7 +54,7 @@ public class PlotRect : MonoBehaviour
 				SetFillTextureBlend( fillTextureBlend );
 			}
 		} else {
-			SetNoFill();
+			SetNoFillColor();
 		}
 
 		if( stroke ) {
@@ -63,7 +63,7 @@ public class PlotRect : MonoBehaviour
 			SetStrokeAlignement( strokeAlignment );
 			SetStrokeCornerProfile( strokeCornerProfile );
 		} else {
-			SetNoStroke();
+			SetNoStrokeColor();
 		}
 
 		DrawRect( 0, 0, width, height );

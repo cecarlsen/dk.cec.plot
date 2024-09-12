@@ -21,7 +21,7 @@ namespace PlotExamples
 
 		void Update()
 		{
-			SetNoStroke();
+			SetNoStrokeColor();
 
 			PushCanvas();
 			SetCanvas( transform.localToWorldMatrix );

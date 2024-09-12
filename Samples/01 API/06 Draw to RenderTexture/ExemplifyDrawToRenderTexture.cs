@@ -19,7 +19,7 @@ namespace PlotExamples
 			
 			BeginDrawNowToTexture( renderTexture, Plot.Space.Pixels );
 
-			SetNoStroke();
+			SetNoStrokeColor();
 			SetFillColor( Color.HSVToRGB( 0.5f * Random.value * 0.4f, 1f, 1f ) );
 			DrawCircleNow( Random.value * renderTexture.width, Random.value * renderTexture.height, 100f );
 

@@ -41,7 +41,7 @@ public class ExempligyNearestNeighbours : MonoBehaviour
 			}
 		}
 
-		SetNoStroke();
+		SetNoStrokeColor();
 		SetFillColor( Color.white );
 		foreach( var p in _pos ) DrawCircle( p, radius*2 );
 	}

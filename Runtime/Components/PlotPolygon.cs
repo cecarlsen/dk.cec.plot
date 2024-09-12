@@ -65,7 +65,7 @@ public class PlotPolygon : MonoBehaviour
 			//	SetFillTextureBlend( fillTextureBlend );
 			//}
 		} else { 
-			SetNoFill();
+			SetNoFillColor();
 		}
 
 		if( stroke ) {
@@ -74,7 +74,7 @@ public class PlotPolygon : MonoBehaviour
 			SetStrokeAlignement( strokeAlignment );
 			SetStrokeCornerProfile( strokeCornerProfile );
 		} else {
-			SetNoStroke();
+			SetNoStrokeColor();
 		}
 		DrawPolygon( _polygon );
 

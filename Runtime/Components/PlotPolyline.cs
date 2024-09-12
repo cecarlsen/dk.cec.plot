@@ -47,7 +47,7 @@ public class PlotPolyline : MonoBehaviour
 			SetStrokeWidth( strokeWidth );
 			SetStrokeCornerProfile( strokeCornerProfile );
 		} else {
-			SetNoStroke();
+			SetNoStrokeColor();
 		}
 
 		if( _polyline == null ) _polyline = new Polyline( points );

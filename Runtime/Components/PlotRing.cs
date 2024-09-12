@@ -53,7 +53,7 @@ public class PlotRing : MonoBehaviour
 				SetFillTextureBlend( fillTextureBlend );
 			}
 		} else {
-			SetNoFill();
+			SetNoFillColor();
 		}
 
 		if( stroke ) {
@@ -61,7 +61,7 @@ public class PlotRing : MonoBehaviour
 			SetStrokeWidth( strokeWidth );
 			SetStrokeAlignement( strokeAlignment );
 		} else {
-			SetNoStroke();
+			SetNoStrokeColor();
 		}
 
 		DrawRing( 0, 0, innerDiameter, outerDiameter );
