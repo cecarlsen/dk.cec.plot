@@ -1,6 +1,11 @@
 # Changelog
 
 
+## [0.0.14b] - 2024-09-XX
+
+	- Removed an example.
+
+
 ## [0.0.14] - 2024-09-20
 
 	- Refactored Plot partial scripts.
