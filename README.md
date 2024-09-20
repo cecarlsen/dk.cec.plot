@@ -34,6 +34,7 @@ API docs are in the making!
 ## Known issues
 
 - The combination of StrokeCornerProfile.Round and StrokeAlignment.Inside or Edge does not work for Rects and Polygons.
+- Image fill changes size inside DrawRect when stroke is enabled and disabled.
 - Shrinking without flicker needs a review. See comment in Ring Shader.
 - SetFillTexture not implemented for Polygon. 
 - Polygons will flicker when very small and moving (won't fix).

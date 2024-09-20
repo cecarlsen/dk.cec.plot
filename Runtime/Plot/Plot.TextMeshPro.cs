@@ -107,8 +107,6 @@ public partial class Plot
 
 	public static class TextHelper
 	{
-		static Font defaultFont;
-
 		public static void AdaptTextCount( Transform parentTransform, int entryCount, List<TextMeshPro> labels, TMP_FontAsset font = null, bool hideNewObjectsInHierarchy = true )
 		{
 			// If the labels list count is correct, then check if it still contains labels and have fonts.
@@ -186,19 +184,20 @@ public partial class Plot
 
 		public static Pivot AlignmentToPivot( TextAlignmentOptions alignment )
 		{
-			switch( alignment ) {
-				case TextAlignmentOptions.BottomLeft: return Plot.Pivot.BottomLeft;
-				case TextAlignmentOptions.Left: return Plot.Pivot.Left;
-				case TextAlignmentOptions.MidlineLeft: return Plot.Pivot.Left;
-				case TextAlignmentOptions.TopLeft: return Plot.Pivot.TopLeft;
-				case TextAlignmentOptions.Top: return Plot.Pivot.Top;
-				case TextAlignmentOptions.TopRight: return Plot.Pivot.TopRight;
-				case TextAlignmentOptions.Right: return Plot.Pivot.Right;
-				case TextAlignmentOptions.MidlineRight: return Plot.Pivot.Right;
-				case TextAlignmentOptions.BottomRight: return Plot.Pivot.BottomRight;
-				case TextAlignmentOptions.Bottom: return Plot.Pivot.Bottom;
+			switch( alignment )
+			{
+				case TextAlignmentOptions.BottomLeft: return Pivot.BottomLeft;
+				case TextAlignmentOptions.Left: return Pivot.Left;
+				case TextAlignmentOptions.MidlineLeft: return Pivot.Left;
+				case TextAlignmentOptions.TopLeft: return Pivot.TopLeft;
+				case TextAlignmentOptions.Top: return Pivot.Top;
+				case TextAlignmentOptions.TopRight: return Pivot.TopRight;
+				case TextAlignmentOptions.Right: return Pivot.Right;
+				case TextAlignmentOptions.MidlineRight: return Pivot.Right;
+				case TextAlignmentOptions.BottomRight: return Pivot.BottomRight;
+				case TextAlignmentOptions.Bottom: return Pivot.Bottom;
 			}
-			return Plot.Pivot.Center;
+			return Pivot.Center;
 		}
 	}
 

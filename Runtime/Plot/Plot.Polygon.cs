@@ -44,31 +44,13 @@ public partial class Plot
 		}
 
 
-		public Polygon() { }
-
-
-		public Polygon( int pointCount )
-		{
-			SetPointCount( pointCount );
-		}
-
-
 		/// <summary>
 		/// Creates a new Polygon to be drawn using Plot.DrawPolygon(). Points must be provided in clockwise order. 
 		/// </summary>
-		public Polygon( Vector2[] points )
-		{
-			SetPoints( points );
-		}
-
-
-		/// <summary>
-		/// Creates a new Polygon to be drawn using Plot.DrawPolygon(). Points must be provided in clockwise order. 
-		/// </summary>
-		public Polygon( List<Vector2> points )
-		{
-			SetPoints( points );
-		}
+		public Polygon(){}
+		public Polygon( int pointCount ){ SetPointCount( pointCount ); }
+		public Polygon( Vector2[] points ){ SetPoints( points ); }
+		public Polygon( List<Vector2> points ){ SetPoints( points ); }
 
 
 

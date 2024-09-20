@@ -1,8 +1,10 @@
 # Changelog
 
 
-## [0.0.14] - 2024-09-XX
+## [0.0.14] - 2024-09-20
 
+	- Refactored Plot partial scripts.
+	- Added scripting reference.
 	- Changed name of SetNoStroke and SetNoFill to SetNoStrokeColor and SetNoFillColor.
 	- Added DestroyImmediateOrRuntime.
 
