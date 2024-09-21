@@ -16,28 +16,19 @@ This repository is structured as a custom Unity package, so just download the en
 
 Plot depends on TextMeshPro, which should be installed automatically when you drop the package in your project.
 
-### Included dependencies
-
-Plot contains adapted and stripped down versions of these additional sources:  
-
-- [Earcut.net](https://github.com/oberbichler/earcut.net) by Thomas Oberbichler, for triangulation (ISC license).
-- [Chroma.js](https://github.com/gka/chroma.js) by Gregor Aisch, for JCh color conversion (BSD license).
-
 
 ## Gettings started
 
 Please go through the scenes located in *dk.cec.plot/Samples* in chronological order.
 
-API docs are in the making!
-
 
 ## Known issues
 
-- The combination of StrokeCornerProfile.Round and StrokeAlignment.Inside or Edge does not work for Rects and Polygons.
-- Image fill changes size inside DrawRect when stroke is enabled and disabled.
-- Shrinking without flicker needs a review. See comment in Ring Shader.
-- SetFillTexture not implemented for Polygon. 
-- Polygons will flicker when very small and moving (won't fix).
+	- Texts can vanish temporarily on code reload using ExecuteInEditMode.
+	- Image fill changes size inside DrawRect when stroke is enabled and disabled.
+	- Shrinking without flicker needs a review. See comment in Ring Shader.
+	- SetFillTexture not implemented for Polygon. 
+	- Polygons will flicker when very small and moving (won't fix).
 
 
 ## Author

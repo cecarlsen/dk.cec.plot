@@ -1,6 +1,12 @@
 # Changelog
 
 
+## [0.1.0] - 2024-09-XX
+
+	- Added a Text example.
+	- Updated how polylines, polygons, and text is created and drawn.
+
+
 ## [0.0.14b] - 2024-09-XX
 
 	- Removed an example.

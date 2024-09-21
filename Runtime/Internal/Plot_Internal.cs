@@ -7,10 +7,21 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using System.Collections.Generic;
 using PlotInternals;
+using TMPro;
 
 public partial class Plot
 {
 	static Plot _p;
+	static Plot P()
+	{
+		if( _p == null )
+		{
+			_p = new Plot();
+			SetAntiAliasing( true );
+			SetStyle( Style.GetDefault() );
+		}
+		return _p;
+	}
 
 	RingPRenderer _ringRenderer;
 	ArcPRenderer _arcRenderer;
@@ -50,6 +61,9 @@ public partial class Plot
 	const Blend defaultBlend = Blend.Transparent;
 	const FillTextureBlend defaultFillTextureBlend = FillTextureBlend.Overlay;
 	static readonly Color defaultFillTextureTint = Color.white;
+	const float defaultTextSize = 0.1f;
+	static readonly Color defaultTextColor = Color.white;
+	const TextAlignmentOptions defaultTextAlignment = TextAlignmentOptions.Center;
 
 
 	Plot()
@@ -61,20 +75,9 @@ public partial class Plot
 	}
 
 
-	static Plot Instance()
-	{
-		if( _p == null ) {
-			_p = new Plot();
-			SetAntiAliasing( true );
-			SetStyle( Style.GetDefault() );
-		}
-		return _p;
-	}
-
-
 	static void BeginDrawNowToTexture( RenderTexture rt, Space space, Color clearColor, bool clear )
 	{
-		Instance();
+		P();
 
 		// Setup render target and GL.
 		Graphics.SetRenderTarget( rt );
@@ -226,6 +229,57 @@ public partial class Plot
 		}
 
 		_polylineRenderer.Render( polyline, beginCap, endCap, drawNow, ref _matrix, ref _style );
+	}
+
+
+	void DrawTextInternal( Text text, float x, float y, float fieldWidth, float fieldHeight, bool drawDebugRect, bool drawNow = false )
+	{
+		if( !text || !text._tmpText ) return;
+
+		if( _drawingToTextureNow && !drawNow ) DebugLogDrawToTextureNowWarning();
+
+		Matrix4x4 matrix = _matrix;
+		matrix.Translate3x4( x, y );
+
+		//if( applyPlotStyle ) {
+			text._tmpText.color = _style.fillColor;
+			text._tmpText.fontSize = _style.tmpFontSize;
+			text._tmpText.alignment = _style.textAlignment;
+			text._tmpText.rectTransform.localPosition = new Vector3( x, y );
+			text._tmpText.rectTransform.pivot = new Vector2( ( _pivotPosition.x * 0.5f ) + 0.5f, ( _pivotPosition.y * 0.5f ) + 0.5f );
+			text._tmpText.rectTransform.sizeDelta = new Vector2( fieldWidth, fieldHeight ); // TODO check the performance impact of this.
+		//}
+		
+
+		if( drawNow ) {
+			text._tmpText.fontSharedMaterial.SetPass( 0 );
+			Graphics.DrawMeshNow( text._tmpText.mesh, matrix );
+		} else {
+			Graphics.DrawMesh( text._tmpText.mesh, matrix, text._tmpText.fontSharedMaterial, layer: 0 );
+		}
+
+		if( drawDebugRect ) {
+			float debugSize = Mathf.Min( fieldWidth, fieldHeight ) * 0.01f;
+			PushStyle();
+			PushCanvas();
+			TranslateCanvas( 0, 0, -0.001f );
+			SetNoFillColor();
+			SetStrokeAlignement( StrokeAlignment.Edge );
+			SetStrokeCornerProfile( StrokeCornerProfile.Hard );
+			SetStrokeColor( Color.green );
+			SetStrokeWidth( debugSize );
+			// Draw using the current pivot.
+			if( drawNow ) DrawRectNow( x, y, fieldWidth, fieldHeight );
+			else DrawRect( x, y, fieldWidth, fieldHeight );
+			// Then draw pivot.
+			TranslateCanvas( 0, 0, -0.001f );
+			SetPivot( Pivot.Center );
+			SetNoStrokeColor();
+			SetFillColor( Color.red );
+			DrawCircle( x, y, debugSize * 4 );
+			PopCanvas();
+			PopStyle();
+		}
 	}
 
 

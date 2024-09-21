@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 */
 
@@ -7,23 +7,24 @@ using UnityEngine;
 
 namespace PlotExamples
 {
-	[ExecuteInEditMode]						// Make sure that Update is called in Edit Mode.
+	[ExecuteInEditMode] // Make sure that Update is called in Edit Mode.
 	public class ExamplifyCircleStaticPlot : MonoBehaviour
 	{
 		public Color color = Color.red;
 
 		void Update()
 		{
-			Plot.SetNoStrokeColor();				// Request not stroke for subsequently drawn shapes.
-			Plot.SetFillColor( color );		// Request a fill color for subsequently drawn shapes.
+			Plot.SetNoStrokeColor();					// Request no stroke for subsequently drawn shapes.
+			Plot.SetFillColor( color );					// Request a fill color for subsequently drawn shapes.
 			
-			Plot.PushCanvas();				// Save the current canvas matrix (used later).
-			Plot.SetCanvas( transform );	// We want to draw locally to this transform.
+			Plot.PushCanvas();							// Save the current canvas matrix on the canvas stack.
+			Plot.SetCanvas( transform );				// We want to draw locally to this transform.
 		
-			Plot.DrawCircle( 0, 0, 1 );		// Draw a circle at canvas center.
+			Plot.DrawCircle( x: 0, y: 0, diameter: 1 );	// Draw a circle at canvas center.
 		
-			Plot.PopCanvas();				// Load previously saved canvas matrix to isolate transformations
-											// made in this script.
+			Plot.PopCanvas();							// Load previously saved canvas matrix from the canvas stack
+														// We do this to isolate transformations made in this script.
+
 		}
 	}
 }

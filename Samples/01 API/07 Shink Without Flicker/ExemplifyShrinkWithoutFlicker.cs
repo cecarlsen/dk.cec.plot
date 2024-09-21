@@ -24,8 +24,8 @@ namespace PlotExamples
 		public StrokeCap caps = StrokeCap.Round;
 		public StrokeAlignment strokeAlignment = StrokeAlignment.Outside;
 
-		Polygon _polygon = new Polygon( 4 );
-		Polyline _polyline = new Polyline( 2 );
+		Polygon _polygon = CreatePolygon( 4 );
+		Polyline _polyline = CreatePolyline( 2 );
 
 
 		void Update()

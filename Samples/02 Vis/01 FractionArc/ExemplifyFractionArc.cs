@@ -1,13 +1,11 @@
 /*
-	Copyright © Carl Emil Carlsen 2021
+	Copyright © Carl Emil Carlsen 2021-2024
 	http://cec.dk
 */
 
 using UnityEngine;
 using static Plot;
-#if TMP_PRESENT // Only use TextMeshPro if the user has declared that it is imported.
 using TMPro;
-#endif
 
 namespace PlotExamples
 {
@@ -18,7 +16,7 @@ namespace PlotExamples
 		[SerializeField,Range(0,1)] float _fraction = 0.5f;
 		[SerializeField] string _headerText = "Fraction";
 
-		[Header( "Shape" )]
+		[Header( "Shape" )] 
 		[Range(0,1)] public float diameter = 1;
 		[Range(0,1)] public float innerDiameterFactor = 0.5f;
 		[Range(0,1)] public float roundness = 0;
@@ -31,16 +29,12 @@ namespace PlotExamples
 		public Color arcColor = Color.white;
 
 		[Header( "Labels" )]
-#if TMP_PRESENT
-		[SerializeField] TMP_FontAsset _headerFont = null;
-#endif
+		TMP_FontAsset _headerFont = null;
 		public float headerLabelSizeRelative = 0.3f;
 		public float headerLabelWidthRelative = 3f;
 		public float headerLabelOffsetYRelative = 0.05f;
 		public Color headerLabelColor = Color.white;
-#if TMP_PRESENT
-		[SerializeField] public TMP_FontAsset _fractionFont = null;
-#endif
+		public TMP_FontAsset _fractionFont = null;
 		[Range(0,1)] public float fractionLabelSizeRelative = 0.3f;
 		public Color fractionLabelColor = Color.white;
 
@@ -49,10 +43,8 @@ namespace PlotExamples
 
 		bool _dataChanged = true;
 
-#if TMP_PRESENT
-		[SerializeField,HideInInspector] TextMeshPro _headerLabel = null;
-		[SerializeField,HideInInspector] TextMeshPro _fractionLabel = null;
-#endif
+		Text _headerPlotText;
+		Text _fractionPlotText;
 
 		public float fraction {
 			get { return _fraction; }
@@ -70,12 +62,11 @@ namespace PlotExamples
 			}
 		}
 
-		#if TMP_PRESENT
 		public TMP_FontAsset headerFont {
 			get { return _headerFont; }
 			set {
 				_headerFont = value;
-				if( _headerLabel ) _headerLabel.font = _headerFont;
+				if( _headerPlotText ) _headerPlotText.font = _headerFont;
 			}
 		}
 
@@ -83,24 +74,23 @@ namespace PlotExamples
 			get { return _fractionFont; }
 			set {
 				_fractionFont = value;
-				if( _fractionLabel ) _fractionLabel.font = _fractionFont;
+				if( _fractionPlotText ) _fractionPlotText.font = _fractionFont;
 			}
 		}
-		#endif
 
 
 		void Update()
 		{
 			// Only update text when data change. Text changes always generate garbage.
 			if( _dataChanged ) {
-#if TMP_PRESENT
-				// Ensure that we have the TextMeshPro components we need.
-				if( !_headerLabel ) _headerLabel = TextHelper.CreateText( transform, _headerFont );
-				if( !_fractionLabel ) _fractionLabel = TextHelper.CreateText( transform, _fractionFont );
+				// Ensure that we have the Text objects we need.
+				if( !_fractionPlotText ) _fractionPlotText = CreateText();
+				if( !_headerPlotText ) _headerPlotText = CreateText();
 				// Update text.
-				_headerLabel.text = "<b>" + _headerText + "</b>";
-				_fractionLabel.text = Mathf.RoundToInt( _fraction * 100 ).ToString() + "%";
-#endif
+				_headerPlotText.font = _headerFont;
+				_fractionPlotText.font = _fractionFont;
+				_headerPlotText.SetContent( "<b>" + _headerText + "</b>" );
+				_fractionPlotText.SetContent( Mathf.RoundToInt( _fraction * 100 ).ToString() + "%" );
 				_dataChanged = false;
 			}
 
@@ -112,7 +102,7 @@ namespace PlotExamples
 			SetCanvas( transform );
 
 			// Setup shared drawing style.
-			SetNoStrokeColor();
+			SetNoStrokeColor(); 
 			SetAntiAliasing( antiAliasing );
 
 			// Compute proportions.
@@ -127,21 +117,18 @@ namespace PlotExamples
 			SetFillColor( arcColor );
 			DrawArc( Vector2.zero, innerDiameter, diameter, 90 - _fraction * 360, 90, 0, roundness, useGeometricRoundness, constrainAngleSpanToRoundness );
 			
-			#if TMP_PRESENT
-
 			SetFillColor( headerLabelColor );
 			SetTextAlignment( TextAlignmentOptions.Bottom );
 			SetPivot( Pivot.Bottom );
 			SetTextSize( headerLabelSize );
-			DrawText( _headerLabel, Vector2.up * ( diameter * 0.5f + diameter * headerLabelOffsetYRelative ), new Vector2( diameter * headerLabelWidthRelative, headerLabelHeight ), debugLabelRects );
+			DrawText( _headerPlotText, Vector2.up * ( diameter * 0.5f + diameter * headerLabelOffsetYRelative ), new Vector2( diameter * headerLabelWidthRelative, headerLabelHeight ), debugLabelRects );
+
 
 			SetFillColor( fractionLabelColor );
 			SetPivot( Pivot.Center );
 			SetTextAlignment( TextAlignmentOptions.Center );
 			SetTextSize( innerDiameter * fractionLabelSizeRelative );
-			DrawText( _fractionLabel, Vector2.zero, Vector2.one * diameter, debugLabelRects );
-
-			#endif
+			DrawText( _fractionPlotText, Vector2.zero, Vector2.one * diameter, debugLabelRects );
 
 			// Recall last plot canvas transform and style.
 			PopCanvas();
@@ -153,10 +140,8 @@ namespace PlotExamples
 		{
 			// User fiddled with the inspector, so we assume a change in data.
 			fraction = _fraction;
-			#if TMP_PRESENT
 			headerFont = _headerFont;
 			fractionFont = _fractionFont;
-			#endif
 		}
 	}
 }

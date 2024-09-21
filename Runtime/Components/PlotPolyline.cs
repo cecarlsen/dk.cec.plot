@@ -50,7 +50,7 @@ public class PlotPolyline : MonoBehaviour
 			SetNoStrokeColor();
 		}
 
-		if( _polyline == null ) _polyline = new Polyline( points );
+		if( !_polyline ) _polyline = CreatePolyline( points );
 		DrawPolyline( _polyline, capBegin, capEnd );
 
 		PopCanvas();
@@ -60,7 +60,7 @@ public class PlotPolyline : MonoBehaviour
 
 	void OnValidate()
 	{
-		if( _polyline == null ) _polyline = new Polyline( points );
+		if( !_polyline ) _polyline = CreatePolyline( points );
 		else _polyline.SetPoints( points );
 		if( strokeWidth < 0 ) strokeWidth = 0;
 	}

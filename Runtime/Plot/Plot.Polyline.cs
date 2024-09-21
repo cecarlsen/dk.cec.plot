@@ -1,10 +1,9 @@
 /*
-	Copyright © Carl Emil Carlsen 2021
+	Copyright © Carl Emil Carlsen 2021-2024
 	http://cec.dk
 */
 
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using PlotInternals;
@@ -44,16 +43,7 @@ public partial class Plot
 			public Vector4 points;
 			public Vector4 roundedCaps_posAlongLineA_posAlongLineB;
 		}
-
-
-		/// <summary>
-		/// Creates a new Polyline to be drawn using Plot.DrawPolyline(). Points must be provided in clockwise order. 
-		/// </summary>
-		public Polyline(){}
-		public Polyline( int pointCount ){ SetPointCount( pointCount ); }
-		public Polyline( Vector2[] points ){ SetPoints( points ); }
-		public Polyline( List<Vector2> points ){ SetPoints( points );}
-
+		
 
 		/// <summary>
 		/// Fill this polyline with bezier curve points.

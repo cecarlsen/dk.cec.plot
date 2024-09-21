@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2021
+	Copyright © Carl Emil Carlsen 2021-2024
 	http://cec.dk
 */
 
@@ -11,7 +11,7 @@ using static Plot;
 public class PlotPolygon : MonoBehaviour
 {
 	[Header("Shape")]
-	[Tooltip("Clockwise order")]public List<Vector2> points = new List<Vector2>(){
+	[Tooltip("Clockwise order")] public List<Vector2> points = new List<Vector2>(){
 		new Vector2( -0.1f, 0 ), new Vector2( -0.3f, -0.5f ), new Vector2( 0.5f, 0 ), new Vector2( -0.3f, 0.5f )
 	};
 
@@ -27,7 +27,7 @@ public class PlotPolygon : MonoBehaviour
 
 	[Header("Stroke")]
 	public bool stroke = true;
-	public float strokeWidth = 0.05f;
+	[Range(0f,1f)]public float strokeWidth = 0.05f;
 	public Color strokeColor = Color.black;
 	public StrokeAlignment strokeAlignment = StrokeAlignment.Outside;
 	public StrokeCornerProfile strokeCornerProfile = StrokeCornerProfile.Round;
@@ -45,7 +45,7 @@ public class PlotPolygon : MonoBehaviour
 
 	void Update()
 	{
-		if( _polygon == null ) _polygon = new Polygon( points );
+		if( !_polygon ) _polygon = CreatePolygon( points );
 
 		PushStyle();
 		PushCanvas();
@@ -85,9 +85,8 @@ public class PlotPolygon : MonoBehaviour
 
 	void OnValidate()
 	{
-		if( _polygon == null ) _polygon = new Polygon( points );
+		if( _polygon == null ) _polygon = CreatePolygon( points );
 		else _polygon.SetPoints( points );
-		if( strokeWidth < 0 ) strokeWidth = 0;
 	}
 
 

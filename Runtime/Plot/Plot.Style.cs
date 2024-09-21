@@ -5,6 +5,7 @@
 
 using System;
 using UnityEngine;
+using TMPro;
 
 public partial class Plot
 {
@@ -24,6 +25,8 @@ public partial class Plot
 		public Pivot pivot;
 		public Vector4 fillTextureST;
 		public Color fillTextureTint;
+		public float tmpFontSize;
+		public TextAlignmentOptions textAlignment;
 
 		/// <summary>
 		/// Does not work for DrawNow methods, just like Graphics.DrawMeshNow not regarding layers.

@@ -11,9 +11,9 @@ using UnityEngine.Rendering;
 namespace PlotInternals
 {
 	[Serializable]
-	abstract public class MeshDependentShape
+	abstract public class MeshDependentShape : ScriptableObject
 	{
-		protected Queue<KeyValuePair<int,Mesh>> _framedMeshPool;
+		protected Queue<(int,Mesh)> _framedMeshPool;
 		protected Mesh _mesh;
 		protected int _meshSubmissionFrame = -1;
 
@@ -94,10 +94,11 @@ namespace PlotInternals
 
 		static Mesh CreateMesh()
 		{
-			Mesh mesh = new Mesh();
-			mesh.name = "Shape";
-			mesh.hideFlags = HideFlags.HideAndDontSave;
-			return mesh;
+			return new Mesh()
+			{
+				name = "Shape",
+				hideFlags = HideFlags.HideAndDontSave
+			};
 		}
 
 
@@ -112,18 +113,28 @@ namespace PlotInternals
 				if( !_mesh ) {
 					_mesh = CreateMesh();
 				} else if( _meshSubmissionFrame == currentFrame ) {
-					if( _framedMeshPool == null ) _framedMeshPool = new Queue<KeyValuePair<int, Mesh>>();
-					_framedMeshPool.Enqueue( new KeyValuePair<int, Mesh>( currentFrame, _mesh ) );
-					KeyValuePair<int, Mesh> pooledFramedMesh = _framedMeshPool.Peek();
-					if( pooledFramedMesh.Key == currentFrame ) {
+					if( _framedMeshPool == null ) _framedMeshPool = new Queue<(int,Mesh)>();
+					_framedMeshPool.Enqueue( ( currentFrame, _mesh ) );
+					(int,Mesh) pooledFramedMesh = _framedMeshPool.Peek();
+					if( pooledFramedMesh.Item1 == currentFrame ) {
 						_mesh = CreateMesh();
 					} else {
-						_mesh = _framedMeshPool.Dequeue().Value;
+						_mesh = _framedMeshPool.Dequeue().Item2;
 					}
 					if( dirtyMesh ) ApplyMeshData();
 				}
 				_meshSubmissionFrame = currentFrame;
 			}
+		}
+
+
+		void OnDisable()
+		{
+			if( _framedMeshPool != null ){
+				foreach( var pair in _framedMeshPool ) if( pair.Item2 ) UnityEngine.Object.DestroyImmediate( pair.Item2 );
+				_framedMeshPool.Clear();
+			}
+			if( _mesh ) UnityEngine.Object.DestroyImmediate( _mesh );
 		}
 	}
 }

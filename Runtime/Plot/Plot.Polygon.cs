@@ -42,17 +42,7 @@ public partial class Plot
 			public Vector4 points;
 			public Vector3 outwards_directionMult;
 		}
-
-
-		/// <summary>
-		/// Creates a new Polygon to be drawn using Plot.DrawPolygon(). Points must be provided in clockwise order. 
-		/// </summary>
-		public Polygon(){}
-		public Polygon( int pointCount ){ SetPointCount( pointCount ); }
-		public Polygon( Vector2[] points ){ SetPoints( points ); }
-		public Polygon( List<Vector2> points ){ SetPoints( points ); }
-
-
+		
 
 		/// <summary>
 		/// Fill this polygon with a N-gon shape.
