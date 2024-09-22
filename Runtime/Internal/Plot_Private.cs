@@ -232,7 +232,7 @@ public partial class Plot
 
 	void DrawTextInternal( Text text, float x, float y, float fieldWidth, float fieldHeight, bool drawDebugRect, bool drawNow = false )
 	{
-		if( !text || !text._tmpText ){
+		if( !text ){
 			Debug.LogWarning( logPrepend + "DrawText failed. The text is null.\n" );
 			return;
 		}

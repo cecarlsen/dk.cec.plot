@@ -18,26 +18,28 @@ namespace PlotInternals
 			ref Matrix4x4 matrix, ref Style style, // Note that matrix and style are passed by reference for performance reasons, they are not changed.
 			bool drawDebugRect, bool drawNow
 		){
+			var tmp = text.GetTextMeshPro( drawNow );
+
 			Matrix4x4 matrixCopy = matrix;
 			matrixCopy.Translate3x4( x, y );
 
 			if( style.font ){
-				if( text._tmpText.font != style.font ) text._tmpText.font = style.font;
+				if( tmp.font != style.font ) tmp.font = style.font;
 			} else {
-				if( !text._tmpText.font ) text._tmpText.font = TMP_Settings.defaultFontAsset;
+				if( !tmp.font ) tmp.font = TMP_Settings.defaultFontAsset;
 			}
-			text._tmpText.color = style.fillColor;
-			text._tmpText.fontSize = style.tmpFontSize;
-			text._tmpText.alignment = style.textAlignment;
-			text._tmpText.rectTransform.localPosition = new Vector3( x, y );
-			text._tmpText.rectTransform.pivot = new Vector2( ( pivotPosition.x * 0.5f ) + 0.5f, ( pivotPosition.y * 0.5f ) + 0.5f );
-			text._tmpText.rectTransform.sizeDelta = new Vector2( fieldWidth, fieldHeight ); // TODO check the performance impact of this.
+			tmp.color = style.fillColor;
+			tmp.fontSize = style.tmpFontSize;
+			tmp.alignment = style.textAlignment;
+			tmp.rectTransform.localPosition = new Vector3( x, y );
+			tmp.rectTransform.pivot = new Vector2( ( pivotPosition.x * 0.5f ) + 0.5f, ( pivotPosition.y * 0.5f ) + 0.5f );
+			tmp.rectTransform.sizeDelta = new Vector2( fieldWidth, fieldHeight ); // TODO check the performance impact of this.
 
 		if( drawNow ) {
-			text._tmpText.fontSharedMaterial.SetPass( 0 );
-			Graphics.DrawMeshNow( text._tmpText.mesh, matrixCopy );
+			tmp.fontSharedMaterial.SetPass( 0 );
+			Graphics.DrawMeshNow( tmp.mesh, matrixCopy );
 		} else {
-			Graphics.DrawMesh( text._tmpText.mesh, matrixCopy, text._tmpText.fontSharedMaterial, layer: 0 );
+			Graphics.DrawMesh( tmp.mesh, matrixCopy, tmp.fontSharedMaterial, layer: 0 );
 		}
 
 		if( drawDebugRect ) {
