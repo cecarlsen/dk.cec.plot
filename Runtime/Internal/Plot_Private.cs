@@ -73,10 +73,10 @@ public partial class Plot
 	}
 
 
-	static void BeginDrawNowToTexture( RenderTexture rt, Space space, Color clearColor, bool clear )
+	static void BeginDrawNowToRenderTextureInternal( RenderTexture rt, Space space, Color clearColor, bool clear )
 	{
 		P();
-
+ 
 		// Setup render target and GL.
 		Graphics.SetRenderTarget( rt );
 

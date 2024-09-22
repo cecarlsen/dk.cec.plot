@@ -3,6 +3,7 @@
 
 ## [0.1.0] - 2024-09-XX
 
+	- Added NoiseTrails example.
 	- Added multi submission per update support for Text.
 	- Moved Text.font to Plot.SetTextFont().
 	- Added GameOfLife example.

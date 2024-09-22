@@ -577,19 +577,19 @@ public partial class Plot
 	#region DrawNow
 
 	/// <summary>
-	/// Begin a DrawNowToTexture session. Call DrawXNow subsequently (for example DrawCircleNow) and don't forget to call EndDrawNowToTexture when you are done.
+	/// Begin a DrawNowToRenderTexture session. Call DrawXNow subsequently (for example DrawCircleNow) and don't forget to call EndDrawNowToTexture when you are done.
 	/// For Space.Normalized 0,0 is center. Left, right, top and bottom is ( -aspect, aspect, -1, 1 ). For Space.Pixels 0,0 is in upper left corner.
 	/// </summary>
-	public static void BeginDrawNowToTexture( RenderTexture rt ){ BeginDrawNowToTexture( rt, Space.Pixels, Color.clear, false ); }
-	public static void BeginDrawNowToTexture( RenderTexture rt, Space space ) { BeginDrawNowToTexture( rt, space, Color.clear, false ); }
-	public static void BeginDrawNowToTexture( RenderTexture rt, Color clearColor ) { BeginDrawNowToTexture( rt, Space.Pixels, clearColor, true ); }
-	public static void BeginDrawNowToTexture( RenderTexture rt, Space space, Color clearColor ){ BeginDrawNowToTexture( rt, space, clearColor, true ); }
+	public static void BeginDrawNowToRenderTexture( RenderTexture rt ){ BeginDrawNowToRenderTextureInternal( rt, Space.Pixels, Color.clear, false ); }
+	public static void BeginDrawNowToRenderTexture( RenderTexture rt, Space space ) { BeginDrawNowToRenderTextureInternal( rt, space, Color.clear, false ); }
+	public static void BeginDrawNowToRenderTexture( RenderTexture rt, Color clearColor ) { BeginDrawNowToRenderTextureInternal( rt, Space.Pixels, clearColor, true ); }
+	public static void BeginDrawNowToRenderTexture( RenderTexture rt, Space space, Color clearColor ){ BeginDrawNowToRenderTextureInternal( rt, space, clearColor, true ); }
 
 	
 	/// <summary>
 	/// End a DrawNowToTexture session
 	/// </summary>
-	public static void EndDrawNowToTexture()
+	public static void EndDrawNowToRenderTexture()
 	{
 		P()._drawingToTextureNow = false;
 
