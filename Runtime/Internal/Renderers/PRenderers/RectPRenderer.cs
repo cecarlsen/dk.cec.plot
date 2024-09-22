@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 */
 
@@ -14,9 +14,9 @@ namespace PlotInternals
 
 		static class ShaderIDs
 		{
-			public static readonly int vertData = Shader.PropertyToID( "_VertData" );
-			public static readonly int fragData = Shader.PropertyToID( "_FragData" );
-			public static readonly int roundedness = Shader.PropertyToID( "_Roundedness" );
+			public static readonly int _VertData = Shader.PropertyToID( nameof( _VertData ) );
+			public static readonly int _FragData = Shader.PropertyToID( nameof( _FragData ) );
+			public static readonly int _Roundedness = Shader.PropertyToID( nameof( _Roundedness ) );
 		}
 
 		public RectPRenderer
@@ -107,11 +107,11 @@ namespace PlotInternals
 
 			if( style.fillTexture ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission
 				if( drawNow ) {
-					_material.SetVector( FillShaderIDs.texST, style.fillTextureST );
-					_material.SetColor( FillShaderIDs.texTint, style.fillTextureTint );
+					_material.SetVector( FillShaderIDs._Tex_ST, style.fillTextureST );
+					_material.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
 				} else {
-					_propBlock.SetVector( FillShaderIDs.texST, style.fillTextureST );
-					_propBlock.SetColor( FillShaderIDs.texTint, style.fillTextureTint );
+					_propBlock.SetVector( FillShaderIDs._Tex_ST, style.fillTextureST );
+					_propBlock.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
 				}
 			}
 
@@ -120,15 +120,15 @@ namespace PlotInternals
 			Vector4 roundness = new Vector4( lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness );
 
 			if( drawNow ) {
-				_material.SetVector( ShaderIDs.vertData, vertData );
-				_material.SetVector( ShaderIDs.fragData, fragData );
-				_material.SetVector( ShaderIDs.roundedness, roundness );
+				_material.SetVector( ShaderIDs._VertData, vertData );
+				_material.SetVector( ShaderIDs._FragData, fragData );
+				_material.SetVector( ShaderIDs._Roundedness, roundness );
 				_material.SetPass( 0 );
 				Graphics.DrawMeshNow( mesh, matrix );
 			} else {
-				_propBlock.SetVector( ShaderIDs.vertData, vertData );
-				_propBlock.SetVector( ShaderIDs.fragData, fragData );
-				_propBlock.SetVector( ShaderIDs.roundedness, roundness );
+				_propBlock.SetVector( ShaderIDs._VertData, vertData );
+				_propBlock.SetVector( ShaderIDs._FragData, fragData );
+				_propBlock.SetVector( ShaderIDs._Roundedness, roundness );
 				Graphics.DrawMesh( mesh, matrix, _material, style.layer, null, 0, _propBlock, false, false, false );
 			}
 		}

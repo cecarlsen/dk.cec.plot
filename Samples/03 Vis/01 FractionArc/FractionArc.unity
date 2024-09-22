@@ -161,12 +161,12 @@ MonoBehaviour:
   antiAliasing: 1
   backgroundColor: {r: 1, g: 1, b: 1, a: 0.05882353}
   arcColor: {r: 1, g: 1, b: 1, a: 1}
-  _headerFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  headerFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   headerLabelSizeRelative: 0.18
   headerLabelWidthRelative: 3
   headerLabelOffsetYRelative: 0.14
   headerLabelColor: {r: 1, g: 1, b: 1, a: 1}
-  _fractionFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  fractionFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   fractionLabelSizeRelative: 0.206
   fractionLabelColor: {r: 1, g: 1, b: 1, a: 1}
   debugLabelRects: 0

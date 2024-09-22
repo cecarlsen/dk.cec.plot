@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020-2021
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 */
 
@@ -17,7 +17,7 @@ namespace PlotInternals
 		protected MaterialPropertyBlock _propBlock;
 		bool _materialCreated = false;
 
-		Queue<KeyValuePair<int,Material>> _framedMaterialPool;
+		Queue<(int,Material)> _framedMaterialPool;
 		int _materialSubmissionFrame = -1;
 
 		protected bool _areFeaturesDirty;
@@ -34,9 +34,9 @@ namespace PlotInternals
 
 		protected static class SharedShaderIDs
 		{
-			public static readonly int strokeColor = Shader.PropertyToID( "_StrokeColor" );
-			public static readonly int srcBlend = Shader.PropertyToID( "_SrcBlend" );
-			public static readonly int dstBlend = Shader.PropertyToID( "_DstBlend" );
+			public static readonly int _StrokeColor = Shader.PropertyToID( nameof( _StrokeColor ) );
+			public static readonly int _SrcBlend = Shader.PropertyToID( nameof( _SrcBlend ) );
+			public static readonly int _DstBlend = Shader.PropertyToID( nameof( _DstBlend ) );
 		}
 
 
@@ -76,8 +76,8 @@ namespace PlotInternals
 
 		protected void UpdateStrokeColor( Color color, bool drawNow )
 		{
-			if( drawNow ) _material.SetColor( SharedShaderIDs.strokeColor, color );
-			else _propBlock.SetColor( SharedShaderIDs.strokeColor, color );
+			if( drawNow ) _material.SetColor( SharedShaderIDs._StrokeColor, color );
+			else _propBlock.SetColor( SharedShaderIDs._StrokeColor, color );
 			isStrokeColorDirty = false;
 		}
 
@@ -119,12 +119,12 @@ namespace PlotInternals
 			switch( _blend )
 			{
 				case Plot.Blend.Transparent:
-					_material.SetInt( SharedShaderIDs.srcBlend, (int) BlendMode.SrcAlpha );
-					_material.SetInt( SharedShaderIDs.dstBlend, (int) BlendMode.OneMinusSrcAlpha );
+					_material.SetInt( SharedShaderIDs._SrcBlend, (int) BlendMode.SrcAlpha );
+					_material.SetInt( SharedShaderIDs._DstBlend, (int) BlendMode.OneMinusSrcAlpha );
 					break;
 				case Plot.Blend.TransparentAdditive:
-					_material.SetInt( SharedShaderIDs.srcBlend, (int) BlendMode.SrcAlpha );
-					_material.SetInt( SharedShaderIDs.dstBlend, (int) BlendMode.One );
+					_material.SetInt( SharedShaderIDs._SrcBlend, (int) BlendMode.SrcAlpha );
+					_material.SetInt( SharedShaderIDs._DstBlend, (int) BlendMode.One );
 					break;
 			}
 
@@ -154,13 +154,13 @@ namespace PlotInternals
 			if( swapMaterial )
 			{
 				// Add the current material to the pool, so it can be used again in a subsequent update frame.
-				if( _framedMaterialPool == null ) _framedMaterialPool = new Queue<KeyValuePair<int,Material>>();
-				_framedMaterialPool.Enqueue( new KeyValuePair<int,Material>( currentFrame, _material ) );
+				if( _framedMaterialPool == null ) _framedMaterialPool = new Queue<(int,Material)>();
+				_framedMaterialPool.Enqueue( ( currentFrame, _material ) );
 
 				// Grab the oldest material from the pool. If it was used this frame, then create new.
-				KeyValuePair<int,Material> pooledFramedMesh = _framedMaterialPool.Peek();
-				if( pooledFramedMesh.Key == currentFrame ) _material = CreateMaterial( _shader, _framedMaterialPool.Count );
-				else _material = _framedMaterialPool.Dequeue().Value;	
+				var pooledFramedMesh = _framedMaterialPool.Peek();
+				if( pooledFramedMesh.Item1 == currentFrame ) _material = CreateMaterial( _shader, _framedMaterialPool.Count );
+				else _material = _framedMaterialPool.Dequeue().Item2;	
 			}
 
 			// Apply settings.

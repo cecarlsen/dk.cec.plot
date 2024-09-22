@@ -13,11 +13,16 @@ public partial class Plot
 	public class Text : ScriptableObject
 	{
 		internal TextMeshPro _tmpText;
+		
+		// TODO: This belongs in Style. Move it.
+		//public TMP_FontAsset font {
+		//	get { return _tmpText?.font; }
+		//	set { if( _tmpText ) _tmpText.font = value; }
+		//}
 
-		public TMP_FontAsset font {
-			get { return _tmpText?.font; }
-			set { if( _tmpText ) _tmpText.font = value; }
-		}
+		// Make constructor private to force use of CreateText().
+		Text(){}
+
 
 		void OnEnable()
 		{

@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 */
 
@@ -11,8 +11,8 @@ namespace PlotInternals
 	{
 		static class ShaderIDs
 		{
-			public static readonly int strokeData = Shader.PropertyToID( "_StrokeData" );
-			public static readonly int roundStrokeCornersFlag = Shader.PropertyToID( "_RoundStrokeCornersFlag" );
+			public static readonly int _StrokeData = Shader.PropertyToID( nameof( _StrokeData ) );
+			public static readonly int _RoundStrokeCornersFlag = Shader.PropertyToID( nameof( _RoundStrokeCornersFlag ) );
 		}
 
 		public PolygonPRenderer
@@ -36,28 +36,27 @@ namespace PlotInternals
 			float actualStrokeWidth = hasStroke ? style.strokeWidth : 0;
 			bool roundStrokeCornersFlag = style.strokeCornerProfile == Plot.StrokeCornerProfile.Round;
 
-			Mesh mesh;
-			polygon.AdaptAndGetMesh( drawNow, hasFill, hasStroke, style.antialias, out mesh );
+			Mesh mesh = polygon.AdaptAndGetMesh( drawNow, hasFill, hasStroke, style.antialias );
 
 			EnsureAvailableMaterialBeforeSubmission( drawNow );
 
 			if( isFillColorDirty || isStrokeColorDirty ) UpdateFillAndStroke( ref style, drawNow );
 
 			if( style.fillTexture ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission
-				_material.SetVector( FillShaderIDs.texST, style.fillTextureST );
-				_material.SetColor( FillShaderIDs.texTint, style.fillTextureTint );
+				_material.SetVector( FillShaderIDs._Tex_ST, style.fillTextureST );
+				_material.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
 			}
 
 			Vector4 strokeData = new Vector4( actualStrokeWidth, strokeOffsetMin );
 
 			if( drawNow ) {
-				_material.SetVector( ShaderIDs.strokeData, strokeData );
-				_material.SetFloat( ShaderIDs.roundStrokeCornersFlag, roundStrokeCornersFlag ? 1 : 0 );
+				_material.SetVector( ShaderIDs._StrokeData, strokeData );
+				_material.SetFloat( ShaderIDs._RoundStrokeCornersFlag, roundStrokeCornersFlag ? 1 : 0 );
 				_material.SetPass( 0 );
 				Graphics.DrawMeshNow( mesh, matrix );
 			} else {
-				_propBlock.SetVector( ShaderIDs.strokeData, strokeData );
-				_propBlock.SetFloat( ShaderIDs.roundStrokeCornersFlag, roundStrokeCornersFlag ? 1 : 0 );
+				_propBlock.SetVector( ShaderIDs._StrokeData, strokeData );
+				_propBlock.SetFloat( ShaderIDs._RoundStrokeCornersFlag, roundStrokeCornersFlag ? 1 : 0 );
 				Graphics.DrawMesh( mesh, matrix, _material, style.layer, null, 0, _propBlock, false, false, false );
 			}
 		}

@@ -1,5 +1,5 @@
 /*
-	Copyright © Carl Emil Carlsen 2021
+	Copyright © Carl Emil Carlsen 2021-2024
 	http://cec.dk
 */
 
@@ -27,7 +27,7 @@ public partial class Plot
 
 		protected override bool dirtyMesh => _dirtyVerticies || _dirtyIndices;
 
-		static VertexAttributeDescriptor[] vertexDataLayout = new VertexAttributeDescriptor[]
+		static readonly VertexAttributeDescriptor[] vertexDataLayout = new VertexAttributeDescriptor[]
 		{
 			new VertexAttributeDescriptor( VertexAttribute.Position, VertexAttributeFormat.Float32, 2 ),
 			new VertexAttributeDescriptor( VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 4 ),
@@ -42,6 +42,10 @@ public partial class Plot
 			public Vector4 points;
 			public Vector3 outwards_directionMult;
 		}
+
+
+		// Make constructor private to force use of CreatePolygon().
+		Polygon(){}
 		
 
 		/// <summary>
@@ -91,8 +95,7 @@ public partial class Plot
 		}
 
 
-		// Undocumented on purpose.
-		public void AdaptAndGetMesh( bool drawNow, bool fillEnabled, bool strokeEnabled, bool antialias, out Mesh mesh )
+		internal Mesh AdaptAndGetMesh( bool drawNow, bool fillEnabled, bool strokeEnabled, bool antialias )
 		{
 			if( fillEnabled != _fillEnabled ) {
 				_fillEnabled = fillEnabled;
@@ -107,11 +110,11 @@ public partial class Plot
 
 			bool meshChange = _dirtyVerticies || _dirtyIndices;
 			bool reuseMesh = drawNow || !meshChange;
-			EnsureAvailableMesh( reuseMesh );
+			EnsureAvailableMeshBeforeSubmission( reuseMesh );
 
 			if( _dirtyVerticies || _dirtyIndices ) Build();
 
-			mesh = _mesh;
+			return _mesh;
 		}
 
 

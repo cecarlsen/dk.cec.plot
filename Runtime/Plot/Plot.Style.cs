@@ -27,6 +27,7 @@ public partial class Plot
 		public Color fillTextureTint;
 		public float tmpFontSize;
 		public TextAlignmentOptions textAlignment;
+		public TMP_FontAsset font;
 
 		/// <summary>
 		/// Does not work for DrawNow methods, just like Graphics.DrawMeshNow not regarding layers.

@@ -3,6 +3,7 @@
 
 ## [0.1.0] - 2024-09-XX
 
+	- Moved Text.font to Plot.SetTextFont().
 	- Added GameOfLife example.
 	- Added Image and Text examples.
 	- Updated how polylines, polygons, and text is created and drawn.

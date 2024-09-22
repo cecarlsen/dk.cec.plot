@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 */
 
@@ -14,7 +14,7 @@ namespace PlotInternals
 
 		static class ShaderIDs
 		{
-			public static readonly int data = Shader.PropertyToID( "_Data" );
+			public static readonly int _Data = Shader.PropertyToID( nameof( _Data ) );
 		}
 
 		public LinePRenderer( bool antialias, Plot.Blend blend ) : base ( "Line", antialias, blend )
@@ -57,11 +57,11 @@ namespace PlotInternals
 			Vector4 data = new Vector4( meshExtentsX, meshExtentsY, beginCap == Plot.StrokeCap.Round ? 1 : 0, endCap == Plot.StrokeCap.Round ? 1 : 0 );
 
 			if( drawNow ) {
-				_material.SetVector( ShaderIDs.data, data );
+				_material.SetVector( ShaderIDs._Data, data );
 				_material.SetPass( 0 );
 				Graphics.DrawMeshNow( mesh, matrix );
 			} else {
-				_propBlock.SetVector( ShaderIDs.data, data );
+				_propBlock.SetVector( ShaderIDs._Data, data );
 				Graphics.DrawMesh( mesh, matrix, _material, style.layer, null, 0, _propBlock, false, false, false );
 			}
 		}

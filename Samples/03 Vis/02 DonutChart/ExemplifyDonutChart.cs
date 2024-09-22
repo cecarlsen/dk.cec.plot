@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 */
 
@@ -35,7 +35,7 @@ namespace PlotExamples
 		public Color paletteColorEnd = Color.blue;
 
 		[Header("Labels")]
-		[SerializeField] public TMP_FontAsset _font = null;
+		public TMP_FontAsset font;
 		public float labelSize = 0.03f;
 		public float labelOffset = 0.1f;
 		public Color labelColor = Color.white;
@@ -44,14 +44,6 @@ namespace PlotExamples
 		bool _dataChanged = true;
 
 		List<Text> _labels = new List<Text>();
-
-		public TMP_FontAsset font {
-			get { return _font; }
-			set {
-				_font = value;
-				foreach( var l in _labels ) if( l ) l.font = _font;
-			}
-		}
 
 
 		public int GetEntryCount()
@@ -87,7 +79,7 @@ namespace PlotExamples
 			if( _dataChanged )
 			{
 				// Ensure that we have the TextMeshPro components we need.
-				AdaptTextCount( _entries.Count, _labels, _font );
+				AdaptTextCount( _entries.Count, _labels );
 				// Update text.
 				for( int i = 0; i < _entries.Count; i++ ) {
 					Entry entry = _entries[ i ];
@@ -111,6 +103,7 @@ namespace PlotExamples
 			SetStrokeWidth( strokeWidth );
 			SetStrokeAlignement( StrokeAlignment.Inside );
 			SetStrokeCornerProfile( strokeCornerProfile );
+			SetTextFont( font );
 			SetTextSize( labelSize );
 
 			// Sum the data.
@@ -146,7 +139,10 @@ namespace PlotExamples
 				
 				SetPivot( ConvertAlignmentToPivot( alignment ) );
 				SetFillColor( labelColor );
-				DrawText( _labels[ i ], position, new Vector2( 1, 0.2f ) );
+				PushCanvas();
+				TranslateCanvas( position );
+				DrawText( _labels[ i ], Vector3.zero, new Vector2( 1, 0.2f ) );
+				PopCanvas();
 			}
 
 			// Recall last plot canvas transform and style.
@@ -158,7 +154,7 @@ namespace PlotExamples
 		void OnValidate()
 		{
 			_dataChanged = true; // User fiddled with the inspector, so we assume a change in data.
-			font = _font;
+			//font = _font;
 		}
 
 

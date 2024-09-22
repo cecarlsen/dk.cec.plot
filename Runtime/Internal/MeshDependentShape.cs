@@ -102,7 +102,7 @@ namespace PlotInternals
 		}
 
 
-		protected void EnsureAvailableMesh( bool reuse )
+		protected void EnsureAvailableMeshBeforeSubmission( bool reuse )
 		{
 			if( reuse ) {
 				// No need for pooling when there is no mesh change (then we use instancing) or the shape is drawn immediately.
@@ -115,7 +115,7 @@ namespace PlotInternals
 				} else if( _meshSubmissionFrame == currentFrame ) {
 					if( _framedMeshPool == null ) _framedMeshPool = new Queue<(int,Mesh)>();
 					_framedMeshPool.Enqueue( ( currentFrame, _mesh ) );
-					(int,Mesh) pooledFramedMesh = _framedMeshPool.Peek();
+					var pooledFramedMesh = _framedMeshPool.Peek();
 					if( pooledFramedMesh.Item1 == currentFrame ) {
 						_mesh = CreateMesh();
 					} else {
@@ -131,10 +131,10 @@ namespace PlotInternals
 		void OnDisable()
 		{
 			if( _framedMeshPool != null ){
-				foreach( var pair in _framedMeshPool ) if( pair.Item2 ) UnityEngine.Object.DestroyImmediate( pair.Item2 );
+				foreach( var pair in _framedMeshPool ) if( pair.Item2 ) DestroyImmediate( pair.Item2 );
 				_framedMeshPool.Clear();
 			}
-			if( _mesh ) UnityEngine.Object.DestroyImmediate( _mesh );
+			if( _mesh ) DestroyImmediate( _mesh );
 		}
 	}
 }

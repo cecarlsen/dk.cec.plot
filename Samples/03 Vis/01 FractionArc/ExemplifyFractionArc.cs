@@ -29,12 +29,12 @@ namespace PlotExamples
 		public Color arcColor = Color.white;
 
 		[Header( "Labels" )]
-		TMP_FontAsset _headerFont = null;
+		public TMP_FontAsset headerFont;
 		public float headerLabelSizeRelative = 0.3f;
 		public float headerLabelWidthRelative = 3f;
 		public float headerLabelOffsetYRelative = 0.05f;
 		public Color headerLabelColor = Color.white;
-		public TMP_FontAsset _fractionFont = null;
+		public TMP_FontAsset fractionFont;
 		[Range(0,1)] public float fractionLabelSizeRelative = 0.3f;
 		public Color fractionLabelColor = Color.white;
 
@@ -62,22 +62,6 @@ namespace PlotExamples
 			}
 		}
 
-		public TMP_FontAsset headerFont {
-			get { return _headerFont; }
-			set {
-				_headerFont = value;
-				if( _headerPlotText ) _headerPlotText.font = _headerFont;
-			}
-		}
-
-		public TMP_FontAsset fractionFont {
-			get { return _fractionFont; }
-			set {
-				_fractionFont = value;
-				if( _fractionPlotText ) _fractionPlotText.font = _fractionFont;
-			}
-		}
-
 
 		void Update()
 		{
@@ -87,8 +71,6 @@ namespace PlotExamples
 				if( !_fractionPlotText ) _fractionPlotText = CreateText();
 				if( !_headerPlotText ) _headerPlotText = CreateText();
 				// Update text.
-				_headerPlotText.font = _headerFont;
-				_fractionPlotText.font = _fractionFont;
 				_headerPlotText.SetContent( "<b>" + _headerText + "</b>" );
 				_fractionPlotText.SetContent( Mathf.RoundToInt( _fraction * 100 ).ToString() + "%" );
 				_dataChanged = false;
@@ -120,13 +102,14 @@ namespace PlotExamples
 			SetFillColor( headerLabelColor );
 			SetTextAlignment( TextAlignmentOptions.Bottom );
 			SetPivot( Pivot.Bottom );
+			SetTextFont( headerFont );
 			SetTextSize( headerLabelSize );
 			DrawText( _headerPlotText, Vector2.up * ( diameter * 0.5f + diameter * headerLabelOffsetYRelative ), new Vector2( diameter * headerLabelWidthRelative, headerLabelHeight ), debugLabelRects );
 
-
 			SetFillColor( fractionLabelColor );
-			SetPivot( Pivot.Center );
 			SetTextAlignment( TextAlignmentOptions.Center );
+			SetPivot( Pivot.Center );
+			SetTextFont( fractionFont );
 			SetTextSize( innerDiameter * fractionLabelSizeRelative );
 			DrawText( _fractionPlotText, Vector2.zero, Vector2.one * diameter, debugLabelRects );
 
@@ -140,8 +123,6 @@ namespace PlotExamples
 		{
 			// User fiddled with the inspector, so we assume a change in data.
 			fraction = _fraction;
-			headerFont = _headerFont;
-			fractionFont = _fractionFont;
 		}
 	}
 }

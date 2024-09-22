@@ -31,6 +31,7 @@ public partial class Plot
 	PolylinePRenderer _polylineRenderer;
 	List<PRenderer> _allRenderers;
 	List<FillPRenderer> _fillRenderers; // Fill renderers are different because they can display textures.
+	TextRenderer _textRenderer; // Works very differently than the above, relying on TextMeshPro.
 
 	Matrix4x4 _matrix = Matrix4x4.identity;
 	Stack<Matrix4x4> _matrixStack;
@@ -46,9 +47,6 @@ public partial class Plot
 	const MeshUpdateFlags meshFlags = MeshUpdateFlags.DontRecalculateBounds | MeshUpdateFlags.DontValidateIndices;
 	const string logPrepend = "<b>[" + nameof( Plot ) + "]</b> ";
 
-	public const float Pi = Mathf.PI;
-	public const float HalfPi = Pi * 0.5f;
-	public const float Tau = Pi * 2;
 	const string antialiasKeyword = "_ANTIALIAS";
 
 	static readonly Color defaultFillColor = Color.white;
@@ -193,7 +191,7 @@ public partial class Plot
 
 	void DrawPolygonInternal( Polygon polygon, bool drawNow = false )
 	{
-		if( polygon == null ) {
+		if( !polygon ) {
 			Debug.LogWarning( logPrepend + "DrawPolygon failed. The polygon is null.\n" );
 			return;
 		}
@@ -214,7 +212,7 @@ public partial class Plot
 
 	void DrawPolylineInternal( Polyline polyline, StrokeCap beginCap, StrokeCap endCap, bool drawNow = false )
 	{
-		if( polyline == null ) {
+		if( !polyline ) {
 			Debug.LogWarning( logPrepend + "DrawPolyline failed. The polyline is null.\n" );
 			return;
 		}
@@ -234,52 +232,18 @@ public partial class Plot
 
 	void DrawTextInternal( Text text, float x, float y, float fieldWidth, float fieldHeight, bool drawDebugRect, bool drawNow = false )
 	{
-		if( !text || !text._tmpText ) return;
+		if( !text || !text._tmpText ){
+			Debug.LogWarning( logPrepend + "DrawText failed. The text is null.\n" );
+			return;
+		}
 
 		if( _drawingToTextureNow && !drawNow ) DebugLogDrawToTextureNowWarning();
 
-		Matrix4x4 matrix = _matrix;
-		matrix.Translate3x4( x, y );
-
-		//if( applyPlotStyle ) {
-			text._tmpText.color = _style.fillColor;
-			text._tmpText.fontSize = _style.tmpFontSize;
-			text._tmpText.alignment = _style.textAlignment;
-			text._tmpText.rectTransform.localPosition = new Vector3( x, y );
-			text._tmpText.rectTransform.pivot = new Vector2( ( _pivotPosition.x * 0.5f ) + 0.5f, ( _pivotPosition.y * 0.5f ) + 0.5f );
-			text._tmpText.rectTransform.sizeDelta = new Vector2( fieldWidth, fieldHeight ); // TODO check the performance impact of this.
-		//}
-		
-
-		if( drawNow ) {
-			text._tmpText.fontSharedMaterial.SetPass( 0 );
-			Graphics.DrawMeshNow( text._tmpText.mesh, matrix );
-		} else {
-			Graphics.DrawMesh( text._tmpText.mesh, matrix, text._tmpText.fontSharedMaterial, layer: 0 );
+		if( _textRenderer == null ){
+			_textRenderer = new TextRenderer();
 		}
 
-		if( drawDebugRect ) {
-			float debugSize = Mathf.Min( fieldWidth, fieldHeight ) * 0.01f;
-			PushStyle();
-			PushCanvas();
-			TranslateCanvas( 0, 0, -0.001f );
-			SetNoFillColor();
-			SetStrokeAlignement( StrokeAlignment.Edge );
-			SetStrokeCornerProfile( StrokeCornerProfile.Hard );
-			SetStrokeColor( Color.green );
-			SetStrokeWidth( debugSize );
-			// Draw using the current pivot.
-			if( drawNow ) DrawRectNow( x, y, fieldWidth, fieldHeight );
-			else DrawRect( x, y, fieldWidth, fieldHeight );
-			// Then draw pivot.
-			TranslateCanvas( 0, 0, -0.001f );
-			SetPivot( Pivot.Center );
-			SetNoStrokeColor();
-			SetFillColor( Color.red );
-			DrawCircle( x, y, debugSize * 4 );
-			PopCanvas();
-			PopStyle();
-		}
+		_textRenderer.Render( text, x, y, fieldWidth, fieldHeight, _pivotPosition, ref _matrix, ref _style, drawDebugRect, drawNow );
 	}
 
 

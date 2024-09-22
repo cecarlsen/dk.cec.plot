@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020-2021
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 */
 
@@ -17,10 +17,10 @@ namespace PlotInternals
 
 		protected static class FillShaderIDs
 		{
-			public static readonly int fillColor = Shader.PropertyToID( "_FillColor" );
-			public static readonly int tex = Shader.PropertyToID( "_Tex" );
-			public static readonly int texST = Shader.PropertyToID( "_Tex_ST" );
-			public static readonly int texTint = Shader.PropertyToID( "_TexTint" );
+			public static readonly int _FillColor = Shader.PropertyToID( nameof( _FillColor ) );
+			public static readonly int _Tex = Shader.PropertyToID( nameof( _Tex ) );
+			public static readonly int _Tex_ST = Shader.PropertyToID( nameof( _Tex_ST ) );
+			public static readonly int _TexTint = Shader.PropertyToID( nameof( _TexTint ) );
 		}
 
 
@@ -36,26 +36,17 @@ namespace PlotInternals
 		{
 			if( isFillColorDirty || ( !style.fillEnabled && isStrokeColorDirty ) ) {
 				Color color = style.fillEnabled ? style.fillColor : ColorWithAlpha( style.strokeColor, 0 );
-				if( drawNow ) _material.SetColor( FillShaderIDs.fillColor, color );
-				else _propBlock.SetColor( FillShaderIDs.fillColor, color );
+				if( drawNow ) _material.SetColor( FillShaderIDs._FillColor, color );
+				else _propBlock.SetColor( FillShaderIDs._FillColor, color );
 			}
 			if( isStrokeColorDirty || ( !style.strokeEnabled && isFillColorDirty )) {
 				Color color = style.strokeEnabled ? style.strokeColor : ColorWithAlpha( style.fillColor, 0 );
-				if( drawNow ) _material.SetColor( SharedShaderIDs.strokeColor, color );
-				else _propBlock.SetColor( SharedShaderIDs.strokeColor, color );
+				if( drawNow ) _material.SetColor( SharedShaderIDs._StrokeColor, color );
+				else _propBlock.SetColor( SharedShaderIDs._StrokeColor, color );
 			}
 			isFillColorDirty = false;
 			isStrokeColorDirty = false;
 		}
-
-		/*
-		protected void UpdateFillColor( Color color, bool drawNow )
-		{
-			if( drawNow ) _material.SetColor( FillShaderIDs.fillColor, color );
-			else _propBlock.SetColor( FillShaderIDs.fillColor, color );
-			isFillColorDirty = false;
-		}
-		*/
 
 
 		public void SetFillTextureFeature( Texture texture )
@@ -80,7 +71,7 @@ namespace PlotInternals
 		{
 			// Texture.
 			if( _fillTexture ) {
-				_material.SetTexture( FillShaderIDs.tex, _fillTexture );
+				_material.SetTexture( FillShaderIDs._Tex, _fillTexture );
 				if( _fillTextureBlend == Plot.FillTextureBlend.Overlay ) {
 					_material.EnableKeyword( textureOverlayKeyword );
 					_material.DisableKeyword( textureMultiplyKeyword );

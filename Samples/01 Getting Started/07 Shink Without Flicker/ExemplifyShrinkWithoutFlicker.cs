@@ -24,12 +24,15 @@ namespace PlotExamples
 		public StrokeCap caps = StrokeCap.Round;
 		public StrokeAlignment strokeAlignment = StrokeAlignment.Outside;
 
-		Polygon _polygon = CreatePolygon( 4 );
-		Polyline _polyline = CreatePolyline( 2 );
+		Polygon _polygon;
+		Polyline _polyline;
 
 
 		void Update()
 		{
+			if( !_polygon ) _polygon = CreatePolygon( 4 );
+			if( !_polyline ) _polyline = CreatePolyline( 2 );
+
 			SetAntiAliasing( antialias );
 			SetStrokeAlignement( strokeAlignment );
 

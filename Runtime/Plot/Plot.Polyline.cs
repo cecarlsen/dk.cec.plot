@@ -27,7 +27,7 @@ public partial class Plot
 
 		protected override bool dirtyMesh => _dirtyVerticies;
 
-		static VertexAttributeDescriptor[] vertexDataLayout = new VertexAttributeDescriptor[]
+		static readonly VertexAttributeDescriptor[] vertexDataLayout = new VertexAttributeDescriptor[]
 		{
 			new VertexAttributeDescriptor( VertexAttribute.Position, VertexAttributeFormat.Float32, 2 ),
 			new VertexAttributeDescriptor( VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 4 ),
@@ -44,6 +44,10 @@ public partial class Plot
 			public Vector4 roundedCaps_posAlongLineA_posAlongLineB;
 		}
 		
+
+		// Make constructor private to force use of CreatePolyline().
+		Polyline(){}
+
 
 		/// <summary>
 		/// Fill this polyline with bezier curve points.
@@ -67,8 +71,7 @@ public partial class Plot
 		}
 
 
-		// Undocumented on purpose.
-		public void AdaptAndGetMesh( bool drawNow, StrokeCap beginCap, StrokeCap endCap, StrokeCornerProfile strokeCornerProfile, out Mesh mesh )
+		internal Mesh AdaptAndGetMesh( bool drawNow, StrokeCap beginCap, StrokeCap endCap, StrokeCornerProfile strokeCornerProfile )
 		{
 			if( beginCap != _beginCap || endCap != _endCap || strokeCornerProfile != _strokeCornerProfile ) {
 				_beginCap = beginCap;
@@ -78,11 +81,11 @@ public partial class Plot
 			}
 
 			bool reuseMesh = drawNow || !_dirtyVerticies;
-			EnsureAvailableMesh( reuseMesh );
+			EnsureAvailableMeshBeforeSubmission( reuseMesh );
 
 			if( _dirtyVerticies ) Build();
 
-			mesh = _mesh;
+			return _mesh;
 		}
 
 

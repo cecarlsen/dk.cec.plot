@@ -344,7 +344,7 @@ MonoBehaviour:
   strokeCornerProfile: 0
   paletteColorBegin: {r: 0.9544456, g: 1, b: 0.33490568, a: 1}
   paletteColorEnd: {r: 0.24270204, g: 0.39059296, b: 0.509434, a: 1}
-  _font: {fileID: 0}
+  font: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   labelSize: 0.065
   labelOffset: 0.05
   labelColor: {r: 1, g: 1, b: 1, a: 1}
@@ -2247,7 +2247,7 @@ MonoBehaviour:
   strokeCornerProfile: 0
   paletteColorBegin: {r: 0.9544456, g: 1, b: 0.33490568, a: 1}
   paletteColorEnd: {r: 0.24270204, g: 0.39059296, b: 0.509434, a: 1}
-  _font: {fileID: 0}
+  font: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   labelSize: 0.065
   labelOffset: 0.05
   labelColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3138,7 +3138,7 @@ MonoBehaviour:
   strokeCornerProfile: 0
   paletteColorBegin: {r: 0.9544456, g: 1, b: 0.33490568, a: 1}
   paletteColorEnd: {r: 0.24270204, g: 0.39059296, b: 0.509434, a: 1}
-  _font: {fileID: 0}
+  font: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   labelSize: 0.065
   labelOffset: 0.05
   labelColor: {r: 1, g: 1, b: 1, a: 1}
@@ -4068,7 +4068,7 @@ MonoBehaviour:
   strokeCornerProfile: 0
   paletteColorBegin: {r: 0.9544456, g: 1, b: 0.33490568, a: 1}
   paletteColorEnd: {r: 0.24270204, g: 0.39059296, b: 0.509434, a: 1}
-  _font: {fileID: 0}
+  font: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   labelSize: 0.065
   labelOffset: 0.05
   labelColor: {r: 1, g: 1, b: 1, a: 1}
@@ -4143,7 +4143,7 @@ MonoBehaviour:
   strokeCornerProfile: 1
   paletteColorBegin: {r: 0.9544456, g: 1, b: 0.33490568, a: 1}
   paletteColorEnd: {r: 0.24270204, g: 0.39059296, b: 0.509434, a: 1}
-  _font: {fileID: 0}
+  font: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   labelSize: 0.065
   labelOffset: 0.05
   labelColor: {r: 1, g: 1, b: 1, a: 1}

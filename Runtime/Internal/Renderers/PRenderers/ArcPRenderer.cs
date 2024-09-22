@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 */
 
@@ -15,11 +15,11 @@ namespace PlotInternals
 
 		public static class ShaderIDs
 		{
-			public static readonly int vertData = Shader.PropertyToID( "_VertData" );
-			public static readonly int angleOffset = Shader.PropertyToID( "_AngleOffset" );
-			public static readonly int fragData = Shader.PropertyToID( "_FragData" );
-			public static readonly int strokeWidth = Shader.PropertyToID( "_StrokeWidth" );
-			public static readonly int strokeAlignmentExtension = Shader.PropertyToID( "_StrokeAlignmentExtension" );
+			public static readonly int _VertData = Shader.PropertyToID( nameof( _VertData ) );
+			public static readonly int _AngleOffset = Shader.PropertyToID( nameof( _AngleOffset ) );
+			public static readonly int _FragData = Shader.PropertyToID( nameof( _FragData ) );
+			public static readonly int _StrokeWidth = Shader.PropertyToID( nameof( _StrokeWidth ) );
+			public static readonly int _StrokeAlignmentExtension = Shader.PropertyToID( nameof( _StrokeAlignmentExtension ) );
 		}
 
 
@@ -144,13 +144,13 @@ namespace PlotInternals
 
 			if( style.fillTexture ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission
 				if( drawNow ) {
-					_material.SetVector( FillShaderIDs.texST, style.fillTextureST );
-					_material.SetColor( FillShaderIDs.texTint, style.fillTextureTint );
-					_material.SetFloat( ShaderIDs.strokeAlignmentExtension, strokeAlignmentExtension );
+					_material.SetVector( FillShaderIDs._Tex_ST, style.fillTextureST );
+					_material.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
+					_material.SetFloat( ShaderIDs._StrokeAlignmentExtension, strokeAlignmentExtension );
 				} else {
-					_propBlock.SetVector( FillShaderIDs.texST, style.fillTextureST );
-					_propBlock.SetColor( FillShaderIDs.texTint, style.fillTextureTint );
-					_propBlock.SetFloat( ShaderIDs.strokeAlignmentExtension, strokeAlignmentExtension );
+					_propBlock.SetVector( FillShaderIDs._Tex_ST, style.fillTextureST );
+					_propBlock.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
+					_propBlock.SetFloat( ShaderIDs._StrokeAlignmentExtension, strokeAlignmentExtension );
 				}
 			}
 
@@ -158,17 +158,17 @@ namespace PlotInternals
 			Vector4 fragData = new Vector4( ringRadius, ringExtents, horseshoeExtention, fillDistOffset );
 
 			if( drawNow ) {
-				_material.SetVector( ShaderIDs.vertData, vertData );
-				_material.SetFloat( ShaderIDs.angleOffset, angleOffset );
-				_material.SetVector( ShaderIDs.fragData, fragData );
-				_material.SetFloat( ShaderIDs.strokeWidth, actualStrokeWidth );
+				_material.SetVector( ShaderIDs._VertData, vertData );
+				_material.SetFloat( ShaderIDs._AngleOffset, angleOffset );
+				_material.SetVector( ShaderIDs._FragData, fragData );
+				_material.SetFloat( ShaderIDs._StrokeWidth, actualStrokeWidth );
 				_material.SetPass( 0 );
 				Graphics.DrawMeshNow( mesh, matrix );
 			} else {
-				_propBlock.SetVector( ShaderIDs.vertData, vertData );
-				_propBlock.SetFloat( ShaderIDs.angleOffset, angleOffset );
-				_propBlock.SetVector( ShaderIDs.fragData, fragData );
-				_propBlock.SetFloat( ShaderIDs.strokeWidth, actualStrokeWidth );
+				_propBlock.SetVector( ShaderIDs._VertData, vertData );
+				_propBlock.SetFloat( ShaderIDs._AngleOffset, angleOffset );
+				_propBlock.SetVector( ShaderIDs._FragData, fragData );
+				_propBlock.SetFloat( ShaderIDs._StrokeWidth, actualStrokeWidth );
 				Graphics.DrawMesh( mesh, matrix, _material, style.layer, null, 0, _propBlock, false, false, false );
 			}
 		}

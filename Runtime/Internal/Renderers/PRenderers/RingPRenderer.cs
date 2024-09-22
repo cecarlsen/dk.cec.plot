@@ -14,8 +14,8 @@ namespace PlotInternals
 
 		static class ShaderIDs
 		{
-			public static readonly int vertData = Shader.PropertyToID( "_VertData" );
-			public static readonly int fragData = Shader.PropertyToID( "_FragData" );
+			public static readonly int _VertData = Shader.PropertyToID( nameof( _VertData ) );
+			public static readonly int _FragData = Shader.PropertyToID( nameof( _FragData ) );
 		}
 
 
@@ -66,11 +66,11 @@ namespace PlotInternals
 
 			if( style.textureEnabled ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission
 				if( drawNow ) {
-					_material.SetVector( FillShaderIDs.texST, style.fillTextureST );
-					_material.SetColor( FillShaderIDs.texTint, style.fillTextureTint );
+					_material.SetVector( FillShaderIDs._Tex_ST, style.fillTextureST );
+					_material.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
 				} else {
-					_propBlock.SetVector( FillShaderIDs.texST, style.fillTextureST );
-					_propBlock.SetColor( FillShaderIDs.texTint, style.fillTextureTint );
+					_propBlock.SetVector( FillShaderIDs._Tex_ST, style.fillTextureST );
+					_propBlock.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
 				}
 			}
 
@@ -78,14 +78,14 @@ namespace PlotInternals
 			Vector4 fragData = new Vector4( ringRadius, ringExtents, actualStrokeWidth, strokeOffsetMin ); 
 
 			if( drawNow ) {
-				_material.SetVector( ShaderIDs.vertData, vertData );
-				_material.SetVector( ShaderIDs.fragData, fragData );
+				_material.SetVector( ShaderIDs._VertData, vertData );
+				_material.SetVector( ShaderIDs._FragData, fragData );
 				_material.SetPass( 0 );
 				Graphics.DrawMeshNow( mesh, matrix );
 			} else {
 				//Debug.Log( _material.enableInstancing + " " + _material.GetHashCode() );
-				_propBlock.SetVector( ShaderIDs.vertData, vertData );
-				_propBlock.SetVector( ShaderIDs.fragData, fragData );
+				_propBlock.SetVector( ShaderIDs._VertData, vertData );
+				_propBlock.SetVector( ShaderIDs._FragData, fragData );
 				Graphics.DrawMesh( mesh, matrix, _material, style.layer, camera: null, submeshIndex: 0, _propBlock, false, false, false );
 			}
 		}

@@ -22,7 +22,15 @@ using TMPro;
 [Serializable]
 public partial class Plot
 {
-	
+	#region Constants
+
+	public const float Pi = Mathf.PI;
+	public const float HalfPi = Pi * 0.5f;
+	public const float Tau = Pi * 2;
+
+	#endregion // Constants
+
+
 	#region Enums
 
 	[Serializable] public enum StrokeAlignment { Inside, Edge, Outside }
@@ -121,14 +129,15 @@ public partial class Plot
 	/// <summary>
 	/// Adapts a list of Texts by destroying and creating new ones as needed.
 	/// </summary>
-	public static void AdaptTextCount( int entryCount, List<Text> labels, TMP_FontAsset font = null )
+	public static void AdaptTextCount( int entryCount, List<Text> labels )
 	{
 		// If the labels list count is correct, then check if it still contains labels and have fonts.
 		// In the case that we have no entries, labels may still be hanging around waiting to be destroyed.
 		if( entryCount != 0 && labels.Count == entryCount ) {
 			bool allGood = true;
 			foreach( Text tm in labels ) {
-				if( !tm || tm.font == null ) {
+				//if( !tm || tm.font == null ) {
+				if( !tm ) {
 					allGood = false;
 					break;
 				}
@@ -143,12 +152,12 @@ public partial class Plot
 		}
 
 		// Ensure existing labels has font.
-		if( !font ) foreach( var label in labels ) if( label && !label.font ) label.font = TMP_Settings.defaultFontAsset;
+		//if( !font ) foreach( var label in labels ) if( label && !label.font ) label.font = TMP_Settings.defaultFontAsset;
 
 		// Added missing.
 		while( labels.Count < entryCount ) {
 			var text = CreateText();
-			if( font ) text.font = font;
+			//if( font ) text.font = font;
 			labels.Add( text );
 		}
 	}
@@ -368,7 +377,16 @@ public partial class Plot
 
 
 	/// <summary>
-	/// Set the size to be used for subsequently drawn texts in world space scale (Requires TextMeshPro).
+	/// Set the font used for subsequently drawn texts.
+	/// </summary>
+	public static void SetTextFont( TMP_FontAsset font )
+	{
+		P()._style.font = font;
+	}
+
+
+	/// <summary>
+	/// Set the size to be used for subsequently drawn texts in world space scale.
 	/// </summary>
 	public static void SetTextSize( float textSize )
 	{
@@ -377,7 +395,7 @@ public partial class Plot
 
 
 	/// <summary>
-	/// Set the alignment to be used for subsequently drawn texts (Requires TextMeshPro).
+	/// Set the alignment to be used for subsequently drawn texts.
 	/// </summary>
 	public static void SetTextAlignment( TextAlignmentOptions alignment )
 	{

@@ -27,8 +27,10 @@ Please go through the scenes located in *dk.cec.plot/Samples* in chronological o
 	- Texts can vanish temporarily on code reload using ExecuteInEditMode.
 	- Image fill changes size inside DrawRect when stroke is enabled and disabled.
 	- Shrinking without flicker needs a review. See comment in Ring Shader.
-	- SetFillTexture not implemented for Polygon. 
+	- SetFillTexture() not implemented for Polygon. 
+	- Text ignores SetBlend().
 	- Polygons will flicker when very small and moving (won't fix).
+	- Text ignores SetAntiAliasing(). It is always on (won't fix).
 
 
 ## Author
