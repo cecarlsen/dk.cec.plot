@@ -12,17 +12,17 @@ namespace PlotExamples
 	[ExecuteInEditMode]
 	public class ExemplifyText : MonoBehaviour
 	{
-		public TMP_FontAsset _font = null;
+		public TMP_FontAsset font;
 
-		Text text;
+		Text _text;
 
  
 		void Update() 
 		{
 			// Similar to Polyline and Polygon, we have to create an object for drawing.
-			if( !text ){  
-				text = CreateText( "Hello World" );
-				text.font = _font;
+			if( !_text ){  
+				_text = CreateText( "Hello World" );
+				_text.font = font;
 			}
 			//text.SetContent( "Hello world" ); // BUG TESTING. Text won't vanish on code reload if we keep setting the content.
 
@@ -33,7 +33,7 @@ namespace PlotExamples
 			SetTextSize( 0.1f );
 			SetTextAlignment( TextAlignmentOptions.Center );
 			SetFillColor( Color.blue );
-			DrawText( text, 0, 0, 1, 1, true );
+			DrawText( _text, 0, 0, 1, 1, true );
 
 			PopCanvas();
 			PopStyle();

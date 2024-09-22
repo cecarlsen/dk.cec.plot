@@ -3,7 +3,8 @@
 
 ## [0.1.0] - 2024-09-XX
 
-	- Added a Text example.
+	- Added GameOfLife example.
+	- Added Image and Text examples.
 	- Updated how polylines, polygons, and text is created and drawn.
 
 
