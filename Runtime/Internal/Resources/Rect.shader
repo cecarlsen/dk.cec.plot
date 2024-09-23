@@ -45,7 +45,7 @@ Shader "Hidden/Draw/Rect"
 			#endif
 
 			#include "UnityCG.cginc"
-			#include "SDFShapeBase.cginc"
+			#include "Base.cginc"
 
 			 
 			struct ToVert

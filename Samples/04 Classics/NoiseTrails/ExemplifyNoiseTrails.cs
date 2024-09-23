@@ -11,58 +11,25 @@ namespace PlotExamples
 	[ExecuteInEditMode]
 	public class ExemplifyNoiseTrails : MonoBehaviour
 	{
-		public int brushCount = 64;
-		[Range(1f,10f)]public float frequency = 5f;
+		[Range(1f,10f)] public float frequency = 5f;
 		[Range(0.1f,2f)] public float strokeWidth = 1f;
 		[Range(0f,1f)] public float alpha = 0.1f;
+		public Vector2 sampleOffset = new Vector2( 46.23476f, 7.1974f );
 
 		Vector2[] _brushes;
 		RenderTexture _rt;
 
-		const int resolution = 4096;
+		const int brushCount = 128;
+		const int width = 3840;
+		const int height = 2180;
 
 
-		void Update()
+		void OnEnable()
 		{
-			bool initRenderTexture = false;
-			if( !_rt ){
-				if( _rt ) _rt.Release();
-				_rt = new RenderTexture( resolution, resolution, 0, RenderTextureFormat.ARGB32 );
-				initRenderTexture = true;
-			}
-			
-			if( _brushes == null || _brushes.Length != brushCount ) ResetBrushes();
-
-			if( initRenderTexture) BeginDrawNowToRenderTexture( _rt, Plot.Space.Pixels, Color.black );
-			else BeginDrawNowToRenderTexture( _rt, Plot.Space.Pixels );
-
-			SetStrokeWidth( strokeWidth );
-			SetStrokeColor( Color.white, alpha );
-			for( int i = 0; i < brushCount; i++ ){
-				var p0 = _brushes[ i ];
-				var pSample = frequency * p0 / resolution;
-				var delta = CurlNoise( pSample ) * 10;
-				var p1 = p0 + delta;
-				DrawLineNow( p0, p1 );
-				if( p1.x <= 0 || p1.x >= resolution || p1.y < 0 || p1.y >= resolution ){
-					p1 = new Vector2( Random.value * resolution, Random.value * resolution );
-				}
-				_brushes[ i ] = p1;
-			}
-
-			EndDrawNowToRenderTexture();
-			
-			SetFillTexture( _rt );
-			SetFillColor( Color.white );
-			SetNoStroke();
-			DrawRect( 0, 0, 1, 1 );
-		}
-
-
-		void ResetBrushes()
-		{
-			if( _brushes == null || _brushes.Length != brushCount ) _brushes = new Vector2[ brushCount ];
-			for( int i = 0; i < brushCount; i++ ) _brushes[ i ] = new Vector2( Random.Range( 0f, resolution ), Random.Range( 0f, resolution ) );
+			_rt = new RenderTexture( width, height, 0, RenderTextureFormat.ARGB32, mipCount: 4 ){
+				useMipMap = true // Render nicely when zooming out in the scene.
+			};
+			Reset();
 		}
 
 
@@ -73,17 +40,59 @@ namespace PlotExamples
 		}
 
 
-		void OnValidate()
+		void Update()
 		{
-			brushCount = Mathf.Clamp( brushCount, 1, 512 );
+			if( Input.GetMouseButtonDown( 0 ) ) Reset();
+
+			MoveAndDrawBrushesToRenderTexture();
+			DrawTextureRenderInScene();
+		}
+
+
+		void MoveAndDrawBrushesToRenderTexture()
+		{
+			BeginDrawNowToRenderTexture( _rt, Plot.Space.Pixels );
+
+			SetStrokeWidth( strokeWidth );
+			SetStrokeColor( Color.white, alpha );
+			for( int i = 0; i < brushCount; i++ ){
+				var p0 = _brushes[ i ];
+				var pSample = frequency * p0 / width + sampleOffset;
+				var delta = CurlNoise( pSample ) * 10;
+				var p1 = p0 + delta;
+				DrawLineNow( p0, p1 );
+				if( p1.x <= 0 || p1.x >= width || p1.y < 0 || p1.y >= width ){
+					p1 = new Vector2( Random.value * width, Random.value * height );
+				}
+				_brushes[ i ] = p1;
+			}
+
+			EndDrawNowToRenderTexture();
+		}
+
+
+		void DrawTextureRenderInScene()
+		{
+			SetFillTexture( _rt );
+			SetFillColor( Color.black );
+			SetNoStroke();
+			DrawRect( 0, 0, width / (float) height, 1 );
+		}
+
+
+		void Reset()
+		{
+			ClearRenderTextureNow( _rt, Color.black );
+			if( _brushes == null ) _brushes = new Vector2[ brushCount ];
+			for( int i = 0; i < brushCount; i++ ) _brushes[ i ] = new Vector2( Random.Range( 0f, width ), Random.Range( 0f, height ) );
 		}
 
 
 		static Vector2 CurlNoise( Vector2 pos )
 		{
-			const float e = 0.01f;
+			const float e = 0.001f;
 			return new Vector2(
-				( Mathf.PerlinNoise( pos.x, pos.y + e ) - Mathf.PerlinNoise( pos.x, pos.y - e ) ) / ( 2 * e ), 
+				( Mathf.PerlinNoise( pos.x, pos.y + e ) - Mathf.PerlinNoise( pos.x, pos.y - e ) ) / ( 2f * e ), 
 				- ( ( Mathf.PerlinNoise( pos.x + e, pos.y ) - Mathf.PerlinNoise( pos.x - e, pos.y ) ) / ( 2f * e ) )
 			);
 		}

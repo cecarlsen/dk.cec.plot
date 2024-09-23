@@ -611,14 +611,13 @@ public partial class Plot
 	/// <summary>
 	/// End a DrawNowToTexture session
 	/// </summary>
-	public static void EndDrawNowToRenderTexture()
-	{
-		P()._drawingToTextureNow = false;
+	public static void EndDrawNowToRenderTexture() => EndDrawNowToRenderTextureInternal();
 
-		GL.PopMatrix();
-		GL.invertCulling = false;
-		Graphics.SetRenderTarget( null );
-	}
+
+	/// <summary>
+	/// Clear a RenderTexture with a color immediately.
+	/// </summary>
+	public static void ClearRenderTextureNow( RenderTexture rt, Color clearColor ) => ClearRenderTextureNowInternal( rt, clearColor );
 
 
 	/// <summary>

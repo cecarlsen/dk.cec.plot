@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020-2021
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 */
 
@@ -39,26 +39,26 @@ namespace PlotInternals
 			float boundScale = outerDiameter;
 			float meshScale = boundScale;
 			float ringExtents = ( outerDiameter - innerDiameter ) * 0.25f;
-			float actualStrokeWidth = hasStroke ? style.strokeWidth : 0;
-			float strokeOffsetMin = 0;
+			float actualStrokeWidth = hasStroke ? style.strokeWidth : 0f;
+			float strokeOffsetMin = 0f;
 			float innerVertexFactor;
 			if( hasStroke ) {
 				strokeOffsetMin = GetStokeOffsetMin( ref style );
-				float extension = ( strokeOffsetMin + actualStrokeWidth ) * 2;
+				float extension = ( strokeOffsetMin + actualStrokeWidth ) * 2f;
 				meshScale += extension;
 				if( !hasFill && innerDiameter < 0 ) { // For stroked cricle without fill, make a hole. 
-					innerVertexFactor = ( meshScale - actualStrokeWidth * 2 ) / meshScale;
+					innerVertexFactor = ( meshScale - actualStrokeWidth * 2f ) / meshScale;
 				} else {
 					innerVertexFactor = ( innerDiameter - extension ) / meshScale;
 				}
 			} else {
 				innerVertexFactor = innerDiameter / meshScale;
 			}
-			if( innerVertexFactor < 0 ) innerVertexFactor = 0;
+			if( innerVertexFactor < 0 ) innerVertexFactor = 0f;
 			float ringRadius = innerDiameter * 0.5f + ringExtents;
 
-			if( x != 0 || y != 0 ) matrix.Translate3x4( x, y );
-			if( meshScale != 1 ) matrix.Scale3x4( meshScale, meshScale );
+			if( x != 0f || y != 0f ) matrix.Translate3x4( x, y );
+			if( meshScale != 1f ) matrix.Scale3x4( meshScale, meshScale );
 			if( style.pivot != Plot.Pivot.Center ){
 				float pivotFactor = 0.5f * boundScale / meshScale;
 				matrix.Translate3x4( -pivotPosition.x * pivotFactor, -pivotPosition.x * pivotFactor );

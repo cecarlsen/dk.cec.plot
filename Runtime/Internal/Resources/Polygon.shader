@@ -38,7 +38,7 @@ Shader "Hidden/Draw/Polygon"
 			#define SHAPE_EXTENTS_EXCLUDED_FROM_MODEL_MATRIX	// Used by TransformVertexAndComputeShapePosition
 
 			#include "UnityCG.cginc"
-			#include "SDFShapeBase.cginc"
+			#include "Base.cginc"
 
 
 			struct ToVert

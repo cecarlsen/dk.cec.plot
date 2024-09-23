@@ -183,7 +183,7 @@ Camera:
   far clip plane: 4
   field of view: 60
   orthographic: 1
-  orthographic size: 0.51
+  orthographic size: 0.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -258,10 +258,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34aa5aaac92f4527afe4cc3283293e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brushCount: 512
-  frequency: 5
+  frequency: 6.4
   strokeWidth: 2
-  alpha: 0.04
+  alpha: 0.1
+  sampleOffset: {x: 46.23476, y: 8.81}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 
 	About instancing
@@ -45,7 +45,7 @@ Shader "Hidden/Draw/Ring"
 			#endif
 			
 			#include "UnityCG.cginc"
-			#include "SDFShapeBase.cginc"
+			#include "Base.cginc"
 			
 			struct ToVert
 			{

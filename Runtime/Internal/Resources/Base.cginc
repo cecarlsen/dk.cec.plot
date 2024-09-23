@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 */
 
@@ -35,7 +35,7 @@ float GetWorldSpacePixelSizeRelativeToCamera( float4 vertexMS )
 	float3 posVS = UnityObjectToViewPos( vertexMS );	// Model + View transformation.
 
 	// Compute pixel size in world coordinates.
-	//		unity_OrthoParams.y == half height the orthographic camera view.
+	//		unity_OrthoParams.y == float height the orthographic camera view.
 	//		unity_OrthoParams.w == orthographics camera flag (0.0 or 1.0).
 	//		_ScreenParams.y == height of the target texture.
 	// -posVS.z / _ScreenParams.y will give you the height of a pixel in world space for a perspective camera.
@@ -46,7 +46,7 @@ float GetWorldSpacePixelSizeRelativeToCamera( float4 vertexMS )
 
 /// Maintains stroke extents and compute min size alpha fade to avoid lines looking shitty when very thin.
 /// Called from fragment functions.
-void MaintainSafeStrokeExtents( float fSizeShape, inout half strokeExtents, out float alphaMult )
+void MaintainSafeStrokeExtents( float fSizeShape, inout float strokeExtents, out float alphaMult )
 {
 	float minExtents = fSizeShape * MIN_EXTENTS;
 	float extension = max( 0, minExtents - strokeExtents );
@@ -97,13 +97,15 @@ void GetScales( float2 shapeScaleWithoutCanvasScale, out float2 shapeScaleWithCa
 
 
 // Compute color assuming that d == 0 is where fill ends and stroke begins.
-half4 EvaluateFillStrokeColor
+float4 EvaluateFillStrokeColor
 (
-	float d, float fSize, float totalExtents, float strokeWidth, fixed4 fillCol, fixed4 strokeCol
+	float d, float fSize, float totalExtents, float strokeWidth, float4 fillCol, float4 strokeCol
 	#ifdef _HAS_TEXTURE
-	, float2 uv, fixed4 texTint
+	, float2 uv, float4 texTint
 	#endif
 ){
+	if( strokeWidth <= 0.0 ) strokeCol = float4( fillCol.rgb, 0.0 );
+
 	// Maintain min size and compute min size alpha.
 	float minExtents = fSize * MIN_EXTENTS;
 	float safeAdd = max( 0, minExtents - totalExtents );
@@ -114,11 +116,11 @@ half4 EvaluateFillStrokeColor
 	// This way we completely avoid small scale jitter for strokes. The downside is that tiny shapes will lean towards fill color.
 	float strokeThiningFactor = strokeCol.a * saturate( minExtents - strokeWidth ) / minExtents;
 	strokeCol = lerp( strokeCol, fillCol, strokeThiningFactor );
-	//return fixed4( strokeFactor.xxx, 1 ); // DEBUG visualize stroke factor
+	//return float4( strokeFactor.xxx, 1 ); // DEBUG visualize stroke factor
 
 	// Sample fill texture.
 	#ifdef _HAS_TEXTURE
-		half4 texCol = tex2D( _Tex, uv ) * texTint;
+		float4 texCol = tex2D( _Tex, uv ) * texTint;
 		#ifdef _TEXTURE_OVERLAY
 			fillCol.rgb = fillCol.rgb * ( 1 - texCol.a ) + texCol.rgb * texCol.a;
 			fillCol.a = saturate( fillCol.a + texCol.a );
@@ -136,8 +138,8 @@ half4 EvaluateFillStrokeColor
 		if( d > strokeWidth + gradientExtents ) discard;
 
 		// Interpolate between fill and stroke colors.
-		half4 col = lerp( fillCol, strokeCol, smoothstep( -gradientExtents, gradientExtents, d ) );
-		//fixed4 col = lerp( fillCol, strokeCol, smoothstep( -gradientExtents, gradientExtents, d ) * strokeFactor );
+		float4 col = lerp( fillCol, strokeCol, smoothstep( -gradientExtents, gradientExtents, d ) );
+		//float4 col = lerp( fillCol, strokeCol, smoothstep( -gradientExtents, gradientExtents, d ) * strokeFactor );
 
 		// Apply smooth edge. If no stroke, then strokeCol will be transparent and therefore we have already applied smooth edge by now.
 		if( strokeWidth > 0 ) col.a *= smoothstep( gradientExtents, -gradientExtents, d - strokeWidth ); // Smooth version
@@ -147,7 +149,7 @@ half4 EvaluateFillStrokeColor
 		if( d > strokeWidth ) discard;
 
 		// Switch between fill and stroke colors.
-		half4 col = lerp( fillCol, strokeCol, saturate( ceil( d ) ) );
+		float4 col = lerp( fillCol, strokeCol, saturate( ceil( d ) ) );
 	#endif
 
 	// Support fog.
@@ -160,7 +162,7 @@ half4 EvaluateFillStrokeColor
 }
 
 
-half4 EvaluateStrokeColor( float d, float fSizeWS, half4 strokeCol )
+float4 EvaluateStrokeColor( float d, float fSizeWS, float4 strokeCol )
 {
 	#ifdef _ANTIALIAS
 		// Compute the antialisation extents in space space.

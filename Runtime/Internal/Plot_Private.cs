@@ -8,6 +8,7 @@ using UnityEngine.Rendering;
 using System.Collections.Generic;
 using PlotInternals;
 using TMPro;
+using UnityEditor;
 
 public partial class Plot
 {
@@ -98,6 +99,26 @@ public partial class Plot
 		GL.LoadProjectionMatrix( projectionMatrix );
 
 		_p._drawingToTextureNow = true;
+	}
+
+
+	static void EndDrawNowToRenderTextureInternal()
+	{
+		P()._drawingToTextureNow = false;
+
+		GL.PopMatrix();
+		GL.invertCulling = false;
+		Graphics.SetRenderTarget( null );
+	}
+
+
+	static void ClearRenderTextureNowInternal( RenderTexture rt, Color clearColor )
+	{
+		P();
+ 
+		Graphics.SetRenderTarget( rt );
+		GL.Clear( true, true, clearColor );
+		Graphics.SetRenderTarget( null );
 	}
 
 

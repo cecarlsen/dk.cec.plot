@@ -49,7 +49,7 @@ Shader "Hidden/Draw/Arc"
 			#define CONER_COUNT 6.0 // Hexagon. Must match conerCount in ArcPRenderer.cs
 
 			#include "UnityCG.cginc"
-			#include "SDFShapeBase.cginc"
+			#include "Base.cginc"
 
 
 			struct ToVert

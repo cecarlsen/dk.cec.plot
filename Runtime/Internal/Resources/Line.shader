@@ -36,7 +36,7 @@ Shader "Hidden/Draw/Line"
 			#pragma multi_compile_local __ _ANTIALIAS
 
 			#include "UnityCG.cginc"
-			#include "SDFShapeBase.cginc"
+			#include "Base.cginc"
 
 			struct ToVert
 			{
@@ -55,14 +55,14 @@ Shader "Hidden/Draw/Line"
 
 
 			UNITY_INSTANCING_BUFFER_START( Props )
-				UNITY_DEFINE_INSTANCED_PROP( half4, _Data ) // x: meshExtentsX, y: meshExtentsY, z: roundedBeginCapFlag, w: rounedEndCapFlag,
-				UNITY_DEFINE_INSTANCED_PROP( half4, _StrokeColor )
-				//UNITY_DEFINE_INSTANCED_PROP( half4, _StrokeEndColor )
+				UNITY_DEFINE_INSTANCED_PROP( float4, _Data ) // x: meshExtentsX, y: meshExtentsY, z: roundedBeginCapFlag, w: rounedEndCapFlag,
+				UNITY_DEFINE_INSTANCED_PROP( float4, _StrokeColor )
+				//UNITY_DEFINE_INSTANCED_PROP( float4, _StrokeEndColor )
 			UNITY_INSTANCING_BUFFER_END( Props )
 
 
 			// Similar to sdRoundedBox. https://iquilezles.org/www/articles/distfunctions/distfunctions.htm
-			float SdCenteredHorizontalLineSegment( float2 p, half2 extents, half2 roundCapFlags )
+			float SdCenteredHorizontalLineSegment( float2 p, float2 extents, float2 roundCapFlags )
 			{
 				float r = ( p.x < 0.0 ? roundCapFlags.x : roundCapFlags.y ) * extents.y;
 				float2 q = abs( p ) - extents + r;
@@ -79,7 +79,7 @@ Shader "Hidden/Draw/Line"
 				UNITY_TRANSFER_INSTANCE_ID( v, o );		// Support instanced properties in fragment Shader.
 				
 				// Read properties.
-				half2 shapeExtentsWithoutCanvasScaling = UNITY_ACCESS_INSTANCED_PROP( Props, _Data ).xy;
+				float2 shapeExtentsWithoutCanvasScaling = UNITY_ACCESS_INSTANCED_PROP( Props, _Data ).xy;
 
 				// Get scales.
 				float2 shapeScaleWithCanvasScale, modelScale;
@@ -113,14 +113,14 @@ Shader "Hidden/Draw/Line"
 
 
 
-			half4 Frag( ToFrag i ) : SV_Target
+			float4 Frag( ToFrag i ) : SV_Target
 			{
 				UNITY_SETUP_INSTANCE_ID( i ); // Support instanced properties in fragment Shader.
 				
 				// Read properties.
-				half4 data = UNITY_ACCESS_INSTANCED_PROP( Props, _Data );
-				half4 strokeCol = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeColor );
-				//half4 strokeEndCol = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeEndColor );
+				float4 data = UNITY_ACCESS_INSTANCED_PROP( Props, _Data );
+				float4 strokeCol = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeColor );
+				//float4 strokeEndCol = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeEndColor );
 
 				// Interpolate end color. (WORK IN PROGRESS)
 				//float startEndT = saturate( ( i.posSS.x / data.x ) * 0.5 + 0.5 );
