@@ -9,9 +9,13 @@ using static Plot;
 namespace PlotExamples
 {
 	[ExecuteInEditMode]
-	public class ExemplifyImage : MonoBehaviour
+	public class ExemplifyTexture : MonoBehaviour
 	{
 		public Texture texture;
+		public FillTextureBlend textureBlend = FillTextureBlend.Overlay;
+		public Color fillColor = Color.black;
+		public Color textureTint = Color.white;
+		public Color strokeColor = Color.white;
 
  
 		void Update() 
@@ -20,10 +24,12 @@ namespace PlotExamples
 			SetCanvas( transform );
 
 			SetFillTexture( texture );
+			SetFillTextureBlend( textureBlend );
+			SetFillTextureTint( textureTint );
+			SetFillColor( fillColor );
 			SetStrokeWidth( 0.1f );
-			SetStrokeColor( Color.white, 0.9f );
-			SetFillColor( Color.blue );
-			DrawRect( 0, 0, 1, 1, roundness: 0.2f );
+			SetStrokeColor( strokeColor );
+			DrawRect( 0, 0, 1, 1, 0.2f, 0.5f, 0.2f, 0.5f );
 
 			PopCanvasAndStyle();
 		}
