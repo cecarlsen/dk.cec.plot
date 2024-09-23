@@ -265,21 +265,22 @@ public partial class Plot
 	public static void SetFillColor( Color color )
 	{
 		_p._style.fillColor = color;
+		_p._style.fillEnabled = true;
 		foreach( FillPRenderer r in _p._fillRenderers ) r.isFillColorDirty = true;
 	}
 
 
 	/// <summary>
 	/// Set no fill for subsequently drawn shapes.
-	/// This will effectively set the fill color to (0,0,0,0) and forget the fill texture;
 	/// </summary>
-	public static void SetNoFillColor()
+	public static void SetNoFill()
 	{
 		P();
-		_p._style.fillColor = Color.clear;
-		_p._style.fillTexture = null;
-		foreach( FillPRenderer r in _p._fillRenderers ) r.isFillColorDirty = true;
-		foreach( FillPRenderer r in _p._fillRenderers ) r.SetFillTextureFeature( null );
+		_p._style.fillEnabled = false;
+		//_p._style.fillColor = Color.clear;
+		//_p._style.fillTexture = null;
+		//foreach( FillPRenderer r in _p._fillRenderers ) r.isFillColorDirty = true;
+		//foreach( FillPRenderer r in _p._fillRenderers ) r.SetFillTextureFeature( null );
 	}
 
 
@@ -294,18 +295,8 @@ public partial class Plot
 	public static void SetStrokeColor( Color color )
 	{
 		P();
+		_p._style.strokeEnabled = true;
 		_p._style.strokeColor = color;
-		foreach( PRenderer r in _p._allRenderers ) r.isStrokeColorDirty = true;
-	}
-
-
-	/// <summary>
-	/// Set no stroke for subsequently drawn shapes.
-	/// </summary>
-	public static void SetNoStrokeColor()
-	{
-		P();
-		_p._style.strokeColor = Color.clear;
 		foreach( PRenderer r in _p._allRenderers ) r.isStrokeColorDirty = true;
 	}
 
@@ -316,8 +307,21 @@ public partial class Plot
 	public static void SetStrokeWidth( float width ){
 		P();
 		bool strokeEnabedChange = width > 0 != _p._style.strokeWidth > 0;
-		if( strokeEnabedChange ) foreach( PRenderer r in _p._allRenderers ) r.isStrokeColorDirty = true; // We need to update color when we change from no stroke to stroke.
+		//if( strokeEnabedChange ) foreach( PRenderer r in _p._allRenderers ) r.isStrokeColorDirty = true; // We need to update color when we change from no stroke to stroke.
+		_p._style.strokeEnabled = true;
 		_p._style.strokeWidth = width;
+	}
+
+
+	/// <summary>
+	/// Set no stroke for subsequently drawn shapes.
+	/// </summary>
+	public static void SetNoStroke()
+	{
+		P();
+		_p._style.strokeEnabled = false;
+		//_p._style.strokeColor = Color.clear;
+		//foreach( PRenderer r in _p._allRenderers ) r.isStrokeColorDirty = true;
 	}
 
 
@@ -381,7 +385,7 @@ public partial class Plot
 	/// </summary>
 	public static void SetTextFont( TMP_FontAsset font )
 	{
-		P()._style.font = font;
+		P()._style.textFont = font;
 	}
 
 
@@ -390,7 +394,7 @@ public partial class Plot
 	/// </summary>
 	public static void SetTextSize( float textSize )
 	{
-		P()._style.tmpFontSize = textSize * 10; // World space text size to TMP font size.
+		P()._style.textSize = textSize * 10; // World space text size to TMP font size.
 	}
 
 

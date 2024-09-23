@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020-2021
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 */
 
@@ -36,8 +36,7 @@ public class PlotRect : MonoBehaviour
 
 	void Update()
 	{
-		PushStyle();
-		PushCanvas();
+		PushCanvasAndStyle();
 		SetCanvas( transform );
 
 		SetPivot( pivot );
@@ -54,7 +53,7 @@ public class PlotRect : MonoBehaviour
 				SetFillTextureBlend( fillTextureBlend );
 			}
 		} else {
-			SetNoFillColor();
+			SetNoFill();
 		}
 
 		if( stroke ) {
@@ -63,13 +62,12 @@ public class PlotRect : MonoBehaviour
 			SetStrokeAlignement( strokeAlignment );
 			SetStrokeCornerProfile( strokeCornerProfile );
 		} else {
-			SetNoStrokeColor();
+			SetNoStroke();
 		}
 
 		DrawRect( 0, 0, width, height );
 
-		PopCanvas();
-		PopStyle();
+		PopCanvasAndStyle();
 	}
 
 

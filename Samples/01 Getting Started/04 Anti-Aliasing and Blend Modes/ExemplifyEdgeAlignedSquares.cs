@@ -22,13 +22,12 @@ namespace PlotExamples
 
 		void Update()
 		{
-			PushStyle();
-			PushCanvas();
+			PushCanvasAndStyle();
 			SetCanvas( transform );
 
 			SetAntiAliasing( antiAliasing );
 			SetBlend( blend );
-			SetNoStrokeColor();
+			SetNoStroke();
 
 			SetFillColor( color );
 			DrawSquare( -extents, -extents, size, roundness, 0, 0, 0 );	// Lower-Left
@@ -39,8 +38,7 @@ namespace PlotExamples
 			SetFillColor( color, 0.4f );
 			DrawSquare( extents, -extents, size, 0, 0, 0, roundness );	// Lower-Right
 
-			PopCanvas();
-			PopStyle();
+			PopCanvasAndStyle();
 		}
 	}
 }

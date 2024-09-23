@@ -52,7 +52,7 @@ namespace PlotInternals
 
 			EnsureAvailableMaterialBeforeSubmission( drawNow );
 
-			if( isStrokeColorDirty ) UpdateStrokeColor( style.strokeEnabled ? style.strokeColor : ColorWithAlpha( style.fillColor, 0 ), drawNow );
+			if( isStrokeColorDirty ) UpdateStrokeColor( style.hasVisibleStroke ? style.strokeColor : ColorWithAlpha( style.fillColor, 0 ), drawNow );
 
 			Vector4 data = new Vector4( meshExtentsX, meshExtentsY, beginCap == Plot.StrokeCap.Round ? 1 : 0, endCap == Plot.StrokeCap.Round ? 1 : 0 );
 

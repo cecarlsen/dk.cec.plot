@@ -29,8 +29,8 @@ namespace PlotInternals
 			Plot.Polygon polygon,
 			bool drawNow, ref Matrix4x4 matrix, ref Plot.Style style // Note that matrix and style are passed by reference for performance reasons, they are not changed.
 		){ 
-			bool hasFill = style.fillEnabled;
-			bool hasStroke = style.strokeEnabled;
+			bool hasFill = style.hasVisibleFill;
+			bool hasStroke = style.hasVisibleStroke;
 
 			float strokeOffsetMin = GetStokeOffsetMin( ref style ); 
 			float actualStrokeWidth = hasStroke ? style.strokeWidth : 0;

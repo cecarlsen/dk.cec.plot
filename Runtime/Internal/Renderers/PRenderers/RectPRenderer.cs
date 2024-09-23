@@ -33,8 +33,8 @@ namespace PlotInternals
 			float x, float y, float width, float height, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness,
 			bool drawNow, Matrix4x4 matrix, ref Plot.Style style, ref Vector2 pivotPosition // Note that style and pivot are passed by reference for performance reasons, they are not changed.
 		){
-			bool hasStroke = style.strokeEnabled;
-			bool hasFill = style.fillEnabled;
+			bool hasStroke = style.hasVisibleStroke;
+			bool hasFill = style.hasVisibleFill;
 			bool hasHardStrokeProfile = style.strokeCornerProfile == Plot.StrokeCornerProfile.Hard;
 
 			float boundsExtentsX = width * 0.5f; // Extents to edge, where the pivot will align.

@@ -33,8 +33,8 @@ namespace PlotInternals
 			float x, float y, float innerDiameter, float outerDiameter,
 			bool drawNow, Matrix4x4 matrix, ref Plot.Style style, ref Vector2 pivotPosition // Note that style and pivot are passed by reference for performance reasons, they are not changed.
 		){
-			bool hasFill = style.fillEnabled;
-			bool hasStroke = style.strokeEnabled;
+			bool hasFill = style.hasVisibleFill;
+			bool hasStroke = style.hasVisibleStroke;
 			
 			float boundScale = outerDiameter;
 			float meshScale = boundScale;
@@ -68,7 +68,7 @@ namespace PlotInternals
 
 			if( isFillColorDirty || isStrokeColorDirty ) UpdateFillAndStroke( ref style, drawNow );
 
-			if( style.textureEnabled ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission
+			if( style.hasVisibleTextureEnabled ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission
 				if( drawNow ) {
 					_material.SetVector( FillShaderIDs._Tex_ST, style.fillTextureST );
 					_material.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );

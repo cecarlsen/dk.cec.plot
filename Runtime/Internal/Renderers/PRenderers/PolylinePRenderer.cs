@@ -31,7 +31,7 @@ namespace PlotInternals
 
 			EnsureAvailableMaterialBeforeSubmission( drawNow );
 
-			if( isStrokeColorDirty ) UpdateStrokeColor( style.strokeEnabled ? style.strokeColor : ColorWithAlpha( style.fillColor, 0 ), drawNow );
+			if( isStrokeColorDirty ) UpdateStrokeColor( style.hasVisibleStroke ? style.strokeColor : ColorWithAlpha( style.fillColor, 0 ), drawNow );
 
 			if( drawNow ) {
 				_material.SetFloat( ShaderIDs._StrokeExtents, strokeExtents );

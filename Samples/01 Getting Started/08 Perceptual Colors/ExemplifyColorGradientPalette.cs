@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 */
 
@@ -24,17 +24,16 @@ namespace PlotExamples
 
 		void Update()
 		{
-			PushStyle();
+			PushCanvasAndStyle();
+			SetCanvas( transform );
+
 			SetAntiAliasing( false ); // We need perfect alignment between shape edges, and that is not possible when shape antialiasing is enabled and blend mode is Blend.Transparent.
-			SetNoStrokeColor();
+			SetNoStroke();
 			SetPivot( Pivot.Center );
 
-			PushCanvas();
-			SetCanvas( transform.localToWorldMatrix );
 			DrawGradient( interpolationMethod );
-			PopCanvas();
 	
-			PopStyle();
+			PopCanvasAndStyle();
 		}
 
 

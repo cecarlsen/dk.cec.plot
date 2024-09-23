@@ -33,6 +33,7 @@ namespace PlotExamples
 			if( !_polygon ) _polygon = CreatePolygon( 4 );
 			if( !_polyline ) _polyline = CreatePolyline( 2 );
 
+			PushCanvasAndStyle();
 			SetAntiAliasing( antialias );
 			SetStrokeAlignement( strokeAlignment );
 
@@ -70,13 +71,13 @@ namespace PlotExamples
 				y -= offsetY * 0.5f;
 
 				if( !stroke ){
-					SetNoStrokeColor();
+					SetNoStroke();
 				} else {
 					SetStrokeWidth( ( scaledCanvasInsteadOfShapeSize ? 1 : thickness ) * 0.1f );
 					SetStrokeColor( fill ? Color.black : Color.white );
 				}
 				if( fill ) SetFillColor( Color.white );
-				else SetNoFillColor();
+				else SetNoFill();
 
 				PushCanvas();
 				TranslateCanvas( x, y -= offsetY );
@@ -127,6 +128,8 @@ namespace PlotExamples
 
 				x += thickness * 0.5f + padding;
 			}
+
+			PopCanvasAndStyle();
 		}
 	}
 }

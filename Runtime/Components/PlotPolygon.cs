@@ -47,8 +47,7 @@ public class PlotPolygon : MonoBehaviour
 	{
 		if( !_polygon ) _polygon = CreatePolygon( points );
 
-		PushStyle();
-		PushCanvas();
+		PushCanvasAndStyle();
 		SetCanvas( transform );
 
 		SetPivot( pivot );
@@ -65,7 +64,7 @@ public class PlotPolygon : MonoBehaviour
 			//	SetFillTextureBlend( fillTextureBlend );
 			//}
 		} else { 
-			SetNoFillColor();
+			SetNoFill();
 		}
 
 		if( stroke ) {
@@ -74,12 +73,11 @@ public class PlotPolygon : MonoBehaviour
 			SetStrokeAlignement( strokeAlignment );
 			SetStrokeCornerProfile( strokeCornerProfile );
 		} else {
-			SetNoStrokeColor();
+			SetNoStroke();
 		}
 		DrawPolygon( _polygon );
 
-		PopCanvas();
-		PopStyle();
+		PopCanvasAndStyle();
 	}
 
 

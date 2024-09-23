@@ -54,7 +54,7 @@ namespace PlotExamples
 			
 			SetFillTexture( _rt );
 			SetFillColor( Color.white );
-			SetNoStrokeColor();
+			SetNoStroke();
 			DrawRect( 0, 0, 1, 1 );
 		}
 

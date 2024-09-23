@@ -17,13 +17,15 @@ namespace PlotExamples
 		{
 			if( !renderTexture ) return;
 			
+			PushCanvasAndStyle();
 			BeginDrawNowToRenderTexture( renderTexture, Plot.Space.Pixels );
 
-			SetNoStrokeColor();
+			SetNoStroke();
 			SetFillColor( Color.HSVToRGB( 0.5f * Random.value * 0.4f, 1f, 1f ) );
 			DrawCircleNow( Random.value * renderTexture.width, Random.value * renderTexture.height, 100f );
 
 			EndDrawNowToRenderTexture();
+			PopCanvasAndStyle();
 		}
 	}
 }

@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 
 	Inspired by our beloved Processing guru Daniel Shiffman
@@ -20,11 +20,15 @@ namespace PlotExamples
 		{
 			_angle = Mathf.Lerp( 10, 90, ( Mathf.Sin( Time.time ) + 1 ) / 2f );
 			
+			PushCanvasAndStyle();
+
 			SetStrokeColor( 1 );
 			SetStrokeWidth( 0.02f );
 
 			DrawLine( 0, 0, 0, -2 );
 			DrawRecursiveBranch( 2 );
+
+			PopCanvasAndStyle();
 		}
 
 

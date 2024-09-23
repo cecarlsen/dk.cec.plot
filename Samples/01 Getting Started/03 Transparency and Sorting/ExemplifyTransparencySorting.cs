@@ -19,10 +19,9 @@ namespace PlotExamples
 
 		void Update()
 		{
-			PushCanvas();
-			PushStyle();
+			PushCanvasAndStyle();
 
-			SetNoStrokeColor();
+			SetNoStroke();
 			SetBlend( blend );
 
 			const int count = 10;
@@ -34,8 +33,7 @@ namespace PlotExamples
 				DrawCircle( position, 1 );
 			}
 
-			PopStyle();
-			PopCanvas();
+			PopCanvasAndStyle();
 
 			// Animate camera to reveal typical sorting issue.
 			if( Application.isPlaying ) {

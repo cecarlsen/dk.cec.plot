@@ -77,14 +77,13 @@ namespace PlotExamples
 			}
 
 			// Save current plot canvas transform and style sate.
-			PushStyle();
-			PushCanvas();
+			PushCanvasAndStyle();
 
 			// Draw relative to this transform.
 			SetCanvas( transform );
 
 			// Setup shared drawing style.
-			SetNoStrokeColor(); 
+			SetNoStroke(); 
 			SetAntiAliasing( antiAliasing );
 
 			// Compute proportions.
@@ -114,8 +113,7 @@ namespace PlotExamples
 			DrawText( _fractionPlotText, Vector2.zero, Vector2.one * diameter, debugLabelRects );
 
 			// Recall last plot canvas transform and style.
-			PopCanvas();
-			PopStyle();
+			PopCanvasAndStyle();
 		}
 
 

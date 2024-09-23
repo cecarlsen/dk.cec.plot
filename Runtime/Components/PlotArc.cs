@@ -42,8 +42,7 @@ public class PlotArc : MonoBehaviour
 
 	void Update()
 	{
-		PushStyle();
-		PushCanvas();
+		PushCanvasAndStyle();
 		SetCanvas( transform );
 
 		SetPivot( pivot );
@@ -60,7 +59,7 @@ public class PlotArc : MonoBehaviour
 				SetFillTextureBlend( fillTextureBlend );
 			}
 		} else {
-			SetNoFillColor();
+			SetNoFill();
 		}
 
 		if( stroke ) {
@@ -69,13 +68,12 @@ public class PlotArc : MonoBehaviour
 			SetStrokeAlignement( strokeAlignment );
 			SetStrokeCornerProfile( strokeCornerProfile );
 		} else {
-			SetNoStrokeColor();
+			SetNoStroke();
 		}
 
 		DrawArc( 0, 0, innerDiameter, outerDiameter, beginAngle, endAngle, cutoff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness );
 
-		PopCanvas();
-		PopStyle();
+		PopCanvasAndStyle();
 	}
 
 

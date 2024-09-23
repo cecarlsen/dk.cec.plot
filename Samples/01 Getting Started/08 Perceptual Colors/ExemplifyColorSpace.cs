@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 */
 
@@ -21,12 +21,11 @@ namespace PlotExamples
 
 		void Update()
 		{
-			SetNoStrokeColor();
 
-			PushCanvas();
+			PushCanvasAndStyle();
 			SetCanvas( transform.localToWorldMatrix );
 			PlotColorSpace( colorSpace, resolution, chroma );
-			PopCanvas();
+			PopCanvasAndStyle();
 		}
 
 
@@ -38,6 +37,7 @@ namespace PlotExamples
 
 		static void PlotColorSpace( ColorSpace colorSpace, int resolution, float chroma )
 		{
+			SetNoStroke();
 			float step = 1f / ( resolution - 1f );
 			float offset = step * resolution * 0.5f - step * 0.5f;
 			for( int ny = 0; ny < resolution; ny++ ) {

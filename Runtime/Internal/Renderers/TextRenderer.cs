@@ -23,13 +23,13 @@ namespace PlotInternals
 			Matrix4x4 matrixCopy = matrix;
 			matrixCopy.Translate3x4( x, y );
 
-			if( style.font ){
-				if( tmp.font != style.font ) tmp.font = style.font;
+			if( style.textFont ){
+				if( tmp.font != style.textFont ) tmp.font = style.textFont;
 			} else {
 				if( !tmp.font ) tmp.font = TMP_Settings.defaultFontAsset;
 			}
 			tmp.color = style.fillColor;
-			tmp.fontSize = style.tmpFontSize;
+			tmp.fontSize = style.textSize;
 			tmp.alignment = style.textAlignment;
 			tmp.rectTransform.localPosition = new Vector3( x, y );
 			tmp.rectTransform.pivot = new Vector2( ( pivotPosition.x * 0.5f ) + 0.5f, ( pivotPosition.y * 0.5f ) + 0.5f );
@@ -47,7 +47,7 @@ namespace PlotInternals
 			PushStyle();
 			PushCanvas();
 			TranslateCanvas( 0, 0, -0.001f );
-			SetNoFillColor();
+			SetNoFill();
 			SetStrokeAlignement( StrokeAlignment.Edge );
 			SetStrokeCornerProfile( StrokeCornerProfile.Hard );
 			SetStrokeColor( Color.green );
@@ -58,7 +58,7 @@ namespace PlotInternals
 			// Then draw pivot.
 			TranslateCanvas( 0, 0, -0.001f );
 			SetPivot( Pivot.Center );
-			SetNoStrokeColor();
+			SetNoStroke();
 			SetFillColor( Color.red );
 			DrawCircle( x, y, debugSize * 4 );
 			PopCanvas();

@@ -14,7 +14,7 @@ namespace PlotExamples
 
 		void Update()
 		{
-			Plot.SetNoStrokeColor();					// Request no stroke for subsequently drawn shapes.
+			Plot.SetNoStroke();					// Request no stroke for subsequently drawn shapes.
 			Plot.SetFillColor( color );					// Request a fill color for subsequently drawn shapes.
 			
 			Plot.PushCanvas();							// Save the current canvas matrix on the canvas stack.

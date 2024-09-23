@@ -92,8 +92,7 @@ namespace PlotExamples
 			if( _entries?.Count == 0 ) return;
 
 			// Save current plot canvas transform and style sate.
-			PushStyle();
-			PushCanvas();
+			PushCanvasAndStyle();
 
 			// Draw relative to this transform.
 			SetCanvas( transform );
@@ -146,8 +145,7 @@ namespace PlotExamples
 			}
 
 			// Recall last plot canvas transform and style.
-			PopCanvas();
-			PopStyle();
+			PopCanvasAndStyle();
 		}
 
 

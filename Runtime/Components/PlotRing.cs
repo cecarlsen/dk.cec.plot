@@ -35,8 +35,7 @@ public class PlotRing : MonoBehaviour
 
 	void Update()
 	{
-		PushStyle();
-		PushCanvas();
+		PushCanvasAndStyle();
 		SetCanvas( transform );
 
 		SetPivot( pivot );
@@ -53,7 +52,7 @@ public class PlotRing : MonoBehaviour
 				SetFillTextureBlend( fillTextureBlend );
 			}
 		} else {
-			SetNoFillColor();
+			SetNoFill();
 		}
 
 		if( stroke ) {
@@ -61,13 +60,12 @@ public class PlotRing : MonoBehaviour
 			SetStrokeWidth( strokeWidth );
 			SetStrokeAlignement( strokeAlignment );
 		} else {
-			SetNoStrokeColor();
+			SetNoStroke();
 		}
 
 		DrawRing( 0, 0, innerDiameter, outerDiameter );
 
-		PopCanvas();
-		PopStyle();
+		PopCanvasAndStyle();
 	}
 
 

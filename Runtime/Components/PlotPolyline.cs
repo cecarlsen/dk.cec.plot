@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2021
+	Copyright © Carl Emil Carlsen 2021-2024
 	http://cec.dk
 */
 
@@ -33,8 +33,7 @@ public class PlotPolyline : MonoBehaviour
 
 	void Update()
 	{
-		PushStyle();
-		PushCanvas();
+		PushCanvasAndStyle();
 		SetCanvas( transform );
 
 		SetPivot( pivot );
@@ -47,14 +46,13 @@ public class PlotPolyline : MonoBehaviour
 			SetStrokeWidth( strokeWidth );
 			SetStrokeCornerProfile( strokeCornerProfile );
 		} else {
-			SetNoStrokeColor();
+			SetNoStroke();
 		}
 
 		if( !_polyline ) _polyline = CreatePolyline( points );
 		DrawPolyline( _polyline, capBegin, capEnd );
 
-		PopCanvas();
-		PopStyle();
+		PopCanvasAndStyle();
 	}
 
 

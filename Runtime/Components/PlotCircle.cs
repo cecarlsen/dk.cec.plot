@@ -34,8 +34,7 @@ public class PlotCircle : MonoBehaviour
 
 	void Update()
 	{
-		PushStyle();
-		PushCanvas();
+		PushCanvasAndStyle();
 		SetCanvas( transform );
 
 		SetPivot( pivot );
@@ -48,7 +47,7 @@ public class PlotCircle : MonoBehaviour
 			SetStrokeWidth( strokeWidth );
 			SetStrokeAlignement( strokeAlignment );
 		} else {
-			SetNoStrokeColor();
+			SetNoStroke();
 		}
 
 		if( fill ) {
@@ -60,13 +59,12 @@ public class PlotCircle : MonoBehaviour
 				SetFillTextureBlend( fillTextureBlend );
 			}
 		} else {
-			SetNoFillColor();
+			SetNoFill();
 		}
 
 		DrawCircle( 0, 0, diameter );
 
-		PopCanvas();
-		PopStyle();
+		PopCanvasAndStyle();
 	}
 
 

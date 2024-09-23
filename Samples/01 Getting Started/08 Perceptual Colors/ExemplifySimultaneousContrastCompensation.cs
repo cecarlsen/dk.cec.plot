@@ -21,7 +21,7 @@ namespace PlotExamples
 
 		void Update()
 		{
-			SetNoStrokeColor();
+			SetNoStroke();
 			SetPivot( Pivot.Center );
 
 			float step = 1 / ( stepCount - 1f );

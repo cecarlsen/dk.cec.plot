@@ -35,7 +35,9 @@ namespace PlotExamples
 
 		void Update()
 		{
-			SetNoStrokeColor();
+			PushCanvasAndStyle();
+
+			SetNoStroke();
 
 			if( _positions?.Length != count || _dirtyPhylotaxis ) GeneratePhyllotaxis();
 			if( _shapeLookup?.Length != count || _selectedMode != mode ) UpdateShapeLookup();
@@ -59,6 +61,8 @@ namespace PlotExamples
 
 				if( placeShapesAtUniqueDepths ) PopCanvas();
 			}
+
+			PopCanvasAndStyle();
 		}
 
 

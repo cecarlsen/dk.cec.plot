@@ -39,7 +39,7 @@ namespace PlotInternals
 		){
 			if( cutOff < 0 ) cutOff = 0;
 
-			bool hasStroke = style.strokeEnabled;
+			bool hasStroke = style.hasVisibleStroke;
 			bool hasRoundness = roundness > 0;
 
 			if( endAngle < beginAngle ) endAngle = beginAngle;

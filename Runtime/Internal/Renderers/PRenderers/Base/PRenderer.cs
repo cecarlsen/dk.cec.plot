@@ -84,7 +84,7 @@ namespace PlotInternals
 
 		protected float GetStokeOffsetMin( ref Plot.Style style ) // Passed by ref for performance only.
 		{
-			if( !style.strokeEnabled ) return 0;
+			if( !style.hasVisibleStroke ) return 0;
 			switch( style.strokeAlignment ) {
 				case Plot.StrokeAlignment.Inside: return -style.strokeWidth;
 				case Plot.StrokeAlignment.Edge: return -style.strokeWidth * 0.5f;

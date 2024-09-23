@@ -116,7 +116,7 @@ public partial class Plot
 
 	void DrawRingInternal( float x, float y, float innerDiameter, float outerDiameter, bool drawNow = false )
 	{
-		if( !_style.fillOrStrokeEnabled ) return;
+		if( !_style.hasVisibleFillOrStroke ) return;
 
 		if( _drawingToTextureNow && !drawNow ) DebugLogDrawToTextureNowWarning();
 
@@ -135,7 +135,7 @@ public partial class Plot
 
 	void DrawArcInternal( float x, float y, float innerDiameter, float outerDiameter, float beginAngle, float endAngle, float cutOff, float roundness, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false, bool drawNow = false )
 	{
-		if( !_style.fillOrStrokeEnabled || ( beginAngle > endAngle && ( !_style.strokeEnabled || _style.strokeAlignment == StrokeAlignment.Inside ) ) ) return;
+		if( !_style.hasVisibleFillOrStroke || ( beginAngle > endAngle && ( !_style.hasVisibleStroke || _style.strokeAlignment == StrokeAlignment.Inside ) ) ) return;
 
 		if( _drawingToTextureNow && !drawNow ) DebugLogDrawToTextureNowWarning();
 
@@ -154,7 +154,7 @@ public partial class Plot
 
 	void DrawRectInternal( float x, float y, float width, float height, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness, bool drawNow = false )
 	{
-		if( !_style.fillOrStrokeEnabled ) return;
+		if( !_style.hasVisibleFillOrStroke ) return;
 
 		if( _drawingToTextureNow && !drawNow ) DebugLogDrawToTextureNowWarning();
 
@@ -173,7 +173,7 @@ public partial class Plot
 
 	void DrawLineInternal( float ax, float ay, float bx, float by, StrokeCap beginCap, StrokeCap endCap, bool drawNow = false )
 	{
-		if( !_style.strokeEnabled ) return;
+		if( !_style.hasVisibleStroke ) return;
 
 		if( _drawingToTextureNow && !drawNow ) DebugLogDrawToTextureNowWarning();
 
@@ -198,7 +198,7 @@ public partial class Plot
 
 		if( _drawingToTextureNow && !drawNow ) DebugLogDrawToTextureNowWarning();
 
-		if( !_style.fillOrStrokeEnabled ) return;
+		if( !_style.hasVisibleFillOrStroke ) return;
 
 		if( _polygonRenderer == null ) {
 			_polygonRenderer = new PolygonPRenderer( _style.antialias, _style.blend, _style.fillTexture, _style.fillTextureBlend );
@@ -219,7 +219,7 @@ public partial class Plot
 
 		if( _drawingToTextureNow && !drawNow ) DebugLogDrawToTextureNowWarning();
 
-		if( !_style.strokeEnabled ) return;
+		if( !_style.hasVisibleStroke ) return;
 
 		if( _polylineRenderer == null ) {
 			_polylineRenderer = new PolylinePRenderer( _style.antialias, _style.blend );

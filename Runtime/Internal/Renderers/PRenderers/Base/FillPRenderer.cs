@@ -34,13 +34,13 @@ namespace PlotInternals
 
 		protected void UpdateFillAndStroke( ref Plot.Style style, bool drawNow )
 		{
-			if( isFillColorDirty || ( !style.fillEnabled && isStrokeColorDirty ) ) {
-				Color color = style.fillEnabled ? style.fillColor : ColorWithAlpha( style.strokeColor, 0 );
+			if( isFillColorDirty || ( !style.hasVisibleFill && isStrokeColorDirty ) ) {
+				Color color = style.hasVisibleFill ? style.fillColor : ColorWithAlpha( style.strokeColor, 0 );
 				if( drawNow ) _material.SetColor( FillShaderIDs._FillColor, color );
 				else _propBlock.SetColor( FillShaderIDs._FillColor, color );
 			}
-			if( isStrokeColorDirty || ( !style.strokeEnabled && isFillColorDirty )) {
-				Color color = style.strokeEnabled ? style.strokeColor : ColorWithAlpha( style.fillColor, 0 );
+			if( isStrokeColorDirty || ( !style.hasVisibleStroke && isFillColorDirty )) {
+				Color color = style.hasVisibleStroke ? style.strokeColor : ColorWithAlpha( style.fillColor, 0 );
 				if( drawNow ) _material.SetColor( SharedShaderIDs._StrokeColor, color );
 				else _propBlock.SetColor( SharedShaderIDs._StrokeColor, color );
 			}

@@ -26,8 +26,7 @@ public class PlotLine : MonoBehaviour
 
 	void Update()
 	{
-		PushStyle();
-		PushCanvas();
+		PushCanvasAndStyle();
 		SetCanvas( transform );
 
 		SetBlend( blend );
@@ -39,8 +38,7 @@ public class PlotLine : MonoBehaviour
 
 		DrawLine( pointA, pointB, capA, capB );
 
-		PopCanvas();
-		PopStyle();
+		PopCanvasAndStyle();
 	}
 
 
