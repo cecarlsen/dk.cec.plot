@@ -170,35 +170,35 @@ public partial class Plot
 
 
 	/// <summary>
-	/// Draw a circle using Graphics.DrawMesh. This supports Unity's instancing, culling, and sorting.
+	/// Submit a circle shape instance for rendering.
 	/// </summary>
 	public static void DrawCircle( float x, float y, float diameter ){ P().DrawRingInternal( x, y, -_p._style.strokeWidth-diameter, diameter ); }
 	public static void DrawCircle( Vector2 position, float diameter ){ P().DrawRingInternal( position.x, position.y, -_p._style.strokeWidth - diameter, diameter ); }
 
 
 	/// <summary>
-	/// Draw a ring using Graphics.DrawMesh. This supports Unity's instancing, culling, and sorting.
+	/// Submit a ring shape instance for rendering.
 	/// </summary>
 	public static void DrawRing( float x, float y, float innerDiameter, float outerDiameter ) { P().DrawRingInternal( x, y, innerDiameter, outerDiameter ); }
 	public static void DrawRing( Vector2 position, float innerDiameter, float OuterDiameter ){ P().DrawRingInternal( position.x, position.y, innerDiameter, OuterDiameter ); }
 
 
 	/// <summary>
-	/// Draw a pie using Graphics.DrawMesh. This supports Unity's instancing, culling, and sorting.
+	/// Submit a pie shape instance for rendering.
 	/// </summary>
 	public static void DrawPie( float x, float y, float diameter, float angleBegin, float angleEnd, float cutOff = 0, float roundness = 0 ) { P().DrawArcInternal( x, y, -_p._style.strokeWidth-diameter, diameter, angleBegin, angleEnd, cutOff, roundness ); }
 	public static void DrawPie( Vector2 position, float diameter, float angleBegin, float angleEnd, float cutOff = 0, float roundness = 0 ){ P().DrawArcInternal( position.x, position.y, -_p._style.strokeWidth-diameter, diameter, angleBegin, angleEnd, cutOff, roundness ); }
 
 
 	/// <summary>
-	/// Draw an arc using Graphics.DrawMesh. This supports Unity's instancing, culling, and sorting. Angles in degrees. AngleBegin must be smaller than AngleEnd.
+	/// Submit an arc shape instance for rendering.
 	/// </summary>
-	public static void DrawArc( float x, float y, float innerDiameter, float outerDiameter, float beginAngle, float endAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) { P().DrawArcInternal( x, y, innerDiameter, outerDiameter, beginAngle, endAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness ); }
-	public static void DrawArc( Vector2 position, float innerDiameter, float outerDiameter, float beginAngle, float endAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) { P().DrawArcInternal( position.x, position.y, innerDiameter, outerDiameter, beginAngle, endAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness ); }
+	public static void DrawArc( float x, float y, float innerDiameter, float outerDiameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) { P().DrawArcInternal( x, y, innerDiameter, outerDiameter, beginAngle, deltaAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness ); }
+	public static void DrawArc( Vector2 position, float innerDiameter, float outerDiameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) { P().DrawArcInternal( position.x, position.y, innerDiameter, outerDiameter, beginAngle, deltaAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness ); }
 
 
 	/// <summary>
-	/// Draw a rectangle using Graphics.DrawMesh. This supports Unity's instancing, culling, and sorting.
+	/// Submit a rect shape instance for rendering.
 	/// </summary>
 	public static void DrawRect( float x, float y, float width, float height ){ P().DrawRectInternal( x, y, width, height, 0, 0, 0, 0 ); }
 	public static void DrawRect( float x, float y, float width, float height, float roundness ){ P().DrawRectInternal( x, y, width, height, roundness, roundness, roundness, roundness ); }
@@ -208,7 +208,7 @@ public partial class Plot
 
 
 	/// <summary>
-	/// Draw an arc using Graphics.DrawMesh. This supports Unity's instancing, culling, and sorting.
+	/// Submit a square shape instance for rendering.
 	/// </summary>
 	public static void DrawSquare( float x, float y, float size ){ P().DrawRectInternal( x, y, size, size, 0, 0, 0, 0 ); }
 	public static void DrawSquare( float x, float y, float size, float roundness ){ P().DrawRectInternal( x, y, size, size, roundness, roundness, roundness, roundness ); }
@@ -218,7 +218,7 @@ public partial class Plot
 
 
 	/// <summary>
-	/// Draw a line using Graphics.DrawMesh. This supports Unity's instancing, culling, and sorting.
+	/// Submit a line shape instance for rendering.
 	/// </summary>
 	public static void DrawLine( float ax, float ay, float bx, float by ){ P().DrawLineInternal( ax, ay, bx, by, StrokeCap.Round, StrokeCap.Round ); }
 	public static void DrawLine( float ax, float ay, float bx, float by, StrokeCap caps ){ P().DrawLineInternal( ax, ay, bx, by, caps, caps ); }
@@ -229,20 +229,20 @@ public partial class Plot
 
 
 	/// <summary>
-	/// Draw a polygon using Graphics.DrawMesh. This supports Unity's instancing, culling, and sorting.
+	/// Submit a polygon shape instance for rendering.
 	/// </summary>
 	public static void DrawPolygon( Polygon polygon ) { P().DrawPolygonInternal( polygon ); }
 
 
 	/// <summary>
-	/// Draw a polygon using Graphics.DrawMesh. This supports Unity's instancing, culling, and sorting.
+	/// Submit a polyline shape instance for rendering.
 	/// </summary>
 	public static void DrawPolyline( Polyline polyline, StrokeCap beginCap, StrokeCap endCap ) { P().DrawPolylineInternal( polyline, beginCap, endCap ); }
 	public static void DrawPolyline( Polyline polyline, StrokeCap caps = StrokeCap.Round ){ P().DrawPolylineInternal( polyline, caps, caps );}
 
 
 	/// <summary>
-	/// Draw a text using Graphics.DrawMesh. This supports Unity's culling, and sorting.
+	/// Submit a text instance for rendering.
 	/// </summary>
 	public static void DrawText( Text text, float x, float y, float fieldwidth, float fieldHeight, bool drawDebugRect = false ) { P().DrawTextInternal( text, x, y, fieldwidth, fieldHeight, drawDebugRect ); }
 	public static void DrawText( Text text, Vector2 position, Vector2 fieldSize, bool drawDebugRect = false ) { P().DrawTextInternal( text, position.x, position.y, fieldSize.x, fieldSize.y, drawDebugRect ); }

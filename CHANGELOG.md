@@ -3,6 +3,7 @@
 
 ## [0.1.0] - 2024-09-XX
 
+	- Changed DrawArc endAngle to deltaAngle.
 	- Added dependency to Unity.UI. Used in sample scenes.
 	- Fixed stroke color being forgotten when stroke width is set to zero.
 	- Fixed pivot aligning to outside instead of edge.

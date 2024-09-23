@@ -878,8 +878,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   innerDiameter: 0.4
   outerDiameter: 1
-  beginAngle: 14.6
-  endAngle: 268.02
+  beginAngle: 90
+  deltaAngle: 242.8
   cutoff: 0
   roundness: 0
   useGeometricRoundness: 0

@@ -154,9 +154,10 @@ public partial class Plot
 	}
 
 
-	void DrawArcInternal( float x, float y, float innerDiameter, float outerDiameter, float beginAngle, float endAngle, float cutOff, float roundness, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false, bool drawNow = false )
+	void DrawArcInternal( float x, float y, float innerDiameter, float outerDiameter, float beginAngle, float deltaAngle, float cutOff, float roundness, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false, bool drawNow = false )
 	{
-		if( !_style.hasVisibleFillOrStroke || ( beginAngle > endAngle && ( !_style.hasVisibleStroke || _style.strokeAlignment == StrokeAlignment.Inside ) ) ) return;
+		if( !_style.hasVisibleFillOrStroke ) return;
+		// TODO: check this case: ( beginAngle > endAngle && ( !_style.hasVisibleStroke || _style.strokeAlignment == StrokeAlignment.Inside ) )
 
 		if( _drawingToTextureNow && !drawNow ) DebugLogDrawToTextureNowWarning();
 
@@ -167,7 +168,7 @@ public partial class Plot
 		}
 
 		_arcRenderer.Render(
-			x, y, innerDiameter, outerDiameter, beginAngle, endAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness, 
+			x, y, innerDiameter, outerDiameter, beginAngle, deltaAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness, 
 			drawNow, _matrix, ref _style, ref _pivotPosition
 		);
 	}

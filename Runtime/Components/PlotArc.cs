@@ -13,7 +13,7 @@ public class PlotArc : MonoBehaviour
 	public float innerDiameter = 0.5f;
 	public float outerDiameter = 1;
 	public float beginAngle = -120;
-	public float endAngle = 120;
+	public float deltaAngle = 120;
 	public float cutoff = 0;
 	[Range(0,1)] public float roundness = 0;
 	public bool useGeometricRoundness = false;
@@ -71,7 +71,7 @@ public class PlotArc : MonoBehaviour
 			SetNoStroke();
 		}
 
-		DrawArc( 0, 0, innerDiameter, outerDiameter, beginAngle, endAngle, cutoff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness );
+		DrawArc( 0, 0, innerDiameter, outerDiameter, beginAngle, deltaAngle, cutoff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness );
 
 		PopCanvasAndStyle();
 	}

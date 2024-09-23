@@ -34,7 +34,7 @@ namespace PlotInternals
 
 		public void Render
 		(
-			float x, float y, float innerDiameter, float outerDiameter, float beginAngle, float endAngle, float cutOff, float roundness, bool useGeometricRoundness, bool constrainAngleSpanToRoundness,
+			float x, float y, float innerDiameter, float outerDiameter, float beginAngle, float deltaAngle, float cutOff, float roundness, bool useGeometricRoundness, bool constrainAngleSpanToRoundness,
 			bool drawNow, Matrix4x4 matrix, ref Plot.Style style, ref Vector2 pivotPosition // Note that style and pivot are passed by reference for performance reasons, they are not changed.
 		){
 			if( cutOff < 0 ) cutOff = 0;
@@ -42,6 +42,14 @@ namespace PlotInternals
 			bool hasStroke = style.hasVisibleStroke;
 			bool hasRoundness = roundness > 0;
 
+			float endAngle;
+			if( deltaAngle > 0f ){
+				endAngle = beginAngle + deltaAngle;	
+			} else {
+				endAngle = beginAngle;
+				beginAngle = beginAngle + deltaAngle;
+			}
+			
 			if( endAngle < beginAngle ) endAngle = beginAngle;
 			else while( beginAngle > endAngle ) endAngle += 360f;
 
