@@ -404,6 +404,47 @@ public partial class Plot
 
 
 	/// <summary>
+	/// Set the fill texture to be used for subsequently drawn shapes.
+	/// See also SetFillTextureUVRect, SetFillTextureBlend and SetFillTextureTint.
+	/// </summary>
+	public static void SetFillTexture( Texture texture )
+	{
+		P();
+		foreach( FillPRenderer r in _p._fillRenderers ) r.SetFillTextureFeature( texture );
+		_p._style.fillTexture = texture;
+	}
+
+
+	/// <summary>
+	/// Disable fill texture for subsequently drawn shapes.
+	/// </summary>
+	public static void SetNoFillTexture() { SetFillTexture( null ); }
+
+
+
+	/// <summary>
+	/// Set the uv rect to be used for subsequently drawn shapes that has a fill texture.
+	/// </summary>
+	public static void SetFillTextureUVRect( Rect uvRect ) { SetFillTextureUVRect( uvRect.x, uvRect.y, uvRect.width, uvRect.height ); }
+	public static void SetFillTextureUVRect( float x, float y, float width, float height )
+	{
+		P();
+		_p._style.fillTextureST = new Vector4( width, height, x, y );
+	}
+
+
+	/// <summary>
+	/// Set the texture blend mode to be used for subsequently drawn shapes that has a fill texture.
+	/// </summary>
+	public static void SetFillTextureBlend( FillTextureBlend blend )
+	{
+		P();
+		foreach( FillPRenderer r in _p._fillRenderers ) r.SetFillTextureBlendFeature( blend );
+		_p._style.fillTextureBlend = blend;
+	}
+
+
+	/// <summary>
 	/// Push (save) the current style to the stack.
 	/// </summary>
 	public static void PushStyle()
@@ -444,43 +485,20 @@ public partial class Plot
 
 
 	/// <summary>
-	/// Set the fill texture to be used for subsequently drawn shapes.
-	/// See also SetFillTextureUVRect, SetFillTextureBlend and SetFillTextureTint.
+	/// Short hand for PushCanvas() and PushStyle().
 	/// </summary>
-	public static void SetFillTexture( Texture texture )
-	{
-		P();
-		foreach( FillPRenderer r in _p._fillRenderers ) r.SetFillTextureFeature( texture );
-		_p._style.fillTexture = texture;
+	public static void PushCanvasAndStyle(){
+		PushCanvas();
+		PushStyle();
 	}
 
 
 	/// <summary>
-	/// Disable fill texture for subsequently drawn shapes.
+	/// Short hand for PushCanvas() and PushStyle().
 	/// </summary>
-	public static void SetNoFillTexture() { SetFillTexture( null ); }
-
-
-
-	/// <summary>
-	/// Set the uv rect to be used for subsequently drawn shapes that has a fill texture.
-	/// </summary>
-	public static void SetFillTextureUVRect( Rect uvRect ) { SetFillTextureUVRect( uvRect.x, uvRect.y, uvRect.width, uvRect.height ); }
-	public static void SetFillTextureUVRect( float x, float y, float width, float height )
-	{
-		P();
-		_p._style.fillTextureST = new Vector4( width, height, x, y );
-	}
-
-
-	/// <summary>
-	/// Set the texture blend mode to be used for subsequently drawn shapes that has a fill texture.
-	/// </summary>
-	public static void SetFillTextureBlend( FillTextureBlend blend )
-	{
-		P();
-		foreach( FillPRenderer r in _p._fillRenderers ) r.SetFillTextureBlendFeature( blend );
-		_p._style.fillTextureBlend = blend;
+	public static void PopCanvasAndStyle(){
+		PopCanvas();
+		PopStyle();
 	}
 
 

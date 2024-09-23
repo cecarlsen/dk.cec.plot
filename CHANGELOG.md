@@ -3,6 +3,8 @@
 
 ## [0.1.0] - 2024-09-XX
 
+	- Fixed pivot aligning to outside instead of edge.
+	- Added PushCanvasAndStyle() and PopCanvasAndStyle().
 	- Added NoiseTrails example.
 	- Added multi submission per update support for Text.
 	- Moved Text.font to Plot.SetTextFont().

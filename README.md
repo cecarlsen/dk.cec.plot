@@ -31,6 +31,7 @@ Please go through the scenes located in *dk.cec.plot/Samples* in chronological o
 	- Text ignores SetBlend().
 	- Polygons will flicker when very small and moving (won't fix).
 	- Text ignores SetAntiAliasing(). It is always on (won't fix).
+	- Polygon, Polyline, and Line ignores SetPivot() (by design).
 
 
 ## Author

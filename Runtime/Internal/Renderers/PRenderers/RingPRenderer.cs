@@ -36,9 +36,10 @@ namespace PlotInternals
 			bool hasFill = style.fillEnabled;
 			bool hasStroke = style.strokeEnabled;
 			
+			float boundScale = outerDiameter;
+			float meshScale = boundScale;
 			float ringExtents = ( outerDiameter - innerDiameter ) * 0.25f;
 			float actualStrokeWidth = hasStroke ? style.strokeWidth : 0;
-			float meshScale = outerDiameter;
 			float strokeOffsetMin = 0;
 			float innerVertexFactor;
 			if( hasStroke ) {
@@ -58,7 +59,10 @@ namespace PlotInternals
 
 			if( x != 0 || y != 0 ) matrix.Translate3x4( x, y );
 			if( meshScale != 1 ) matrix.Scale3x4( meshScale, meshScale );
-			if( style.pivot != Plot.Pivot.Center ) matrix.Translate3x4( -pivotPosition.x, -pivotPosition.x );
+			if( style.pivot != Plot.Pivot.Center ){
+				float pivotFactor = 0.5f * boundScale / meshScale;
+				matrix.Translate3x4( -pivotPosition.x * pivotFactor, -pivotPosition.x * pivotFactor );
+			}
 
 			EnsureAvailableMaterialBeforeSubmission( drawNow );
 

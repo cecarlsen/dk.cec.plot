@@ -45,7 +45,8 @@ namespace PlotInternals
 			if( endAngle < beginAngle ) endAngle = beginAngle;
 			else while( beginAngle > endAngle ) endAngle += 360f;
 
-			float meshScale = outerDiameter;
+			float boundScale = outerDiameter;
+			float meshScale = boundScale;
 			float ringExtents = ( outerDiameter - innerDiameter ) * 0.25f;
 			float ringRadius = ( innerDiameter + outerDiameter ) * 0.25f;
 			float fillDistOffset = 0;
@@ -70,7 +71,7 @@ namespace PlotInternals
 			if( hasStroke || hasRoundness ) {
 				bool hardStrokeCorners = style.strokeCornerProfile == Plot.StrokeCornerProfile.Hard;
 				strokeAlignmentExtension = style.strokeAlignment == Plot.StrokeAlignment.Outside ? actualStrokeWidth : style.strokeAlignment == Plot.StrokeAlignment.Edge ? actualStrokeWidth * 0.5f : 0f;
-				float strokeAlignmentReduction = ( actualStrokeWidth - strokeAlignmentExtension );
+				float strokeAlignmentReduction = actualStrokeWidth - strokeAlignmentExtension;
 				float strokeProfileReduction = hardStrokeCorners ? actualStrokeWidth : 0f;
 
 				if( hasStroke ) {
@@ -114,7 +115,7 @@ namespace PlotInternals
 					} else {
 						horseshoeExtention -= roundnessReduction;
 						if( constrainAngleSpanToRoundness ) {
-							float minAngleExtents = ( roundness * ( outerDiameter - innerDiameter ) * 0.5f ) / ( innerDiameter ) * Mathf.Rad2Deg; // c = Tau * r.
+							float minAngleExtents = roundness * ( outerDiameter - innerDiameter ) * 0.5f / innerDiameter * Mathf.Rad2Deg; // c = Tau * r.
 							if( fragAngleExtents < minAngleExtents ) {
 								angleOffset -= minAngleExtents - fragAngleExtents;
 								vertAngleExtents = minAngleExtents;
@@ -136,7 +137,10 @@ namespace PlotInternals
 
 			if( x != 0f || y != 0f ) matrix.Translate3x4( x, y );
 			if( meshScale != 1f ) matrix.Scale3x4( meshScale, meshScale );
-			if( style.pivot != Plot.Pivot.Center ) matrix.Translate3x4( -pivotPosition.x, -pivotPosition.x );
+			if( style.pivot != Plot.Pivot.Center ){
+				float pivotFactor = 0.5f * boundScale / meshScale;
+				matrix.Translate3x4( -pivotPosition.x * pivotFactor, -pivotPosition.x * pivotFactor );
+			}
 
 			EnsureAvailableMaterialBeforeSubmission( drawNow );
 
