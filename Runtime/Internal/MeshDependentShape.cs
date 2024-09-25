@@ -58,7 +58,7 @@ namespace PlotInternals
 
 
 		/// <summary>
-		/// Set points. Points must be provided in clockwise order.
+		/// Set points. Points must be provided in clockwise order. Points will be copied.
 		/// </summary>
 		public void SetPoints( Vector2[] points )
 		{
@@ -67,11 +67,6 @@ namespace PlotInternals
 
 			_dirtyVerticies = true;
 		}
-
-
-		/// <summary>
-		/// Set points. Points must be provided in clockwise order.
-		/// </summary>
 		public void SetPoints( List<Vector2> points )
 		{
 			int count = points.Count;

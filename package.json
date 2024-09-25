@@ -3,12 +3,13 @@
   "version": "0.0.14",
   "displayName": "Plot",
   "description": "Immediate mode procedural 2D drawing in Unity.",
+  "documentationUrl": "https://github.com/cecarlsen/dk.cec.plot",
+  "licensesUrl": "https://github.com/cecarlsen/dk.cec.plot/blob/main/LICENSE.md",
   "author": {
     "name": "Carl Emil Carlsen",
-    "email": "public@cec.dk",
     "url": "https://cec.dk"
   },
-  "unity": "2023.3",
+  "unity": "2022.3",
   "type": "code",
   "samples": [
     {
