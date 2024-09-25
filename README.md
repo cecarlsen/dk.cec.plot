@@ -1,7 +1,7 @@
 
 # Plot
 
-An immediate mode (IM) procedural 2D drawing package for Unity. Usefull for smaller data visualisations, visual code sketches, and learning how to code. Plot is inspired by [Processing/p5](https://processing.org), so if you're familiar with that, you should be able to jump right in.
+An immediate mode (IM) procedural 2D drawing package for [Unity](https://unity.com). Usefull for smaller data visualisations, visual code sketches, and learning how to code. Plot is inspired by [Processing/p5](https://processing.org), so if you're familiar with that, you should be able to jump right in.
 
 Tested with Unity 2023.3 and supporting BiRP, URP, and HDRP.
 
