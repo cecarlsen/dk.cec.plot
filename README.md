@@ -8,9 +8,13 @@ Tested with Unity 2023.3 and supporting BiRP, URP, and HDRP.
 ![Using Static](https://github.com/user-attachments/assets/605211a4-2810-49bf-a33c-02b264ba4915)
 
 
-## Installment
+## Installation
 
-This repository is structured as a custom Unity package, so just download the entire thing and place it inside */Packages* in your Unity project.
+Install Plot via Unity's Package Manager. Select "Install package from git URL..." and paste in:
+
+	https://github.com/cecarlsen/dk.cec.plot.git
+
+If it doesn't work, check your error message and consult [this page](https://docs.unity3d.com/6000.0/Documentation/Manual/upm-ui-giturl.html).
 
 ### Dependencies
 
