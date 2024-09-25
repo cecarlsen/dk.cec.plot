@@ -3,6 +3,8 @@
 
 ## [1.0.1] - 2024-09-25
 
+	- Fixed DrawArcNow paramete names still using endAngle instead of deltaAngle.
+	- Fixed DonutChart sample still using endAngle instead of deltaAngle.
 	- Fixed uv rect initiation issue causing come sample scenes to fail.
 
 

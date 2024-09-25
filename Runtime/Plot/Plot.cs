@@ -671,8 +671,8 @@ public partial class Plot
 	/// <summary>
 	/// Draw a pie immediately using Graphics.DrawMeshNow. Call this from OnPostRender or after calling BeginDrawNowToTexture. Angles in degrees. AngleBegin must be smaller than AngleEnd.
 	/// </summary>
-	public static void DrawArcNow( float x, float y, float innerDiameter, float outerDiameter, float beginAngle, float endAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) { P().DrawArcInternal( x, y, innerDiameter, outerDiameter, beginAngle, endAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness, true ); }
-	public static void DrawArcNow( Vector2 position, float innerDiameter, float outerDiameter, float beginAngle, float endAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) { P().DrawArcInternal( position.x, position.y, innerDiameter, outerDiameter, beginAngle, endAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness, true ); }
+	public static void DrawArcNow( float x, float y, float innerDiameter, float outerDiameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) { P().DrawArcInternal( x, y, innerDiameter, outerDiameter, beginAngle, deltaAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness, true ); }
+	public static void DrawArcNow( Vector2 position, float innerDiameter, float outerDiameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) { P().DrawArcInternal( position.x, position.y, innerDiameter, outerDiameter, beginAngle, deltaAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness, true ); }
 
 
 	/// <summary>

@@ -122,13 +122,14 @@ namespace PlotExamples
 				Entry entry = _entries[ i ];
 				beginAngle = endAngle;
 				endAngle = beginAngle - entry.value * valueToAngle;
-				
+				float deltaAngle = endAngle - beginAngle;
+
 				// Draw arc.
 				Color color = JChColor.Slerp( jchBegin, jchEnd, i * step );
 				SetPivot( Pivot.Center );
 				SetFillColor( color );
 				SetStrokeColor( color, strokeAlpha );
-				DrawArc( 0, 0, diameter * innerDiameterFactor, diameter, endAngle, beginAngle, spacingCut, roundness, useGeometricRoundness );
+				DrawArc( 0, 0, diameter * innerDiameterFactor, diameter, beginAngle, deltaAngle, spacingCut, roundness, useGeometricRoundness );
 
 				// Draw label.
 				float midAngle = Mathf.LerpAngle( beginAngle, endAngle, 0.5f );
