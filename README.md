@@ -25,6 +25,8 @@ Plot depends on TextMeshPro for text rendering and Unity.UI for the samples scen
 
 Please go through the scenes located in *dk.cec.plot/Samples* in chronological order.
 
+Plot [API here](https://cec.dk/plot/api.html).
+
 
 ## Known issues
 
