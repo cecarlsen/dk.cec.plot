@@ -1,6 +1,9 @@
 /*
 	Copyright © Carl Emil Carlsen 2024
 	http://cec.dk
+
+	Brownian motion
+	https://en.wikipedia.org/wiki/Brownian_motion
 */
 
 using UnityEngine;
