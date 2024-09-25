@@ -1,6 +1,11 @@
 # Changelog
 
 
+## [1.0.1b] - 2024-09-XX
+
+	- Added BrownianMotionTrails example.
+
+
 ## [1.0.1] - 2024-09-25
 
 	- Fixed DrawArcNow paramete names still using endAngle instead of deltaAngle.
