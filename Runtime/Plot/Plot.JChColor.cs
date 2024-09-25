@@ -19,7 +19,7 @@
 				https://en.wikipedia.org/wiki/Color_appearance_model
 		02	-	From 2002.
 		CAT	-	Chromatic Adaptation Transform.
-		LMS	-	LMS color space.
+		LMS	-	Long Middle Short color space.
 				Long (560–580nm) Middle (530–540nm) Short (420–440nm).
 				The three types of cone cells in the human eye.
 				LMS is the tristimulus values in the LMS color space.
@@ -77,7 +77,7 @@
 	License
 
 		Copyright (c) 2003 Billy Biggs <vektor@dumbterm.net>
-		Copyright (c) 2020 Carl Emil Carlsen <public@cec.dk> (Port to C# and modifications)
+		Modified Copyright (c) 2020 Carl Emil Carlsen <public@cec.dk> (port to C# and modifications)
 	
 		Permission is hereby granted, free of charge, to any person obtaining
 		a copy of this software and associated documentation files (the
@@ -108,50 +108,55 @@ public partial class Plot
 	public struct JChColor
 	{
 		/// <summary>
-		/// The J dimension, normalised (0.0-1.0).
+		/// The J dimension, normalised (0.0 to 1.0).
 		/// </summary>
 		public float lightness;
 
 		/// <summary>
-		/// The C dimension, normalised (0.0-1.0).
+		/// The C dimension, normalised (0.0 to 1.0).
 		/// </summary>
 		public float chroma;
 
 		/// <summary>
-		/// The h dimension, normalised (0.0-1.0).
+		/// The h dimension, normalised (0.0 to 1.0).
 		/// </summary>
 		public float hueAngle;
 
 		/// <summary>
-		/// The alpha channel, normalised (0.0-1.0).
+		/// The alpha channel, normalised (0.0 to 1.0).
 		/// </summary>
 		public float alpha;
 
 		/// <summary>
-		/// Surround condition where 0 is a reflected surface (Average), 1 an emitting screen (Dim) and 2 an emitting video projector in a dark room (Dark).
-		/// Default is 
+		/// Surround condition where 0.0 is a reflected surface (Average), 1.0 an emitting screen (Dim) and 2.0 an emitting video projector in a dark room (Dark).
+		/// Default is 2.0 (Dim).
 		/// </summary>
 		public float surroundCondition;
 
 		/// <summary>
-		/// The background on which the color is viewed measured in % percent gray (1-100).
-		/// Default is 20%.
+		/// Luminamce factor for background on which the color is viewed, measured in percent gray (0-100).
+		/// Default is 20, recommended for sRGB.
 		/// </summary>
 		public float backgroundGraytone;
 
-
-		static ViewingConditions vc;
-
+		/// <summary>
+		/// Gets a white JChColor.
+		/// </summary>
 		public static JChColor white { get { return new JChColor( 1, 0, 0 ); } }
+
+		/// <summary>
+		/// Gets a black JChColor.
+		/// </summary>
 		public static JChColor black { get { return new JChColor( 0, 0, 0 ); } }
 
 
+		static ViewingConditions vc;
 		const double tau = Mathf.PI * 2;
 		const SurroundCondition defaultSurroundCondition = SurroundCondition.Dim;
-		const float defaultBackgroundGraytone = 20;
+		const float defaultBackgroundGraytone = 20f;
 
 
-		[ Serializable]
+		[Serializable]
 		public enum SurroundCondition
 		{
 			Average,	// Viewing a surface color.
@@ -160,6 +165,9 @@ public partial class Plot
 		}
 
 
+		/// <summary>
+		/// Create a JChColor.
+		/// </summary>
 		public JChColor( float lightness, float chroma, float hueAngle, float alpha = 1 )
 		{
 			surroundCondition = (int) defaultSurroundCondition;
@@ -170,8 +178,6 @@ public partial class Plot
 			this.hueAngle = hueAngle;
 			this.alpha = alpha;
 		}
-
-
 		public JChColor( Color color )
 		{
 			surroundCondition = (int) defaultSurroundCondition;
@@ -191,20 +197,8 @@ public partial class Plot
 		}
 
 
-		public void SetSurroundCondition( SurroundCondition sc )
-		{
-			surroundCondition = (int) sc;
-		}
-
-
-		public void SetSurroundCondition( float sc )
-		{
-			surroundCondition = sc;
-		}
-
-
 		/// <summary>
-		/// Circular interpolation along the hue angle the cylendrical JCh color model.
+		/// Circular interpolation along the hue angle in the cylendrical JCh color model.
 		/// </summary>
 		public static JChColor Slerp( JChColor c1, JChColor c2, float t )
 		{
@@ -246,7 +240,7 @@ public partial class Plot
 
 
 		/// <summary>
-		/// Create a palette of colors by linear interpolation through the JCh color space.
+		/// Create a palette of colors by linear interpolation through the cylendrical JCh color space.
 		/// </summary>
 		public static Color[] LerpCreatePalette( Color colorA, Color colorB, int stepCount )
 		{
@@ -260,7 +254,7 @@ public partial class Plot
 
 
 		/// <summary>
-		/// Create a palette of colors by circular interpolation along the hue angle through the JCh color space.
+		/// Create a palette of colors by circular interpolation along the hue angle through the cylendrical JCh color space.
 		/// </summary>
 		public static Color[] SlerpCreatePalette( Color colorA, Color colorB, int stepCount )
 		{
@@ -383,7 +377,7 @@ public partial class Plot
 		static double NonlinearAdaptation( double c, double fl )
 		{
 			double p = Math.Pow( ( fl * c ) / 100.0, 0.42 );
-			return ( ( 400.0 * p ) / ( 27.13 + p ) ) + 0.1;
+			return ( 400.0 * p / ( 27.13 + p ) ) + 0.1;
 		}
 
 
@@ -585,7 +579,7 @@ public partial class Plot
 				c = v.y;
 				nc = v.z;
 
-				yb = backgroundGraytone < 1 ? 1 : backgroundGraytone;
+				yb = backgroundGraytone < 1.0 ? 1.0 : backgroundGraytone;
 
 				UpdateAmbientIlluminaion();
 			}

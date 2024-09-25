@@ -12,7 +12,7 @@ Tested with Unity 2023.3 and supporting BiRP, URP, and HDRP.
 
 This repository is structured as a custom Unity package, so just download the entire thing and place it inside */Packages* in your Unity project.
 
-### Package dependencies
+### Dependencies
 
 Plot depends on TextMeshPro and Unity.UI (for the samples scenes), which should be installed automatically when you drop the package in your project.
 
@@ -34,9 +34,14 @@ Please go through the scenes located in *dk.cec.plot/Samples* in chronological o
 	- Polygon, Polyline, and Line ignores SetPivot() (by design).
 
 
+## Implementation
+
+Plot shapes are produced by Signed Distance Fields (SDF) in fragment shader, which results in infinite resolution, low CPU impact, and antialiasing practially for free. Every topologically different shape has it's own mesh that is manipulated in a vertex shader to minimize overdraw. When shapes are drawn using any of the DrawX methods, the meshes are submitted for rendering using Unity's Graphcis.DrawMesh(), meaning they will recevie no lighting, but will be sorted and rendered into the 3D scene. When the same type of meshes are drawn in succession, Unity will automatially attempt to draw them as "instanced", meaning that multiple shapes will be drawn in a single draw call with properties stored in a shared constant buffer. Plot also implements DrawXNow, that relies on Unity's Graphics.DrawNow(). This is useful for drawing directly and immediately yo RenderTextures, when placing code between BeginDrawNowToRenderTexture() and EndDrawNowToRenderTexture. These RenderTextures can then immediately be applied to shapes uising SetFillTexture() and drawn into the scene using DrawX methods.
+
+
 ## Author
 
-Plot is written by [Carl Emil Carlsen](https://cec.dk).
+Plot is written and maintained by [Carl Emil Carlsen](https://cec.dk) since 2020.
 
 
 ## License

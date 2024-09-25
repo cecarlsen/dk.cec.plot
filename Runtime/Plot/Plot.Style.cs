@@ -1,6 +1,10 @@
 /*
 	Copyright © Carl Emil Carlsen 2021-2024
 	http://cec.dk
+
+	Notes to self:
+		1) We want this struct to be as light weight as possible because it will be copied a lot. Store no temporary computations.
+		2) This class is public to users, so don't put any rendering related stuff here.
 */
 
 using System;
@@ -10,19 +14,56 @@ using TMPro;
 public partial class Plot
 {
 	#pragma warning disable CS0282
+
+	/// <summary>
+	/// Style holds attributes that are applied when shape instances are submitted for rendering.
+	/// </summary>
 	[Serializable]
-	public partial struct Style
+	public struct Style
 	{
-		// Notes to self:
-		//	1) We want this struct to be as light weight as possible because it will be copied a lot. Store no temporary computations.
-		//  2) This class is public to users, so don't put any rendering related stuff here.
+		/// <summary>
+		/// Toggle fill visibility state of this style.
+		/// Default is true.
+		/// </summary>
 		public bool fillEnabled;
+
+		/// <summary>
+		/// Toggle stroke visibility state of this style.
+		/// Default is true.
+		/// </summary>
 		public bool strokeEnabled;
+
+		/// <summary>
+		/// Fill color of this style (the color inside shapes).
+		/// Default is Color.white.
+		/// </summary>
 		public Color fillColor;
+
+		/// <summary>
+		/// Stroke color of this style (the color of outlines and lines).
+		/// Default is Color.black.
+		/// </summary>
 		public Color strokeColor;
-		public float strokeWidth; // Always stored in meters
+
+		/// <summary>
+		/// Stroke width of this style (the thickness of outlines and lines).
+		/// Default is 0.05f.
+		/// </summary>
+		public float strokeWidth;
+
+		/// <summary>
+		/// Stroke alignment of this style (the alignment of outlines relative to the edge of shapes).
+		/// Default is StrokeAlignment.Outside.
+		/// </summary>
 		public StrokeAlignment strokeAlignment;
+
+		/// <summary>
+		/// Stroke coner profile of this style (the corner sharpness of Pie, Arch, Rect, Polygon, and Polyline).
+		/// Default is StrokeCornerProfile.Round.
+		/// </summary>
 		public StrokeCornerProfile strokeCornerProfile;
+
+
 		public Pivot pivot;
 		public Vector4 fillTextureST;
 		public Color fillTextureTint;

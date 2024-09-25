@@ -1,6 +1,9 @@
 /*
 	Copyright © Carl Emil Carlsen 2024
 	http://cec.dk
+
+	Conway's Game of Life
+	https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 */
 
 using UnityEngine;
