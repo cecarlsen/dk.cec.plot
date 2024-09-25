@@ -1,7 +1,7 @@
 # Changelog
 
 
-## [0.1.0] - 2024-09-XX
+## [1.0.0] - 2024-09-XX
 
 	- Changed DrawArc endAngle to deltaAngle.
 	- Added dependency to Unity.UI. Used in sample scenes.

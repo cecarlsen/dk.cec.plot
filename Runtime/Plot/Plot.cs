@@ -33,14 +33,45 @@ public partial class Plot
 
 	#region Enums
 
+	/// <summary>
+	/// Stroke alignment options.
+	/// </summary>
 	[Serializable] public enum StrokeAlignment { Inside, Edge, Outside }
+
+	/// <summary>
+	/// Stroke cap options, applied to DrawLine() and DrawPolyline().
+	/// </summary>
 	[Serializable] public enum StrokeCap { None, Square, Round }
+
+	/// <summary>
+	/// Stroke corner profile options.
+	/// </summary>
 	[Serializable] public enum StrokeCornerProfile { Hard, Round }
+
+	/// <summary>
+	/// Pivot options.
+	/// </summary>
 	[Serializable] public enum Pivot { Center, TopLeft, Top, TopRight, Right, BottomRight, Bottom, BottomLeft, Left }
-	[Serializable] public enum RoundnessDesign { Geometric, Organic }
+
+	/// <summary>
+	/// Shape blending options.
+	/// </summary>
 	[Serializable] public enum Blend { Transparent, TransparentAdditive }
+
+	/// <summary>
+	/// Fill texture onto fill color blend options.
+	/// </summary>
 	[Serializable] public enum FillTextureBlend { Overlay, Multiply }
+
+	/// <summary>
+	/// Spatial coordinate metrics.
+	/// </summary>
 	[Serializable] public enum Space { Pixels, Normalized }
+
+	/// <summary>
+	///	Roundness design, used for DrawArc().
+	/// </summary>
+	[Serializable] public enum RoundnessDesign { Geometric, Organic }
 
 	#endregion // Types
 
@@ -53,6 +84,33 @@ public partial class Plot
 		if( _p == null ) return; // Will reset on create anyway.
 
 		_p._style = Style.GetDefault();
+	}
+
+
+	/// <summary>
+	/// Creates a new Polygon to be drawn using Plot.DrawPolygon(). Points must be provided in clockwise order. 
+	/// </summary>
+	public static Polygon CreatePolygon()
+	{
+		return ScriptableObject.CreateInstance<Polygon>();
+	}
+	public static Polygon CreatePolygon( int pointCount )
+	{
+		var polygon = ScriptableObject.CreateInstance<Polygon>();
+		polygon.SetPointCount( pointCount );
+		return polygon;
+	}
+	public static Polygon CreatePolygon( Vector2[] points )
+	{
+		var polygon = ScriptableObject.CreateInstance<Polygon>();
+		polygon.SetPoints( points );
+		return polygon;
+	}
+	public static Polygon CreatePolygon( List<Vector2> points )
+	{
+		var polygon = ScriptableObject.CreateInstance<Polygon>();
+		polygon.SetPoints( points );
+		return polygon;
 	}
 
 	
@@ -84,32 +142,6 @@ public partial class Plot
 
 
 	/// <summary>
-	/// Creates a new Polygon to be drawn using Plot.DrawPolygon(). Points must be provided in clockwise order. 
-	/// </summary>
-	public static Polygon CreatePolygon()
-	{
-		return ScriptableObject.CreateInstance<Polygon>();
-	}
-	public static Polygon CreatePolygon( int pointCount )
-	{
-		var polygon = ScriptableObject.CreateInstance<Polygon>();
-		polygon.SetPointCount( pointCount );
-		return polygon;
-	}
-	public static Polygon CreatePolygon( Vector2[] points )
-	{
-		var polygon = ScriptableObject.CreateInstance<Polygon>();
-		polygon.SetPoints( points );
-		return polygon;
-	}
-	public static Polygon CreatePolygon( List<Vector2> points )
-	{
-		var polygon = ScriptableObject.CreateInstance<Polygon>();
-		polygon.SetPoints( points );
-		return polygon;
-	}
-
-	/// <summary>
 	/// Creates a new Text to be drawn using Plot.DrawText().
 	/// </summary>
 	public static Text CreateText( string content = "" )
@@ -124,13 +156,13 @@ public partial class Plot
 	/// <summary>
 	/// Adapts a list of Texts by destroying and creating new ones as needed.
 	/// </summary>
-	public static void AdaptTextCount( int entryCount, List<Text> labels )
+	public static void AdaptTextCount( int count, List<Text> texts )
 	{
 		// If the labels list count is correct, then check if it still contains labels and have fonts.
 		// In the case that we have no entries, labels may still be hanging around waiting to be destroyed.
-		if( entryCount != 0 && labels.Count == entryCount ) {
+		if( count != 0 && texts.Count == count ) {
 			bool allGood = true;
-			foreach( Text tm in labels ) {
+			foreach( Text tm in texts ) {
 				//if( !tm || tm.font == null ) {
 				if( !tm ) {
 					allGood = false;
@@ -141,19 +173,19 @@ public partial class Plot
 		}
 
 		// Destroy excess.
-		while( labels.Count > entryCount ) {
-			UnityEngine.Object.DestroyImmediate( labels[ labels.Count - 1 ] );
-			labels.RemoveAt( labels.Count - 1 );
+		while( texts.Count > count ) {
+			UnityEngine.Object.DestroyImmediate( texts[ texts.Count - 1 ] );
+			texts.RemoveAt( texts.Count - 1 );
 		}
 
 		// Ensure existing labels has font.
 		//if( !font ) foreach( var label in labels ) if( label && !label.font ) label.font = TMP_Settings.defaultFontAsset;
 
 		// Added missing.
-		while( labels.Count < entryCount ) {
+		while( texts.Count < count ) {
 			var text = CreateText();
 			//if( font ) text.font = font;
-			labels.Add( text );
+			texts.Add( text );
 		}
 	}
 

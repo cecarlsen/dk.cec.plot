@@ -22,71 +22,111 @@ public partial class Plot
 	public struct Style
 	{
 		/// <summary>
-		/// Toggle fill visibility state of this style.
+		/// Toggle fill visibility state.
 		/// Default is true.
 		/// </summary>
 		public bool fillEnabled;
 
 		/// <summary>
-		/// Toggle stroke visibility state of this style.
+		/// Toggle stroke visibility state.
 		/// Default is true.
 		/// </summary>
 		public bool strokeEnabled;
 
 		/// <summary>
-		/// Fill color of this style (the color inside shapes).
+		/// Fill color (the color inside shapes).
 		/// Default is Color.white.
 		/// </summary>
 		public Color fillColor;
 
 		/// <summary>
-		/// Stroke color of this style (the color of outlines and lines).
+		/// Stroke color (the color of outlines and lines).
 		/// Default is Color.black.
 		/// </summary>
 		public Color strokeColor;
 
 		/// <summary>
-		/// Stroke width of this style (the thickness of outlines and lines).
+		/// Stroke width (the thickness of outlines and lines).
 		/// Default is 0.05f.
 		/// </summary>
 		public float strokeWidth;
 
 		/// <summary>
-		/// Stroke alignment of this style (the alignment of outlines relative to the edge of shapes).
+		/// Stroke alignment (the alignment of outlines relative to the edge of shapes).
 		/// Default is StrokeAlignment.Outside.
 		/// </summary>
 		public StrokeAlignment strokeAlignment;
 
 		/// <summary>
-		/// Stroke coner profile of this style (the corner sharpness of Pie, Arch, Rect, Polygon, and Polyline).
+		/// Stroke coner profile (the corner sharpness of Pie, Arch, Rect, Polygon, and Polyline).
 		/// Default is StrokeCornerProfile.Round.
 		/// </summary>
 		public StrokeCornerProfile strokeCornerProfile;
 
 		/// <summary>
-		/// Pivot point of this style (the local zero point on shapes).
+		/// Pivot point (the local zero point on shapes).
 		/// Default is Pivot.Center.
 		/// </summary>
 		public Pivot pivot;
 
 		/// <summary>
-		/// 
+		/// The UV rect for textures set using SetFillTexture(). Parameters are ( x, y, width, height ).
+		/// Default is ( 0, 0, 1, 1 ).
 		/// </summary>
 		public Vector4 fillTextureUVRect;
+
+		/// <summary>
+		/// The color tint for textures set using SetFillTexture().
+		/// Default is Color.white.
+		/// </summary>
 		public Color fillTextureTint;
+
+		/// <summary>
+		/// The text size in Unity meter units.
+		/// Default is 0.1f.
+		/// </summary>
 		public float textSize;
+
+		/// <summary>
+		/// The horizontal and vertical text alignment.
+		/// Default is TextAlignmentOptions.Center.
+		/// </summary>
 		public TextAlignmentOptions textAlignment;
+
+		/// <summary>
+		/// The text font.
+		/// </summary>
 		public TMP_FontAsset textFont;
 
 		/// <summary>
 		/// Does not work for DrawNow methods, just like Graphics.DrawMeshNow are not regarding layers.
+		/// Default is 0, Unity's default layer.
 		/// </summary>
 		public int layer;
 
-		// These are "features" (depends on multi compiled shader)
+		// The following are "features" (depends on multi compiled shader)
+
+		/// <summary>
+		/// Toggle the antialiasing of shapes. This works independently from Unity's antialiasing.
+		/// Default is true.
+		/// </summary>
 		public bool antialias;
+
+		/// <summary>
+		/// The blend mode.
+		/// Default is Blend.Transparent.
+		/// </summary>
 		public Blend blend;
+
+		/// <summary>
+		/// The texture to be filled inside shapes.
+		/// </summary>
 		public Texture fillTexture;
+
+		/// <summary>
+		/// The blend of the fill texture onto the fill color.
+		/// Default is FillTextureBlend.Overlay.
+		/// </summary>
 		public FillTextureBlend fillTextureBlend;
 
 		static readonly Color defaultFillColor = Color.white;
@@ -102,6 +142,7 @@ public partial class Plot
 		const float defaultTextSize = 0.1f;
 		const TextAlignmentOptions defaultTextAlignment = TextAlignmentOptions.Center;
 
+		// Undocumented on purpose.
 		public bool hasVisibleFill => fillEnabled && fillColor.a > 0;
 		public bool hasVisibleStroke => strokeEnabled && strokeColor.a > 0 && strokeWidth > 0;
 		public bool hasVisibleFillOrStroke => hasVisibleFill || hasVisibleStroke;
