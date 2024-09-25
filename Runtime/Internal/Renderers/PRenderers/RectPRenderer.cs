@@ -108,14 +108,15 @@ namespace PlotInternals
 
 			if( style.fillTexture ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission
 				if( drawNow ) {
-					_material.SetVector( FillShaderIDs._Tex_ST, style.fillTextureST );
+					_material.SetVector( FillShaderIDs._TexUVRect, style.fillTextureUVRect );
 					_material.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
 				} else {
-					_propBlock.SetVector( FillShaderIDs._Tex_ST, style.fillTextureST );
+					_propBlock.SetVector( FillShaderIDs._TexUVRect, style.fillTextureUVRect );
 					_propBlock.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
 				}
 			}
 
+			//Debug.Log( "vertData.xy: " + meshExtentsX + ", " + meshExtentsY + ". fragData.xy: " + fillExtentsX + "," + fillExtentsY );
 			Vector4 vertData = new Vector4( meshExtentsX, meshExtentsY, innerVertexFactorX, innerVertexFactorY );
 			Vector4 fragData = new Vector4( fillExtentsX, fillExtentsY, actualStrokeWidth, strokeOffsetMin );
 			Vector4 roundness = new Vector4( lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness );

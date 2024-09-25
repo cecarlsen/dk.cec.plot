@@ -24,6 +24,7 @@ Please go through the scenes located in *dk.cec.plot/Samples* in chronological o
 
 ## Known issues
 
+	- SetFillTextureUVRect scaling textures from outer stroke edge instead of shape edge.
 	- Texts can vanish temporarily on code reload using ExecuteInEditMode.
 	- Image fill changes size inside DrawRect when stroke is enabled and disabled.
 	- Shrinking without flicker needs a review. See comment in Ring Shader.

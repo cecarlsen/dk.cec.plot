@@ -72,7 +72,7 @@ Shader "Hidden/Draw/Rect"
 				UNITY_DEFINE_INSTANCED_PROP( half4, _FragData )			// ( xy: fillExtents, z: strokeWidth, w: strokeOffsetMin )
 				UNITY_DEFINE_INSTANCED_PROP( half4, _Roundedness )
 				#ifdef _HAS_TEXTURE
-					UNITY_DEFINE_INSTANCED_PROP( half4, _Tex_ST )
+					UNITY_DEFINE_INSTANCED_PROP( half4, _TexUVRect )
 					UNITY_DEFINE_INSTANCED_PROP( half4, _TexTint )
 				#endif
 			UNITY_INSTANCING_BUFFER_END( Props )
@@ -115,8 +115,8 @@ Shader "Hidden/Draw/Rect"
 
 				// Compute uv.
 				#ifdef _HAS_TEXTURE
-					half4 texST = UNITY_ACCESS_INSTANCED_PROP( Props, _Tex_ST );
-					o.uv = ( o.vertex.xy * 0.5 + 0.5 ) * texST.xy + texST.zw;
+					half4 texST = UNITY_ACCESS_INSTANCED_PROP( Props, _TexUVRect );
+					o.uv = ( o.vertex.xy * 0.5 + 0.5 ) * texST.zw + texST.xy;
 				#endif
 
 				// Compute world space pizel size at transformed position as seen by camera.
@@ -145,13 +145,13 @@ Shader "Hidden/Draw/Rect"
 			{
 				UNITY_SETUP_INSTANCE_ID( i ); // Support instanced properties in fragment Shader.
 
-				half4 data = UNITY_ACCESS_INSTANCED_PROP( Props, _FragData );
+				half4 data = UNITY_ACCESS_INSTANCED_PROP( Props, _FragData ); // ( xy: fillExtents, z: strokeWidth, w: strokeOffsetMin )
 				half4 roundedness = UNITY_ACCESS_INSTANCED_PROP( Props, _Roundedness );
 				half4 fillCol = UNITY_ACCESS_INSTANCED_PROP( Props, _FillColor );
 				half4 strokeCol = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeColor );
 
 				// Evaluate shape SDF.
-				float d = SDRoundedBox( i.posSS, data.xy, roundedness ) - data.w; // ( xy: fillExtents, z: strokeWidth, w: strokeOffsetMin )
+				float d = SDRoundedBox( i.posSS, data.xy, roundedness ) - data.w;
 
 				// Compute fragment size in shape space. We presume uniform shape space, so we only have to measure one dimension.
 				float fSize = fwidth( i.posSS.y );

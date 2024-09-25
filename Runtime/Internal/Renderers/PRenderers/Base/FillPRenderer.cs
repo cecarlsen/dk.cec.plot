@@ -19,7 +19,7 @@ namespace PlotInternals
 		{
 			public static readonly int _FillColor = Shader.PropertyToID( nameof( _FillColor ) );
 			public static readonly int _Tex = Shader.PropertyToID( nameof( _Tex ) );
-			public static readonly int _Tex_ST = Shader.PropertyToID( nameof( _Tex_ST ) );
+			public static readonly int _TexUVRect = Shader.PropertyToID( nameof( _TexUVRect ) );
 			public static readonly int _TexTint = Shader.PropertyToID( nameof( _TexTint ) );
 		}
 

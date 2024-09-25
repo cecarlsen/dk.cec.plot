@@ -50,20 +50,9 @@ public partial class Plot
 
 	const string antialiasKeyword = "_ANTIALIAS";
 
-	static readonly Color defaultFillColor = Color.white;
-	static readonly Color defaultStrokeColor = Color.black;
-	const float defaultStrokeWidth = 0.05f;
-	const StrokeAlignment defaultStrokeAlignment = StrokeAlignment.Outside;
-	const bool defaultAntialias = true;
-	const Pivot defaultPivot = Pivot.Center;
-	const StrokeCornerProfile defaultStrokeCornerProfile = StrokeCornerProfile.Round;
-	const Blend defaultBlend = Blend.Transparent;
-	const FillTextureBlend defaultFillTextureBlend = FillTextureBlend.Overlay;
-	static readonly Color defaultFillTextureTint = Color.white;
-	const float defaultTextSize = 0.1f;
-	static readonly Color defaultTextColor = Color.white;
-	const TextAlignmentOptions defaultTextAlignment = TextAlignmentOptions.Center;
-
+	/*
+	
+*/
 
 	Plot()
 	{

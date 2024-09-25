@@ -70,10 +70,10 @@ namespace PlotInternals
 
 			if( style.hasVisibleTextureEnabled ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission
 				if( drawNow ) {
-					_material.SetVector( FillShaderIDs._Tex_ST, style.fillTextureST );
+					_material.SetVector( FillShaderIDs._TexUVRect, style.fillTextureUVRect );
 					_material.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
 				} else {
-					_propBlock.SetVector( FillShaderIDs._Tex_ST, style.fillTextureST );
+					_propBlock.SetVector( FillShaderIDs._TexUVRect, style.fillTextureUVRect );
 					_propBlock.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
 				}
 			}

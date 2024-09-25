@@ -79,7 +79,7 @@ Shader "Hidden/Draw/Arc"
 				UNITY_DEFINE_INSTANCED_PROP( half4, _FillColor )
 				UNITY_DEFINE_INSTANCED_PROP( half4, _StrokeColor )
 				#ifdef _HAS_TEXTURE
-					UNITY_DEFINE_INSTANCED_PROP( half4, _Tex_ST )
+					UNITY_DEFINE_INSTANCED_PROP( half4, _TexUVRect )
 					UNITY_DEFINE_INSTANCED_PROP( half, _StrokeAlignmentExtension )
 					UNITY_DEFINE_INSTANCED_PROP( half4, _TexTint )
 				#endif
@@ -140,8 +140,8 @@ Shader "Hidden/Draw/Arc"
 
 				// Compute uv.
 				#ifdef _HAS_TEXTURE
-					half4 texST = UNITY_ACCESS_INSTANCED_PROP( Props, _Tex_ST );
-					o.uv = ( o.vertex.xy + 0.5 ) * texST.xy + texST.zw;
+					half4 texST = UNITY_ACCESS_INSTANCED_PROP( Props, _TexUVRect );
+					o.uv = ( o.vertex.xy + 0.5 ) * texST.zw + texST.xy;
 				#endif
 
 				// Compute world space pixel size at transformed position as seen by camera.

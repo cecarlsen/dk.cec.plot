@@ -52,12 +52,7 @@ public partial class Plot
 	{
 		if( _p == null ) return; // Will reset on create anyway.
 
-		SetFillColor( defaultFillColor );
-		SetStrokeColor( defaultStrokeColor );
-		SetStrokeWidth( defaultStrokeWidth );
-		SetStrokeAlignement( defaultStrokeAlignment );
-		SetPivot( defaultPivot );
-		SetAntiAliasing( defaultAntialias );
+		_p._style = Style.GetDefault();
 	}
 
 	
@@ -433,7 +428,7 @@ public partial class Plot
 	public static void SetFillTextureUVRect( float x, float y, float width, float height )
 	{
 		P();
-		_p._style.fillTextureST = new Vector4( width, height, x, y );
+		_p._style.fillTextureUVRect = new Vector4( x, y, width, height );
 	}
 
 
@@ -489,7 +484,7 @@ public partial class Plot
 
 
 	/// <summary>
-	/// Short hand for PushCanvas() and PushStyle().
+	/// Shorthand for PushCanvas() and PushStyle().
 	/// </summary>
 	public static void PushCanvasAndStyle(){
 		PushCanvas();
@@ -498,7 +493,7 @@ public partial class Plot
 
 
 	/// <summary>
-	/// Short hand for PushCanvas() and PushStyle().
+	/// Shorthand for PushCanvas() and PushStyle().
 	/// </summary>
 	public static void PopCanvasAndStyle(){
 		PopCanvas();

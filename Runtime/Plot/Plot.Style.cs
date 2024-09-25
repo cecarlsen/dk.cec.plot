@@ -63,9 +63,16 @@ public partial class Plot
 		/// </summary>
 		public StrokeCornerProfile strokeCornerProfile;
 
-
+		/// <summary>
+		/// Pivot point of this style (the local zero point on shapes).
+		/// Default is Pivot.Center.
+		/// </summary>
 		public Pivot pivot;
-		public Vector4 fillTextureST;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Vector4 fillTextureUVRect;
 		public Color fillTextureTint;
 		public float textSize;
 		public TextAlignmentOptions textAlignment;
@@ -81,6 +88,19 @@ public partial class Plot
 		public Blend blend;
 		public Texture fillTexture;
 		public FillTextureBlend fillTextureBlend;
+
+		static readonly Color defaultFillColor = Color.white;
+		static readonly Color defaultStrokeColor = Color.black;
+		const float defaultStrokeWidth = 0.05f;
+		const StrokeAlignment defaultStrokeAlignment = StrokeAlignment.Outside;
+		const bool defaultAntialias = true;
+		const Pivot defaultPivot = Pivot.Center;
+		const StrokeCornerProfile defaultStrokeCornerProfile = StrokeCornerProfile.Round;
+		const Blend defaultBlend = Blend.Transparent;
+		const FillTextureBlend defaultFillTextureBlend = FillTextureBlend.Overlay;
+		static readonly Color defaultFillTextureTint = Color.white;
+		const float defaultTextSize = 0.1f;
+		const TextAlignmentOptions defaultTextAlignment = TextAlignmentOptions.Center;
 
 		public bool hasVisibleFill => fillEnabled && fillColor.a > 0;
 		public bool hasVisibleStroke => strokeEnabled && strokeColor.a > 0 && strokeWidth > 0;
@@ -100,7 +120,7 @@ public partial class Plot
 				strokeAlignment = defaultStrokeAlignment,
 				strokeCornerProfile = defaultStrokeCornerProfile,
 				pivot = defaultPivot,
-				fillTextureST = new Vector4( 1, 1, 0, 0 ),
+				fillTextureUVRect = new Vector4( 1, 1, 0, 0 ),
 				fillTextureTint = defaultFillTextureTint,
 				textSize = defaultTextSize,
 				textAlignment = defaultTextAlignment,
@@ -126,7 +146,7 @@ public partial class Plot
 				\tstrokeAlignment: {strokeAlignment}\n
 				\tstrokeCornerProfile: strokeCornerProfile\n
 				\tpivot: {pivot}\n
-				\tfillTextureST: {fillTextureST}\n
+				\tfillTextureST: {fillTextureUVRect}\n
 				\tfillTextureTint: {fillTextureTint}\n
 				\ttextSize: {textSize}\n
 				\ttextAlignment: {textAlignment}\n

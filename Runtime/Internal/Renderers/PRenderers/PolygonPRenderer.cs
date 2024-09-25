@@ -43,7 +43,7 @@ namespace PlotInternals
 			if( isFillColorDirty || isStrokeColorDirty ) UpdateFillAndStroke( ref style, drawNow );
 
 			if( style.fillTexture ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission
-				_material.SetVector( FillShaderIDs._Tex_ST, style.fillTextureST );
+				_material.SetVector( FillShaderIDs._TexUVRect, style.fillTextureUVRect );
 				_material.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
 			}
 

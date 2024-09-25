@@ -156,11 +156,11 @@ namespace PlotInternals
 
 			if( style.fillTexture ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission
 				if( drawNow ) {
-					_material.SetVector( FillShaderIDs._Tex_ST, style.fillTextureST );
+					_material.SetVector( FillShaderIDs._TexUVRect, style.fillTextureUVRect );
 					_material.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
 					_material.SetFloat( ShaderIDs._StrokeAlignmentExtension, strokeAlignmentExtension );
 				} else {
-					_propBlock.SetVector( FillShaderIDs._Tex_ST, style.fillTextureST );
+					_propBlock.SetVector( FillShaderIDs._TexUVRect, style.fillTextureUVRect );
 					_propBlock.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
 					_propBlock.SetFloat( ShaderIDs._StrokeAlignmentExtension, strokeAlignmentExtension );
 				}
