@@ -14,7 +14,7 @@ This repository is structured as a custom Unity package, so just download the en
 
 ### Dependencies
 
-Plot depends on TextMeshPro and Unity.UI (for the samples scenes), which should be installed automatically when you drop the package in your project.
+Plot depends on TextMeshPro for text rendering and Unity.UI for the samples scenes. Both should be installed automatically when you drop the package in your project.
 
 
 ## Gettings started
