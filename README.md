@@ -3,7 +3,7 @@
 
 An immediate mode (IM) procedural 2D drawing package for [Unity](https://unity.com). Usefull for smaller data visualisations, visual code sketches, and learning how to code. Plot is inspired by [Processing/p5](https://processing.org), so if you're familiar with that, you should be able to jump right in.
 
-Tested with Unity 2023.3 and supporting BiRP, URP, and HDRP.
+Tested with Unity 2022.3 and 6.0, supporting BiRP, URP, and HDRP.
 
 ![Using Static](https://github.com/user-attachments/assets/605211a4-2810-49bf-a33c-02b264ba4915)
 
