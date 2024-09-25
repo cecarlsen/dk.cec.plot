@@ -138,6 +138,7 @@ public partial class Plot
 		const StrokeCornerProfile defaultStrokeCornerProfile = StrokeCornerProfile.Round;
 		const Blend defaultBlend = Blend.Transparent;
 		const FillTextureBlend defaultFillTextureBlend = FillTextureBlend.Overlay;
+		static readonly Vector4 fillTextureUVRectDefault = new Vector4( 0f, 0f, 1f, 1f );
 		static readonly Color defaultFillTextureTint = Color.white;
 		const float defaultTextSize = 0.1f;
 		const TextAlignmentOptions defaultTextAlignment = TextAlignmentOptions.Center;
@@ -161,7 +162,7 @@ public partial class Plot
 				strokeAlignment = defaultStrokeAlignment,
 				strokeCornerProfile = defaultStrokeCornerProfile,
 				pivot = defaultPivot,
-				fillTextureUVRect = new Vector4( 1, 1, 0, 0 ),
+				fillTextureUVRect = fillTextureUVRectDefault,
 				fillTextureTint = defaultFillTextureTint,
 				textSize = defaultTextSize,
 				textAlignment = defaultTextAlignment,

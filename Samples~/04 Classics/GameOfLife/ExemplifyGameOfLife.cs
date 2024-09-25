@@ -20,10 +20,8 @@ namespace PlotExamples
 		const int squareCellCount = 32;
 		
 
-		void Start()
-		{
-			Application.targetFrameRate = 25;
-		}
+		void OnEnable() => Application.targetFrameRate = 25;
+		void OnDisable() => Application.targetFrameRate = 0;
 
 
 		void Update()

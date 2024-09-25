@@ -15,6 +15,7 @@ namespace PlotExamples
 		[Range(0.1f,2f)] public float strokeWidth = 1f;
 		[Range(0f,1f)] public float alpha = 0.1f;
 		public Vector2 sampleOffset = new Vector2( 46.23476f, 7.1974f );
+		public bool prewarm = true;
 
 		Vector2[] _brushes;
 		RenderTexture _rt;
@@ -22,7 +23,8 @@ namespace PlotExamples
 		const int brushCount = 128;
 		const int width = 3840;
 		const int height = 2180;
-
+		const int prewarmIterations = 256;
+		
 
 		void OnEnable()
 		{
@@ -30,6 +32,8 @@ namespace PlotExamples
 				useMipMap = true // Render nicely when zooming out in the scene.
 			};
 			Reset();
+
+			if( prewarm ) for( int i = 0; i < prewarmIterations; i++ ) Update();
 		}
 
 

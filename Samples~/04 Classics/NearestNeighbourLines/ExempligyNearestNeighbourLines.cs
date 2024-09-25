@@ -11,6 +11,7 @@ namespace PlotExamples
 	[ExecuteInEditMode]
 	public class ExempligyNearestNeighbourLines : MonoBehaviour
 	{
+		public bool prewarm = true;
 		public bool showLines = false;
 		public Color backgroundColor = Color.black;
 
@@ -20,11 +21,11 @@ namespace PlotExamples
 
 		const int width = 3840;
 		const int height = 2160;
-		const int count = 16;
+		const int count = 32;
 		const float strokeWidth = 2; // Px
 		const float distMin = 300; // Px
 		const float distMax = 800; // Px
-
+		const int prewarmIterations = 256;
 
 		void OnEnable()
 		{
@@ -39,6 +40,8 @@ namespace PlotExamples
 				_pos[ i ] = new Vector2( Random.value * width, Random.value * height );
 				_vel[ i ] = Random.insideUnitCircle.normalized; // Px
 			}
+
+			if( prewarm ) for( int i = 0; i < prewarmIterations; i++ ) Update();
 		}
 
 

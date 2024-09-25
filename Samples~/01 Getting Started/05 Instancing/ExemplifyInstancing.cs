@@ -55,7 +55,7 @@ namespace PlotExamples
 				switch( shape )
 				{
 					case 0: DrawCircle( p.x, p.y, shapeSize ); break;
-					case 1: DrawPie( p.x, p.y, shapeSize, -150, 150 ); break;
+					case 1: DrawPie( p.x, p.y, shapeSize, -150, 300 ); break;
 					case 2: DrawSquare( p.x, p.y, shapeSize, 0.5f ); break;
 				}
 

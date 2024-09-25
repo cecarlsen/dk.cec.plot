@@ -1,8 +1,14 @@
 # Changelog
 
 
-## [1.0.0] - 2024-09-XX
+## [1.0.1] - 2024-09-25
 
+	- Fixed uv rect initiation issue causing come sample scenes to fail.
+
+
+## [1.0.0] - 2024-09-25
+
+	- WE ARE PUBLIC ON GITHUB!! =D
 	- Changed DrawArc endAngle to deltaAngle.
 	- Added dependency to Unity.UI. Used in sample scenes.
 	- Fixed stroke color being forgotten when stroke width is set to zero.
