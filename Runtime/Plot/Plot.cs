@@ -291,6 +291,7 @@ public partial class Plot
 	public static void SetFillColor( Color color, float alphaOverride ) { SetFillColor( ColorWithAlpha( color, alphaOverride ) ); }
 	public static void SetFillColor( Color color )
 	{
+		P();
 		_p._style.fillColor = color;
 		_p._style.fillEnabled = true;
 		foreach( FillPRenderer r in _p._fillRenderers ) r.isFillColorDirty = true;

@@ -12,18 +12,19 @@ namespace PlotExamples
 	public class ExemplifyCurlNoiseTrails : MonoBehaviour
 	{
 		[Range(1f,10f)] public float frequency = 5f;
-		[Range(0.1f,2f)] public float strokeWidth = 1f;
+		[Range(0.1f,4f)] public float strokeWidth = 1f;
 		[Range(0f,1f)] public float alpha = 0.1f;
 		public Vector2 sampleOffset = new Vector2( 46.23476f, 7.1974f );
 		public bool prewarm = true;
+		public Color backgroundColor = Color.clear;
 
 		Vector2[] _brushes;
 		RenderTexture _rt;
 
-		const int brushCount = 128;
+		const int brushCount = 64;
 		const int width = 3840;
-		const int height = 2180;
-		const int prewarmIterations = 256;
+		const int height = 2160;
+		const int prewarmIterations = 8;
 		
 
 		void OnEnable()
@@ -46,10 +47,15 @@ namespace PlotExamples
 
 		void Update()
 		{
-			if( Input.GetMouseButtonDown( 0 ) ) Reset();
+			if( _brushes == null || Input.GetMouseButtonDown( 0 ) ) Reset();
 
+			PushCanvasAndStyle();
+
+			
 			MoveAndDrawBrushesToRenderTexture();
 			DrawTextureRenderInScene();
+
+			PopCanvasAndStyle();
 		}
 
 
@@ -57,6 +63,7 @@ namespace PlotExamples
 		{
 			BeginDrawNowToRenderTexture( _rt, Plot.Space.Pixels );
 
+			SetBlend( Blend.Transparent );
 			SetStrokeWidth( strokeWidth );
 			SetStrokeColor( Color.white, alpha );
 			for( int i = 0; i < brushCount; i++ ){
@@ -65,7 +72,7 @@ namespace PlotExamples
 				var delta = CurlNoise( pSample ) * 10;
 				var p1 = p0 + delta;
 				DrawLineNow( p0, p1 );
-				if( p1.x <= 0 || p1.x >= width || p1.y < 0 || p1.y >= width ){
+				if( p1.x <= 0 || p1.x >= width || p1.y < 0 || p1.y >= height ){
 					p1 = new Vector2( Random.value * width, Random.value * height );
 				}
 				_brushes[ i ] = p1;
@@ -77,6 +84,7 @@ namespace PlotExamples
 
 		void DrawTextureRenderInScene()
 		{
+			SetBlend( Blend.TransparentAdditive );
 			SetFillTexture( _rt );
 			SetFillColor( Color.black );
 			SetNoStroke();
@@ -86,9 +94,9 @@ namespace PlotExamples
 
 		void Reset()
 		{
-			ClearRenderTextureNow( _rt, Color.black );
-			if( _brushes == null ) _brushes = new Vector2[ brushCount ];
-			for( int i = 0; i < brushCount; i++ ) _brushes[ i ] = new Vector2( Random.Range( 0f, width ), Random.Range( 0f, height ) );
+			ClearRenderTextureNow( _rt, backgroundColor );
+			_brushes = new Vector2[ brushCount ];
+			for( int i = 0; i < brushCount; i++ ) _brushes[ i ] = new Vector2( Random.value * width, Random.value * height );
 		}
 
 

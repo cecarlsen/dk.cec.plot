@@ -14,14 +14,27 @@ namespace PlotExamples
 	[ExecuteInEditMode]
 	public class ExemplifyGameOfLife : MonoBehaviour
 	{
-		bool[,] _isAliveFlags0 = new bool[squareCellCount,squareCellCount]; // Current frame.
-		bool[,] _isAliveFlags1 = new bool[squareCellCount,squareCellCount]; // Previous frame.
-		bool[,] _isAliveFlags2 = new bool[squareCellCount,squareCellCount]; // Frame before previous frame.
-		const int squareCellCount = 32;
+		public bool prewarm = true;
+
+		bool[,] _isAliveFlags0 = new bool[countX,countY]; // Current frame.
+		bool[,] _isAliveFlags1 = new bool[countX,countY]; // Previous frame.
+		bool[,] _isAliveFlags2 = new bool[countX,countY]; // Frame before previous frame.
+
+		
+		const int countX = 80;
+		const int countY = 45;
+		const int prewarmIterations = 5;
 		
 
-		void OnEnable() => Application.targetFrameRate = 25;
-		void OnDisable() => Application.targetFrameRate = 0;
+		void OnEnable()
+		{
+			//Application.targetFrameRate = 25;
+			Seed();
+			if( prewarm ) for( int i = 0; i < prewarmIterations; i++ ) Update();
+		}
+
+
+		//void OnDisable() => Application.targetFrameRate = 0;
 
 
 		void Update()
@@ -37,8 +50,8 @@ namespace PlotExamples
 			bool anyChange = false;
 			bool anyAlive = false;
 			bool isRepeating = true;
-			for( int y = 0; y < squareCellCount; y++ ){
-				for( int x = 0; x < squareCellCount; x++ ){
+			for( int y = 0; y < countY; y++ ){
+				for( int x = 0; x < countX; x++ ){
 					if( !anyAlive && _isAliveFlags0[ x, y ] ) anyAlive = true;
 					if( _isAliveFlags0[ x, y ] != _isAliveFlags1[ x, y ] ) anyChange = true;
 					if(  isRepeating && _isAliveFlags0[ x, y ] != _isAliveFlags2[ x, y ] ) isRepeating = false;
@@ -50,8 +63,8 @@ namespace PlotExamples
 
 		void Seed()
 		{
-			for( int y = 0; y < squareCellCount; y++ ){
-				for( int x = 0; x < squareCellCount; x++ ){
+			for( int y = 0; y < countY; y++ ){
+				for( int x = 0; x < countX; x++ ){
 					if( Random.value < 0.2f ) _isAliveFlags0[ x, y ] = true;
 				}
 			}
@@ -67,8 +80,8 @@ namespace PlotExamples
 			CopyDoubleArray( _isAliveFlags0, _isAliveFlags1 );
 
 			// For every cell.
-			for( int y = 0; y < squareCellCount; y++ ){
-				for( int x = 0; x < squareCellCount; x++ )
+			for( int y = 0; y < countY; y++ ){
+				for( int x = 0; x < countX; x++ )
 				{
 					// Count alive neighbors.
 					int aliveNeighborCount = 0;
@@ -77,8 +90,8 @@ namespace PlotExamples
 							if( nx == 0 && ny == 0 ) continue;
 							int wx = x + nx;
 							int wy = y + ny;
-							wx = wx < 0 ? squareCellCount-1 : wx >= squareCellCount ? 0 : wx;
-							wy = wy < 0 ? squareCellCount-1 : wy >= squareCellCount ? 0 : wy;
+							wx = wx < 0 ? countX-1 : wx >= countX ? 0 : wx;
+							wy = wy < 0 ? countY-1 : wy >= countY ? 0 : wy;
 							if( _isAliveFlags1[ wx, wy ] ) aliveNeighborCount++;
 						}
 					}
@@ -105,15 +118,16 @@ namespace PlotExamples
 			PushCanvasAndStyle();
 			SetCanvas( transform );
 
-			TranslateCanvas( -0.5f, -0.5f );
-			ScaleCanvas( 1f / squareCellCount );
+			TranslateCanvas( -0.5f*countX/countY, -0.5f );
+			ScaleCanvas( 1f / countY );
 
 			SetNoStroke();
-
-			for( int y = 0; y < squareCellCount; y++ ){
-				for( int x = 0; x < squareCellCount; x++ ){
+			SetFillColor( Color.white );
+			for( int y = 0; y < countY; y++ ){
+				for( int x = 0; x < countX; x++ ){
 					if( _isAliveFlags0[ x, y ] ){
-						DrawRect( x, y, 0.93f, 0.93f, roundness: 0.3f );
+						//DrawRect( x, y, 0.93f, 0.93f, roundness: 0.5f );
+						DrawCircle( x, y, 0.93f );
 					}
 				}
 			}

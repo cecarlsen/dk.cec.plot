@@ -3,6 +3,7 @@
 
 ## [1.0.1b] - 2024-09-XX
 
+	- Fixed SetFillColor not initialising Plot.
 	- Added BrownianMotionTrails example.
 
 

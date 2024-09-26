@@ -13,6 +13,7 @@ namespace PlotExamples
 	{
 		public bool prewarm = true;
 		public bool showLines = false;
+		[Range(0f,1f)] public float alpha = 0.01f;
 		public Color backgroundColor = Color.black;
 
 		Vector2[] _pos, _vel;
@@ -22,10 +23,11 @@ namespace PlotExamples
 		const int width = 3840;
 		const int height = 2160;
 		const int count = 32;
-		const float strokeWidth = 2; // Px
+		const float strokeWidth = 1; // Px
 		const float distMin = 300; // Px
 		const float distMax = 800; // Px
-		const int prewarmIterations = 256;
+		const int prewarmIterations = 8;
+
 
 		void OnEnable()
 		{
@@ -54,9 +56,14 @@ namespace PlotExamples
 
 		void Update()
 		{
-			MoveAndWrapPositions();
 			if( showLines ) ClearRenderTextureNow( _rt, backgroundColor );
-			DrawToRenderTexture();
+
+			for( int i = 0; i < 10; i++ )
+			{
+				MoveAndWrapPositions();
+				DrawToRenderTexture();
+			}
+
 			DrawRenderTexture();
 		}
 
@@ -102,7 +109,9 @@ namespace PlotExamples
 		{
 			PushCanvasAndStyle();
 
+			SetBlend( Blend.TransparentAdditive );
 			SetNoStroke();
+			SetFillTextureTint( Color.white, alpha );
 			SetFillColor( backgroundColor );
 			SetFillTexture( _rt );
 			DrawRect( 0f, 0f, width / (float) height, 1f );

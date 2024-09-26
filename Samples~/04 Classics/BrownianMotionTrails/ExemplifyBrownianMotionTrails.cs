@@ -16,6 +16,7 @@ namespace PlotExamples
 	{
 		[Range(0.1f,2f)] public float strokeWidth = 1f;
 		[Range(0f,1f)] public float alpha = 0.5f;
+		public float step = 30;
 		public bool prewarm = true;
 
 		Vector2[] _brushes;
@@ -24,7 +25,7 @@ namespace PlotExamples
 		const int brushCount = 256;
 		const int width = 3840;
 		const int height = 2180;
-		const int prewarmIterations = 256;
+		const int prewarmIterations = 32;
 		
 
 		void OnEnable()
@@ -32,8 +33,8 @@ namespace PlotExamples
 			_rt = new RenderTexture( width, height, 0, RenderTextureFormat.ARGB32, mipCount: 4 ){
 				useMipMap = true // Render nicely when zooming out in the scene.
 			};
-			Reset();
 
+			Reset();
 			if( prewarm ) for( int i = 0; i < prewarmIterations; i++ ) Update();
 		}
 
@@ -47,10 +48,15 @@ namespace PlotExamples
 
 		void Update()
 		{
-			if( Input.GetMouseButtonDown( 0 ) ) Reset();
+			if( _brushes == null || Input.GetMouseButtonDown( 0 ) ) Reset();
+
+			PushCanvasAndStyle();
+			SetBlend( Blend.TransparentAdditive );
 
 			MoveAndDrawBrushesToRenderTexture();
 			DrawTextureRenderInScene();
+
+			PopCanvasAndStyle();
 		}
 
 
@@ -58,16 +64,12 @@ namespace PlotExamples
 		{
 			BeginDrawNowToRenderTexture( _rt, Plot.Space.Pixels );
 
-			SetBlend( Blend.TransparentAdditive );
 			SetStrokeWidth( strokeWidth );
 			for( int i = 0; i < brushCount; i++ ){
 				var p0 = _brushes[ i ];
-				var p1 = p0 + Random.insideUnitCircle * 10;
-				SetStrokeColor( Color.white, alpha * Random.value );
+				var p1 = p0 + Random.insideUnitCircle * step;
+				SetStrokeColor( Color.white, alpha );
 				DrawLineNow( p0, p1 );
-				if( p1.x <= 0 || p1.x >= width || p1.y < 0 || p1.y >= width ){
-					p1 = new Vector2( Random.value * width, Random.value * height );
-				}
 				_brushes[ i ] = p1;
 			}
 
@@ -87,7 +89,7 @@ namespace PlotExamples
 		void Reset()
 		{
 			ClearRenderTextureNow( _rt, Color.black );
-			if( _brushes == null ) _brushes = new Vector2[ brushCount ];
+			_brushes = new Vector2[ brushCount ];
 			for( int i = 0; i < brushCount; i++ ) _brushes[ i ] = new Vector2( width / 2f, height / 2f );
 		}
 	}

@@ -14,42 +14,50 @@ namespace PlotExamples
 	[ExecuteInEditMode]
 	public class ExemplifyRecursiveTree : MonoBehaviour
 	{
-		float _angle;
+		public float startAngle = 180;
+
+		float _t;
+
+
+		void OnEnable() => _t = 0;
+
 
 		void Update()
 		{
-			_angle = Mathf.Lerp( 10, 90, ( Mathf.Sin( Time.time ) + 1 ) / 2f );
+			_t += Time.deltaTime;
+			float angle = startAngle + Mathf.Lerp( 10, 90, ( Mathf.Sin( _t ) + 1 ) / 2f );
 			
 			PushCanvasAndStyle();
+			SetCanvas( transform );
 
 			SetStrokeColor( 1 );
 			SetStrokeWidth( 0.02f );
 
 			DrawLine( 0, 0, 0, -2 );
-			DrawRecursiveBranch( 2 );
+			DrawRecursiveBranch( 2, angle );
 
 			PopCanvasAndStyle();
 		}
 
 
-		void DrawRecursiveBranch( float h )
+		void DrawRecursiveBranch( float h, float a )
 		{
 			h *= 0.66f;
 
 			if( h < 0.04f ) return;
 
 			PushCanvas();
-			RotateCanvas( _angle );
+			RotateCanvas( a );
 			DrawLine( 0, 0, 0, h );
 			TranslateCanvas( 0, h );
-			DrawRecursiveBranch( h );
+			DrawRecursiveBranch( h, a );
 			PopCanvas();
 
 			PushCanvas();
-			RotateCanvas( -_angle );
+			RotateCanvas( -a );
 			DrawLine( 0, 0, 0, h );
 			TranslateCanvas( 0, h );
-			DrawRecursiveBranch( h );
+			DrawRecursiveBranch( h, a );
 			PopCanvas();
 		}
 	}
