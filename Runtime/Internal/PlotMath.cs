@@ -46,18 +46,21 @@ namespace PlotInternals
 		/// <summary>
 		/// Takes a series of points and fills an array with normalized directions ponting from one to the next.
 		/// </summary>
-		public static void ComputeNormalizedDirections( Vector2[] points, ref Vector2[] directions, bool wrap = false )
+		public static void ComputeNormalizedDirections( Vector2[] points, ref Vector2[] directions, int count = -1, bool wrap = false )
 		{
 			if( directions == null || directions.Length != points.Length ) directions = new Vector2[ points.Length ];
 
+			if( count < 0 ) count = points.Length;
+			if( count > points.Length ) count = points.Length;
+
 			Vector2 thisPoint = points[ 0 ];
-			int lastP = points.Length - 1;
+			int lastP = count - 1;
 			if( wrap ) {
 				Vector2 dir = thisPoint - points[ lastP ];
 				dir.Normalize();
 				directions[ lastP ] = dir;
 			}
-			for( int p1 = 1; p1 < points.Length; p1++ ) {
+			for( int p1 = 1; p1 < count; p1++ ) {
 				Vector2 nextPoint = points[ p1 ];
 				Vector2 dir = nextPoint - thisPoint;
 				dir.Normalize();
@@ -65,31 +68,35 @@ namespace PlotInternals
 				thisPoint = nextPoint;
 			}
 			if( !wrap ) {
-				directions[ lastP ] = directions[ points.Length - 2 ];
+				directions[ lastP ] = directions[ count - 2 ];
 			}
 		}
 
 
 		/// <summary>
 		/// Takes a series of points and fills an array with normalized directions ponting from one to the next.
+		/// Also output positionsAlongLine since we are computing vector2 lengths anyway.
 		/// </summary>
-		public static void ComputeNormalizedDirections( Vector2[] points, ref Vector2[] directions, ref float[] positionsAlongLine, bool wrap = false )
+		public static void ComputeNormalizedDirections( Vector2[] points, ref Vector2[] directions, ref float[] positionsAlongLine, int count = -1, bool wrap = false )
 		{
 			if( directions == null || directions.Length != points.Length ) directions = new Vector2[ points.Length ];
 			if( positionsAlongLine == null || positionsAlongLine.Length != points.Length ) positionsAlongLine = new float[ points.Length ];
 
-			Vector2 thisPoint = points[ 0 ];
-			int lastP = points.Length - 1;
+			if( count < 0 ) count = points.Length;
+			if( count > points.Length ) count = points.Length;
+
+			var thisPoint = points[ 0 ];
+			int lastP = count - 1;
 			float pos = 0;
 			positionsAlongLine[ 0 ] = 0;
 			if( wrap ) {
-				Vector2 dir = thisPoint - points[ lastP ];
+				var dir = thisPoint - points[ lastP ];
 				dir.Normalize();
 				directions[ lastP ] = dir;
 			}
-			for( int p0 = 0, p1 = 1; p1 < points.Length; p0++, p1++ ) {
-				Vector2 nextPoint = points[ p1 ];
-				Vector2 dir = nextPoint - thisPoint;
+			for( int p0 = 0, p1 = 1; p1 < count; p0++, p1++ ) {
+				var nextPoint = points[ p1 ];
+				var dir = nextPoint - thisPoint;
 				float length = dir.magnitude;
 				if( length > 0 ) dir /= length;
 				pos += length;
@@ -98,7 +105,7 @@ namespace PlotInternals
 				thisPoint = nextPoint;
 			}
 			if( !wrap ) {
-				directions[ lastP ] = directions[ points.Length - 2 ];
+				directions[ lastP ] = directions[ count - 2 ];
 			}
 		}
 	}

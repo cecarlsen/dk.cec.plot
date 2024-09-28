@@ -36,7 +36,7 @@ namespace PlotInternals
 		public static void Triangulate( Vector2[] outlinePoints, int outlinePointCount, IList<int> holeIndices, ref List<int> triangles )
 		{
 			bool hasHoles = holeIndices != null && holeIndices.Count > 0;
-			int outerLen = hasHoles ? holeIndices[0] : outlinePointCount;
+			int outerLen = hasHoles ? holeIndices[ 0 ] : outlinePointCount;
 			Node outerNode = LinkedList( outlinePoints, 0, outerLen, true );
 
 			if( triangles == null ) triangles = new List<int>();

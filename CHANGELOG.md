@@ -1,7 +1,16 @@
 # Changelog
 
 
-## [1.0.1b] - 2024-09-XX
+
+## [1.0.2] - 2024-09-28
+
+	- Added PlotLogo component.
+	- Added SpaceColonisationTree example.
+	- Added AppendPoint, PrependPoint, InsertPoint, and RemovePoint for Polyline and Polygon.
+	- Added independent capacity and point count for Polyline and Polygon.
+
+
+## [1.0.1b] - 2024-09-28
 
 	- Fixed SetFillColor not initialising Plot.
 	- Added BrownianMotionTrails example.

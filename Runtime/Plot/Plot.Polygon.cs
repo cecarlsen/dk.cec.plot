@@ -12,7 +12,7 @@ using PlotInternals;
 public partial class Plot
 {
 	[Serializable]
-	public class Polygon : MeshDependentShape
+	public class Polygon : AdaptiveMeshShape
 	{
 		List<int> _indices;
 		Vertex[] _vertexData;
@@ -141,7 +141,7 @@ public partial class Plot
 		void Build()
 		{
 			// Sanity check.
-			if( _points.Length < 3 ) {
+			if( _pointCount < 3 ) {
 				_mesh.Clear();
 				return;
 			}
@@ -154,21 +154,21 @@ public partial class Plot
 			if( _dirtyVerticies )
 			{
 				// Adapt arrays.
-				int vertexCount = _points.Length * 5;
+				int vertexCount = pointCapacity * 5;
 				if( _vertexData == null || _vertexData.Length != vertexCount ) _vertexData = new Vertex[ vertexCount ];
 				if( _mesh.vertexCount != vertexCount ) _mesh.Clear();
 
 				// Compute directions.
 				const bool wrap = true;
-				PlotMath.ComputeNormalizedDirections( _points, ref _directions, wrap );
+				PlotMath.ComputeNormalizedDirections( _points, ref _directions, _pointCount, wrap );
 
 				// Compute vertex data.
-				int lastP = pointCount - 1;
+				int lastP = _pointCount - 1;
 				Vector2 prevOutwards90 = new Vector2( -_directions[ lastP ].y, _directions[ lastP ].x ); // Rotate 90 degrees
 				Vector2 prevPoint = _points[ lastP ];
 				Vector2 thisPoint = _points[ 0 ];
 				Vertex vertex = new Vertex();
-				for( int thisP = 0; thisP < pointCount; thisP++ )
+				for( int thisP = 0; thisP < _pointCount; thisP++ )
 				{
 					if( thisPoint.x < _posMin.x ) _posMin.x = thisPoint.x;
 					else if( thisPoint.x > _posMax.x ) _posMax.x = thisPoint.x;
@@ -178,10 +178,10 @@ public partial class Plot
 					int prevP = thisP > 0 ? thisP - 1 : lastP;
 					int nextP = thisP < lastP ? thisP + 1 : 0;
 
-					int prevV1 = pointCount + prevP * 4;
+					int prevV1 = _pointCount + prevP * 4;
 					int prevV3 = prevV1 + 2;
 					int prevV4 = prevV1 + 3;
-					int thisV1 = pointCount + thisP * 4;
+					int thisV1 = _pointCount + thisP * 4;
 					int thisV2 = thisV1 + 1;
 
 					Vector2 nextPoint = _points[ nextP ];
@@ -224,10 +224,10 @@ public partial class Plot
 
 			if( _dirtyIndices )
 			{
-				// Adap arrays.
+				// Adapt arrays.
 				int theoreticalIndexCount = 0;
-				if( _fillEnabled ) theoreticalIndexCount += ( _points.Length - 2 ) * 3;
-				if( _strokeOrAntialiasEnabled ) theoreticalIndexCount += 6 * _points.Length;
+				if( _fillEnabled ) theoreticalIndexCount += ( _pointCount - 2 ) * 3;
+				if( _strokeOrAntialiasEnabled ) theoreticalIndexCount += 6 * _pointCount;
 				if( _indices == null ) _indices = new List<int>( theoreticalIndexCount );
 				else if( _indices.Capacity < theoreticalIndexCount ) _indices.Capacity = theoreticalIndexCount;
 
@@ -235,12 +235,12 @@ public partial class Plot
 				_indices.Clear();
 
 				// Build fill (will clear array).
-				if( _fillEnabled ) Earcut.Triangulate( _points, _points.Length, noHoles, ref _indices );
+				if( _fillEnabled ) Earcut.Triangulate( _points, _pointCount, noHoles, ref _indices );
 
 				// Build stroke.
 				if( _strokeOrAntialiasEnabled ) {
-					for( int thisP = 0; thisP < pointCount; thisP++ ) {
-						int thisV1 = pointCount + thisP * 4;
+					for( int thisP = 0; thisP < _pointCount; thisP++ ) {
+						int thisV1 = _pointCount + thisP * 4;
 						int thisV2 = thisV1 + 1;
 						int thisV3 = thisV1 + 2;
 						int thisV4 = thisV1 + 3;

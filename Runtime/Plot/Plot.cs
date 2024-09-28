@@ -94,10 +94,10 @@ public partial class Plot
 	{
 		return ScriptableObject.CreateInstance<Polygon>();
 	}
-	public static Polygon CreatePolygon( int pointCount )
+	public static Polygon CreatePolygon( int pointCapacity )
 	{
 		var polygon = ScriptableObject.CreateInstance<Polygon>();
-		polygon.SetPointCount( pointCount );
+		polygon.SetPointCapacity( pointCapacity );
 		return polygon;
 	}
 	public static Polygon CreatePolygon( Vector2[] points )
@@ -121,10 +121,10 @@ public partial class Plot
 	{
 		return ScriptableObject.CreateInstance<Polyline>();
 	}
-	public static Polyline CreatePolyline( int pointCount )
+	public static Polyline CreatePolyline( int pointCapacity )
 	{
 		var polyline = ScriptableObject.CreateInstance<Polyline>();
-		polyline.SetPointCount( pointCount );
+		polyline.SetPointCapacity( pointCapacity );
 		return polyline;
 	}
 	public static Polyline CreatePolyline( Vector2[] points )

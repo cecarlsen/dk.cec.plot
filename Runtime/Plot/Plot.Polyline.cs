@@ -12,7 +12,7 @@ using PlotInternals;
 public partial class Plot
 {
 	[Serializable]
-	public class Polyline : MeshDependentShape
+	public class Polyline : AdaptiveMeshShape
 	{
 		int[] _indices;
 		Vertex[] _vertexData;
@@ -36,7 +36,7 @@ public partial class Plot
 		};
 
 		[Serializable]
-		struct Vertex
+		public struct Vertex
 		{
 			public Vector2 position;
 			public Vector4 outwards_sideMult_endmult;
@@ -55,7 +55,7 @@ public partial class Plot
 		public Polyline SetAsBezierCurve( Vector2 anchorA, Vector2 controlA, Vector2 controlB, Vector2 anchorB, int resolution = 32 )
 		{
 			if( resolution < 3 ) resolution = 3;
-			if( _points == null || _points.Length != resolution ) _points = new Vector2[ resolution ];
+			if( pointCapacity <  resolution ) SetPointCapacity( resolution );
 			_points[ 0 ] = anchorA;
 			_points[ resolution - 1 ] = anchorB;
 			float step = 1 / ( resolution - 1f );
@@ -65,6 +65,7 @@ public partial class Plot
 				float y = PlotMath.QuadraticInterpolation( anchorA.y, controlA.y, controlB.y, anchorB.y, t );
 				_points[ r ] = new Vector2( x, y );
 			}
+			_pointCount = resolution;
 			_dirtyVerticies = true;
 
 			return this;
@@ -114,14 +115,13 @@ public partial class Plot
 		void Build()
 		{
 			// Sanity check.
-			if( _points.Length < 2 ) {
+			if( _pointCount < 2 ) {
 				_mesh.Clear();
 				return;
 			}
 
 			// Adapt arrays
-			int pointCount = _points.Length;
-			int vertexCount = ( pointCount - 1 ) * 4;
+			int vertexCount = ( pointCapacity - 1 ) * 4;
 			int quadIndexCount = vertexCount;
 			if( _vertexData == null || _vertexData.Length != vertexCount ) {
 				_vertexData = new Vertex[ vertexCount ];
@@ -129,10 +129,10 @@ public partial class Plot
 			}
 
 			// Compute directions.
-			PlotMath.ComputeNormalizedDirections( _points, ref _directions, ref _positionsAlongLine );
+			PlotMath.ComputeNormalizedDirections( _points, ref _directions, ref _positionsAlongLine, _pointCount );
 
 			// Update vertices.
-			int lastP = pointCount - 1;
+			int lastP = _pointCount - 1;
 			int i = 0;
 			Vertex vertex = new Vertex();
 			Vector2 prevPoint = Vector2.zero;
@@ -143,7 +143,8 @@ public partial class Plot
 			int strokeCornerMode = _strokeCornerProfile == StrokeCornerProfile.Round ? 2 : 1;
 			float endMult;
 			float thisPosAlongLine = 0;
-			for( int thisP = 0; thisP < pointCount; thisP++ ) {
+			for( int thisP = 0; thisP < _pointCount; thisP++ )
+			{
 				int prevP = thisP - 1;
 
 				int prevV0 = prevP * 4;
@@ -178,7 +179,7 @@ public partial class Plot
 						outwardsLeft = thisOutwards90;
 						endMult = -1;
 
-						if( pointCount == 2 ) {
+						if( _pointCount == 2 ) {
 							// First segment is also the last segment.
 							capsAndPos1D.y = (int) _endCap;
 						}
@@ -258,6 +259,10 @@ public partial class Plot
 				prevPoint = thisPoint;
 				prevOutwards90 = thisOutwards90;
 			}
+
+			// Clear unused indices.
+			int unusedQuadIndexBegin = ( _pointCount - 1 ) * 4;
+			for( i = unusedQuadIndexBegin; i < quadIndexCount; i++ ) _indices[ i ] = 0;
 
 			// Update mesh.
 			ApplyMeshData();
