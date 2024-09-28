@@ -58,11 +58,8 @@ namespace PlotExamples
 		{
 			if( showLines ) ClearRenderTextureNow( _rt, backgroundColor );
 
-			for( int i = 0; i < 10; i++ )
-			{
-				MoveAndWrapPositions();
-				DrawToRenderTexture();
-			}
+			MoveAndWrapPositions();
+			DrawToRenderTexture();
 
 			DrawRenderTexture();
 		}
