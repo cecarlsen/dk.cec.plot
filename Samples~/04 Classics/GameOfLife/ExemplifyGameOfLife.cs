@@ -15,12 +15,14 @@ namespace PlotExamples
 	public class ExemplifyGameOfLife : MonoBehaviour
 	{
 		public bool prewarm = true;
+		public int frameRate = 25;
 
 		bool[,] _isAliveFlags0 = new bool[countX,countY]; // Current frame.
 		bool[,] _isAliveFlags1 = new bool[countX,countY]; // Previous frame.
 		bool[,] _isAliveFlags2 = new bool[countX,countY]; // Frame before previous frame.
 
-		
+		float _time;
+
 		const int countX = 80;
 		const int countY = 45;
 		const int prewarmIterations = 5;
@@ -28,19 +30,21 @@ namespace PlotExamples
 
 		void OnEnable()
 		{
-			//Application.targetFrameRate = 25;
 			Seed();
 			if( prewarm ) for( int i = 0; i < prewarmIterations; i++ ) Update();
 		}
 
 
-		//void OnDisable() => Application.targetFrameRate = 0;
-
-
 		void Update()
 		{
 			if( AllDeadOrNoChangeOrRepeating() ) Seed();
-			ApplyConwayRules();
+
+			_time += Time.deltaTime;
+			if( _time > 1f / (float) frameRate ) {
+				_time -= 1f / frameRate;
+				ApplyConwayRules();
+			}
+			
 			Draw();
 		}
 

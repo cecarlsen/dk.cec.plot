@@ -19,6 +19,7 @@ namespace PlotExamples
 		public float sporeStep = 0.028f;
 		[Range(5f,85f)] public float branchAngleThreshold = 75f;
 		[Range(10f,80f)] public float branchAngle = 30f;
+		public int seed = 0;
 		public int frameRate = 15;
 
 		float _time;
@@ -61,9 +62,12 @@ namespace PlotExamples
 
 		void ResetSim()
 		{
+			var prevSeed = Random.state;
+			Random.InitState( seed );
 			for( int s = 0; s < spacePointCapacity; s++ ) _spacePoints[ s ] = new SpacePoint(){ position = Random.insideUnitCircle * 0.5f };
 			_spores.Clear();
-			_spores.Add( new Spore( Vector2.zero, Random.insideUnitCircle ) );
+			_spores.Add( new Spore( Vector2.zero, Random.insideUnitCircle.normalized ) );
+			Random.state = prevSeed;
 		}
 
 
