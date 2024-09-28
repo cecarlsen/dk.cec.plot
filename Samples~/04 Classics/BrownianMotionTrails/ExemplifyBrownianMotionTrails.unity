@@ -260,6 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strokeWidth: 1.5
   alpha: 0.1
+  step: 1
   prewarm: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

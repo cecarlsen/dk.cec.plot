@@ -48,7 +48,7 @@ namespace PlotExamples
 					for( int p = 0; p < capacity; p++ ){
 						if( _alive[ p ]) continue;
 						_pos[ p ] = spawnPosition;
-						_vel[ p ] = Random.insideUnitCircle * spawnSpeed;
+						_vel[ p ] = Random.insideUnitCircle.normalized * Random.Range( 0.5f, 1f ) * spawnSpeed;
 						_acc[ p ] = Vector2.zero;
 						_age[ p ] = 0f;
 						_alive[ p ] = true;

@@ -16,7 +16,7 @@ namespace PlotExamples
 	{
 		[Range(0.1f,2f)] public float strokeWidth = 1f;
 		[Range(0f,1f)] public float alpha = 0.5f;
-		public float step = 30;
+		[Range(1f,5f)]public float step = 7;
 		public bool prewarm = true;
 
 		Vector2[] _brushes;
@@ -67,7 +67,7 @@ namespace PlotExamples
 			SetStrokeWidth( strokeWidth );
 			for( int i = 0; i < brushCount; i++ ){
 				var p0 = _brushes[ i ];
-				var p1 = p0 + Random.insideUnitCircle * step;
+				var p1 = p0 + Random.insideUnitCircle * height * step * Time.fixedDeltaTime;
 				SetStrokeColor( Color.white, alpha );
 				DrawLineNow( p0, p1 );
 				_brushes[ i ] = p1;

@@ -22,7 +22,7 @@ namespace PlotExamples
 
 		const int width = 3840;
 		const int height = 2160;
-		const int count = 32;
+		const int count = 64;
 		const float strokeWidth = 1; // Px
 		const float distMin = 300; // Px
 		const float distMax = 800; // Px
