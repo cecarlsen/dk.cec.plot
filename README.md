@@ -53,8 +53,8 @@ When multiple instances of the same type of mesh are drawn in succession, Unity 
 Plot is designed for drawing only while Processing expands into math, input, IO, and more.
 
 Some main differencea are:
-- Shape methods are called DrawX() instead of x(), i.e DrawRect() instead of rect().
-- Attribute altering methods are called SetX() instead of x(), i.e SetFillColor() instead of fill().
+- Shape methods are named DrawX() instead of x(), i.e DrawRect() instead of rect().
+- Attribute altering methods are named SetX() instead of x(), i.e SetFillColor() instead of fill().
 - beginShape() and endShape() is replaced by Polygon and Polyline classes.
 - text() is replaced by the Text class.
 - Trigonometry methods are available in Unity's Mathf, and Vector classes.
