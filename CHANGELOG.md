@@ -1,6 +1,12 @@
 # Changelog
 
 
+## [1.0.2b] - 2024-09-28
+
+	- Various minor example updates.
+	- Fix wrong argument naming for DrawPie() and DrawPieNow().
+	- Fix wrong naming for DrawPolylineNow().
+
 
 ## [1.0.2] - 2024-09-28
 

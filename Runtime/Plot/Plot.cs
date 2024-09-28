@@ -213,8 +213,8 @@ public partial class Plot
 	/// <summary>
 	/// Submit a pie shape instance for rendering.
 	/// </summary>
-	public static void DrawPie( float x, float y, float diameter, float angleBegin, float angleEnd, float cutOff = 0, float roundness = 0 ) { P().DrawArcInternal( x, y, -_p._style.strokeWidth-diameter, diameter, angleBegin, angleEnd, cutOff, roundness ); }
-	public static void DrawPie( Vector2 position, float diameter, float angleBegin, float angleEnd, float cutOff = 0, float roundness = 0 ){ P().DrawArcInternal( position.x, position.y, -_p._style.strokeWidth-diameter, diameter, angleBegin, angleEnd, cutOff, roundness ); }
+	public static void DrawPie( float x, float y, float diameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0 ) { P().DrawArcInternal( x, y, -_p._style.strokeWidth-diameter, diameter, beginAngle, deltaAngle, cutOff, roundness ); }
+	public static void DrawPie( Vector2 position, float diameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0 ){ P().DrawArcInternal( position.x, position.y, -_p._style.strokeWidth-diameter, diameter, beginAngle, deltaAngle, cutOff, roundness ); }
 
 
 	/// <summary>
@@ -665,8 +665,8 @@ public partial class Plot
 	/// <summary>
 	/// Draw a pie immediately using Graphics.DrawMeshNow. Call this from OnPostRender or after calling BeginDrawNowToTexture.
 	/// </summary>
-	public static void DrawPieNow( float x, float y, float diameter, float angleBegin, float angleEnd, float cutOff = 0, float roundness = 0 ) { P().DrawArcInternal( x, y, -_p._style.strokeWidth-diameter, diameter, angleBegin, angleEnd, cutOff, roundness, false, false, true ); }
-	public static void DrawPieNow( Vector2 position, float diameter, float angleBegin, float angleEnd, float cutOff = 0, float roundness = 0 ){ P().DrawArcInternal( position.x, position.y, -_p._style.strokeWidth-diameter, diameter, angleBegin, angleEnd, cutOff, roundness, false, false, true ); }
+	public static void DrawPieNow( float x, float y, float diameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0 ) { P().DrawArcInternal( x, y, -_p._style.strokeWidth-diameter, diameter, beginAngle, deltaAngle, cutOff, roundness, false, false, true ); }
+	public static void DrawPieNow( Vector2 position, float diameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0 ){ P().DrawArcInternal( position.x, position.y, -_p._style.strokeWidth-diameter, diameter, beginAngle, deltaAngle, cutOff, roundness, false, false, true ); }
 
 
 	/// <summary>
@@ -717,7 +717,7 @@ public partial class Plot
 	/// Draw a polygon immediately using Graphics.DrawMeshNow. Call this from OnPostRender or after calling BeginDrawNowToTexture.
 	/// </summary>
 	public static void DrawPolylineNow( Polyline polyline, StrokeCap beginCap, StrokeCap endCap ) { P().DrawPolylineInternal( polyline, beginCap, endCap, true ); }
-	public static void DrawPOlylineNow( Polyline polyline, StrokeCap caps = StrokeCap.Round ) { P().DrawPolylineInternal( polyline, caps, caps, true ); }
+	public static void DrawPolylineNow( Polyline polyline, StrokeCap caps = StrokeCap.Round ) { P().DrawPolylineInternal( polyline, caps, caps, true ); }
 
 
 	/// <summary>

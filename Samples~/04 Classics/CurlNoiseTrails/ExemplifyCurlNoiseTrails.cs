@@ -12,11 +12,11 @@ namespace PlotExamples
 	public class ExemplifyCurlNoiseTrails : MonoBehaviour
 	{
 		[Range(1f,10f)] public float frequency = 5f;
+		public Vector2 sampleOffset = new Vector2( 46.23476f, 7.1974f );
+		[Range(0.1f,2f)] public float speed = 0.5f;
 		[Range(0.1f,4f)] public float strokeWidth = 1f;
 		[Range(0f,1f)] public float alpha = 0.1f;
-		public Vector2 sampleOffset = new Vector2( 46.23476f, 7.1974f );
 		public bool prewarm = true;
-		public Color backgroundColor = Color.clear;
 
 		Vector2[] _brushes;
 		RenderTexture _rt;
@@ -68,7 +68,7 @@ namespace PlotExamples
 			for( int i = 0; i < brushCount; i++ ){
 				var p0 = _brushes[ i ];
 				var pSample = frequency * p0 / width + sampleOffset;
-				var delta = CurlNoise( pSample ) * height * Time.deltaTime;
+				var delta = CurlNoise( pSample ) * height * speed * Time.deltaTime;
 				var p1 = p0 + delta;
 				DrawLineNow( p0, p1 );
 				if( p1.x <= 0 || p1.x >= width || p1.y < 0 || p1.y >= height ){
@@ -93,7 +93,7 @@ namespace PlotExamples
 
 		void Reset()
 		{
-			ClearRenderTextureNow( _rt, backgroundColor );
+			ClearRenderTextureNow( _rt, Color.clear );
 			_brushes = new Vector2[ brushCount ];
 			for( int i = 0; i < brushCount; i++ ) _brushes[ i ] = new Vector2( Random.value * width, Random.value * height );
 		}

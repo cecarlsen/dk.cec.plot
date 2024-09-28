@@ -82,8 +82,7 @@ namespace PlotExamples
 				PushCanvas();
 				TranslateCanvas( _pos[ p ] );
 				RotateCanvas( Mathf.Atan2( _vel[ p ].y, _vel[ p ].x ) * Mathf.Rad2Deg );
-				//DrawRect( Vector2.zero, 0.04f * sizeFactor, 0.02f * sizeFactor, 0f, 0f, 1f, 1f );
-				DrawPie( Vector2.zero, 0.1f * sizeFactor, -30, 30 );
+				DrawPie( Vector2.zero, 0.1f * sizeFactor, -30, 60 );
 				PopCanvas();
 			}
 			PopCanvasAndStyle();

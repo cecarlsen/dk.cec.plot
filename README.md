@@ -16,6 +16,8 @@ Install Plot via Unity's Package Manager. Select "Install package from git URL..
 
 If it doesn't work, check your error message and consult [this page](https://docs.unity3d.com/6000.0/Documentation/Manual/upm-ui-giturl.html).
 
+Examples can be imported via the Package Manager under the Samples tab. 
+
 ### Dependencies
 
 Plot depends on TextMeshPro for text rendering and Unity.UI for the samples scenes. Both should be installed automatically when you drop the package in your project.
@@ -23,7 +25,7 @@ Plot depends on TextMeshPro for text rendering and Unity.UI for the samples scen
 
 ## Gettings started
 
-Please go through the scenes located in *dk.cec.plot/Samples* in chronological order.
+Please go through the imported samples located here *Assets/Samples/Plot/_._._/Samples/01 Getting Started* in chronological order.
 
 Plot [API here](https://cec.dk/plot/api.html).
 
