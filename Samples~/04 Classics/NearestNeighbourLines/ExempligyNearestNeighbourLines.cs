@@ -12,38 +12,33 @@ namespace PlotExamples
 	public class ExempligyNearestNeighbourLines : MonoBehaviour
 	{
 		public bool prewarm = true;
-		public bool showLines = false;
+		[Range(1,10)] public int iterationsPerUpdate = 5;
 		[Range(0f,1f)] public float alpha = 0.01f;
-		public Color backgroundColor = Color.black;
 
 		Vector2[] _pos, _vel;
 
 		RenderTexture _rt;
 
-		const int width = 3840;
-		const int height = 2160;
 		const int count = 64;
 		const float strokeWidth = 1; // Px
 		const float distMin = 300; // Px
-		const float distMax = 800; // Px
+		const float distMax = 500; // Px
 		const int prewarmIterations = 8;
 
 
 		void OnEnable()
 		{
-			_rt = new RenderTexture( width, height, 16, RenderTextureFormat.ARGB32, mipCount: 4 ){
-				useMipMap = true
-			};
-			ClearRenderTextureNow( _rt, backgroundColor );
+			_rt = new RenderTexture( 3840, 2160, 0, RenderTextureFormat.ARGB32 );
+			ClearRenderTextureNow( _rt, Color.clear );
 
 			_pos = new Vector2[ count ];
 			_vel = new Vector2[ count ];
 			for( int i = 0; i < count; i++ ) {
-				_pos[ i ] = new Vector2( Random.value * width, Random.value * height );
+				_pos[ i ] = new Vector2( Random.value * _rt.width, Random.value * _rt.height );
 				_vel[ i ] = Random.insideUnitCircle.normalized; // Px
 			}
 
-			if( prewarm ) for( int i = 0; i < prewarmIterations; i++ ) Update();
+			if( prewarm ) for( int i = 0; i < prewarmIterations; i++ ) StepAndDrawLines();
 		}
 
 
@@ -54,14 +49,17 @@ namespace PlotExamples
 		}
 
 
-		void Update()
+		void LateUpdate()
 		{
-			if( showLines ) ClearRenderTextureNow( _rt, backgroundColor );
+			for( int i = 0; i < iterationsPerUpdate; i++ ) StepAndDrawLines();
+			DrawRenderTexture();
+		}
 
+
+		void StepAndDrawLines()
+		{
 			MoveAndWrapPositions();
 			DrawToRenderTexture();
-
-			DrawRenderTexture();
 		}
 
 
@@ -71,8 +69,8 @@ namespace PlotExamples
 			{
 				_pos[ i ] += _vel[ i ];
 				_pos[ i ].Set(
-					Mathf.Repeat( _pos[ i ].x+distMax, width + distMax*2 )-distMax, 
-					Mathf.Repeat( _pos[ i ].y+distMax, height + distMax*2 )-distMax
+					Mathf.Repeat( _pos[ i ].x+distMax, _rt.width + distMax*2 )-distMax, 
+					Mathf.Repeat( _pos[ i ].y+distMax, _rt.height + distMax*2 )-distMax
 				);
 			}
 		}
@@ -105,13 +103,14 @@ namespace PlotExamples
 		void DrawRenderTexture()
 		{
 			PushCanvasAndStyle();
+			SetCanvas( transform );
 
 			SetBlend( Blend.TransparentAdditive );
 			SetNoStroke();
 			SetFillTextureTint( Color.white, alpha );
-			SetFillColor( backgroundColor );
+			SetFillColor( Color.clear );
 			SetFillTexture( _rt );
-			DrawRect( 0f, 0f, width / (float) height, 1f );
+			DrawRect( 0f, 0f, _rt.width / (float) _rt.height, 1f );
 
 			PopCanvasAndStyle();
 		}

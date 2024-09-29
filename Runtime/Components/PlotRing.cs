@@ -33,7 +33,7 @@ public class PlotRing : MonoBehaviour
 	public Pivot pivot = Pivot.Center;
 
 
-	void Update()
+	void LateUpdate()
 	{
 		PushCanvasAndStyle();
 		SetCanvas( transform );

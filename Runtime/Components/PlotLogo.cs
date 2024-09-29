@@ -17,7 +17,7 @@ public class PlotLogo : MonoBehaviour
 	[Range(0f,1f)] public float alpha = 1f;
 
 
-	void Update()
+	void LateUpdate()
 	{
 		const float tCurveFactor = 0.3f;
 

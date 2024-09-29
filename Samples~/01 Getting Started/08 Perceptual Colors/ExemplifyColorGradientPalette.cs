@@ -22,7 +22,7 @@ namespace PlotExamples
 		public enum InterpolationMethod { RGBLerp, HSVSlerp, HSVLerp, JCHSlerp, JCHLerp }
 
 
-		void Update()
+		void LateUpdate()
 		{
 			PushCanvasAndStyle();
 			SetCanvas( transform );

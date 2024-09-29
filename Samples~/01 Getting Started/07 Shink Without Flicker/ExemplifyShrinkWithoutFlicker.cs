@@ -28,7 +28,7 @@ namespace PlotExamples
 		Polyline _polyline;
 
 
-		void Update()
+		void LateUpdate()
 		{
 			if( !_polygon ) _polygon = CreatePolygon( 4 );
 			if( !_polyline ) _polyline = CreatePolyline( 2 );

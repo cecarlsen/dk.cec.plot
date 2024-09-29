@@ -105,9 +105,10 @@ public partial class Plot
 	{
 		P();
  
+		var prevTarget =  RenderTexture.active;
 		Graphics.SetRenderTarget( rt );
-		GL.Clear( true, true, clearColor );
-		Graphics.SetRenderTarget( null );
+		GL.Clear( clearDepth: true, clearColor: true, clearColor );
+		Graphics.SetRenderTarget( prevTarget );
 	}
 
 

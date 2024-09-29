@@ -31,7 +31,7 @@ public class PlotPolyline : MonoBehaviour
 	Polyline _polyline;
 
 
-	void Update()
+	void LateUpdate()
 	{
 		PushCanvasAndStyle();
 		SetCanvas( transform );

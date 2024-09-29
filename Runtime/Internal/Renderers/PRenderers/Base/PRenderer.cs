@@ -101,11 +101,11 @@ namespace PlotInternals
 
 		static Material CreateMaterial( Shader shader, int num )
 		{
-			Material material = new Material( shader );
-			material.hideFlags = HideFlags.DontSave;
-			material.enableInstancing = true;
-			material.name = shader.name + " " + num;
-			return material;
+			return new Material( shader ){
+				hideFlags = HideFlags.DontSave,
+				enableInstancing = true,
+				name = shader.name + " " + num
+			};
 		}
 
 
@@ -123,7 +123,7 @@ namespace PlotInternals
 					_material.SetInt( SharedShaderIDs._DstBlend, (int) BlendMode.OneMinusSrcAlpha );
 					break;
 				case Plot.Blend.TransparentAdditive:
-					_material.SetInt( SharedShaderIDs._SrcBlend, (int) BlendMode.SrcAlpha );
+					_material.SetInt( SharedShaderIDs._SrcBlend, (int) BlendMode.One );
 					_material.SetInt( SharedShaderIDs._DstBlend, (int) BlendMode.One );
 					break;
 			}
@@ -146,7 +146,7 @@ namespace PlotInternals
 				return;
 			}
 
-			if( drawNow ) return;
+			//if( drawNow ) return; // Why was this here?
 
 			// If a feature changes between draw calls in the same frame, we need keep multiple materials with different features.
 			bool materialSubmittedThisFrame = _materialSubmissionFrame == currentFrame;

@@ -7,23 +7,22 @@ using UnityEngine;
 
 namespace PlotExamples
 {
-	[ExecuteInEditMode] // Make sure that Update is called in Edit Mode.
+	[ExecuteInEditMode] 								// Make this script work in Edit Mode.
 	public class ExamplifyCircleStaticPlot : MonoBehaviour
 	{
 		public Color color = Color.red;
 
-		void Update()
+		void LateUpdate() 								// Draw inside LateUpdate to play nice with Timeline and other scripts that manipulate in Update.
 		{
-			Plot.SetNoStroke();					// Request no stroke for subsequently drawn shapes.
-			Plot.SetFillColor( color );					// Request a fill color for subsequently drawn shapes.
-			
-			Plot.PushCanvas();							// Save the current canvas matrix on the canvas stack.
-			Plot.SetCanvas( transform );				// We want to draw locally to this transform.
+			Plot.PushCanvasAndStyle();					// Save the current canvas matrix and style on stacks.
+			Plot.SetCanvas( transform );				// Set this transform's localToWorldMatrix as our canvas.
 		
+			Plot.SetNoStroke();							// Request no stroke for subsequently drawn shapes.
+			Plot.SetFillColor( color );					// Request a fill color for subsequently drawn shapes.
 			Plot.DrawCircle( x: 0, y: 0, diameter: 1 );	// Draw a circle at canvas center.
 		
-			Plot.PopCanvas();							// Load previously saved canvas matrix from the canvas stack
-														// We do this to isolate transformations made in this script.
+			Plot.PopCanvas();							// Load previously saved canvas matrix and styæe from the stacks.
+														// We do this to isolate transformations and style changes made in this script.
 
 		}
 	}

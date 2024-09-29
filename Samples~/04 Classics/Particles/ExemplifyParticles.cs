@@ -1,6 +1,8 @@
 /*
 	Copyright © Carl Emil Carlsen 2024
 	http://cec.dk
+
+	A simple particle system without classes and objects.
 */
 
 using UnityEngine;
@@ -11,7 +13,6 @@ namespace PlotExamples
 	[ExecuteInEditMode]
 	public class ExemplifyParticles : MonoBehaviour
 	{
-		public Vector2 spawnPosition = Vector2.zero;
 		public float spawnSpeed = 1f;
 		public float gravityForce = 1f;
 		public AnimationCurve _sizeOverLifetime = AnimationCurve.Linear( 0f, 1f, 1f, 0f );
@@ -37,7 +38,7 @@ namespace PlotExamples
 		}
 
 
-		void Update()
+		void LateUpdate()
 		{
 			// Spawn.
 			_spawnTime += Time.deltaTime;
@@ -47,7 +48,7 @@ namespace PlotExamples
 				if( spawnCount > 0 ){
 					for( int p = 0; p < capacity; p++ ){
 						if( _alive[ p ]) continue;
-						_pos[ p ] = spawnPosition;
+						_pos[ p ] = Vector2.zero;
 						_vel[ p ] = Random.insideUnitCircle.normalized * Random.Range( 0.5f, 1f ) * spawnSpeed;
 						_acc[ p ] = Vector2.zero;
 						_age[ p ] = 0f;
@@ -74,6 +75,7 @@ namespace PlotExamples
 
 			// Draw.
 			PushCanvasAndStyle();
+			SetCanvas( transform );
 			SetNoStroke();
 			SetFillColor( Color.white );
 			for( int p = 0; p < capacity; p++ ){

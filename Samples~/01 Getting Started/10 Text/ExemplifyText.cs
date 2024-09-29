@@ -19,7 +19,7 @@ namespace PlotExamples
 		Text _text;
 
  
-		void Update() 
+		void LateUpdate() 
 		{
 			// Similar to Polyline and Polygon, we have to create an object for drawing.
 			if( !_text ) _text = CreateText( "Hello World" );

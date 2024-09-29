@@ -17,7 +17,7 @@ namespace PlotExamples
 		const float cameraCircleRadius = 2;
 
 
-		void Update()
+		void LateUpdate()
 		{
 			PushCanvasAndStyle();
 

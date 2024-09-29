@@ -13,7 +13,7 @@ namespace PlotExamples
 	{
 		public RenderTexture renderTexture;
 
-		void Update()
+		void LateUpdate()
 		{
 			if( !renderTexture ) return;
 			

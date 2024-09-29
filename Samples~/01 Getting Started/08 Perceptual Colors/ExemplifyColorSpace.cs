@@ -19,7 +19,7 @@ namespace PlotExamples
 		public enum ColorSpace { HSV, JCH }
 
 
-		void Update()
+		void LateUpdate()
 		{
 
 			PushCanvasAndStyle();

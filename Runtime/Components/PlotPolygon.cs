@@ -43,7 +43,7 @@ public class PlotPolygon : MonoBehaviour
 	Polygon _polygon;
 
 
-	void Update()
+	void LateUpdate()
 	{
 		if( !_polygon ) _polygon = CreatePolygon( points );
 

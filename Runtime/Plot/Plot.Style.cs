@@ -144,7 +144,7 @@ public partial class Plot
 		const TextAlignmentOptions defaultTextAlignment = TextAlignmentOptions.Center;
 
 		// Undocumented on purpose.
-		public bool hasVisibleFill => fillEnabled && fillColor.a > 0;
+		public bool hasVisibleFill => fillEnabled && ( fillColor.a > 0 || ( fillTextureBlend == FillTextureBlend.Overlay && fillTextureTint.a > 0 ) );
 		public bool hasVisibleStroke => strokeEnabled && strokeColor.a > 0 && strokeWidth > 0;
 		public bool hasVisibleFillOrStroke => hasVisibleFill || hasVisibleStroke;
 		public bool hasVisibleTextureEnabled => hasVisibleFill && fillTexture && fillTextureTint.a > 0f;

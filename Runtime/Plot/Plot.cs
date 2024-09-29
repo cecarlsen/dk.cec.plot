@@ -383,6 +383,7 @@ public partial class Plot
 	public static void SetBlend( Blend blend )
 	{
 		P();
+		if( _p._style.blend == blend ) return;
 		foreach( PRenderer r in _p._allRenderers ) r.SetBlendFeature( blend );
 		_p._style.blend = blend;
 	}
@@ -699,12 +700,12 @@ public partial class Plot
 	/// <summary>
 	/// Draw a line immediately using Graphics.DrawMeshNow. Call this from OnPostRender or after calling BeginDrawNowToTexture.
 	/// </summary>
-	public static void DrawLineNow( float ax, float ay, float bx, float by ) { P().DrawLineInternal( ax, ay, bx, by, StrokeCap.Round, StrokeCap.Round, true ); }
-	public static void DrawLineNow( float ax, float ay, float bx, float by, StrokeCap caps ) { P().DrawLineInternal( ax, ay, bx, by, caps, caps, true ); }
-	public static void DrawLineNow( float ax, float ay, float bx, float by, StrokeCap beginCap, StrokeCap endCap ) { P().DrawLineInternal( ax, ay, bx, by, beginCap, endCap, true ); }
-	public static void DrawLineNow( Vector2 positionA, Vector2 positionB, StrokeCap beginCap, StrokeCap endCap ) { P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, beginCap, endCap, true ); }
-	public static void DrawLineNow( Vector2 positionA, Vector2 positionB, StrokeCap caps ) { P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, caps, caps, true ); }
-	public static void DrawLineNow( Vector2 positionA, Vector2 positionB ) { P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, StrokeCap.Round, StrokeCap.Round, true ); }
+	public static void DrawLineNow( float ax, float ay, float bx, float by ) { P().DrawLineInternal( ax, ay, bx, by, StrokeCap.Round, StrokeCap.Round, drawNow: true ); }
+	public static void DrawLineNow( float ax, float ay, float bx, float by, StrokeCap caps ) { P().DrawLineInternal( ax, ay, bx, by, caps, caps, drawNow: true ); }
+	public static void DrawLineNow( float ax, float ay, float bx, float by, StrokeCap beginCap, StrokeCap endCap ) { P().DrawLineInternal( ax, ay, bx, by, beginCap, endCap, drawNow: true ); }
+	public static void DrawLineNow( Vector2 positionA, Vector2 positionB, StrokeCap beginCap, StrokeCap endCap ) { P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, beginCap, endCap, drawNow: true ); }
+	public static void DrawLineNow( Vector2 positionA, Vector2 positionB, StrokeCap caps ) { P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, caps, caps, drawNow: true ); }
+	public static void DrawLineNow( Vector2 positionA, Vector2 positionB ) { P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, StrokeCap.Round, StrokeCap.Round, drawNow: true ); }
 
 
 	/// <summary>

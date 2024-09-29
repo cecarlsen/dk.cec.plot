@@ -20,7 +20,7 @@ namespace PlotExamples
 		const float extents = size / 2f;
 
 
-		void Update()
+		void LateUpdate()
 		{
 			PushCanvasAndStyle();
 			SetCanvas( transform );

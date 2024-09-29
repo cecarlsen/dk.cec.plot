@@ -71,7 +71,7 @@ namespace PlotExamples
 		}
 
 
-		void Update()
+		void LateUpdate()
 		{
 			_time += Time.deltaTime;
 			if( _time > 1f / (float) frameRate ) {
@@ -134,6 +134,7 @@ namespace PlotExamples
 		void Draw()
 		{
 			PushCanvasAndStyle();
+			SetCanvas( transform );
 			SetNoStroke();
 			SetFillColor( Color.white );
 			foreach( var spacePoint in _spacePoints ) if( !spacePoint.isConsumed ) DrawCircle( spacePoint.position, 0.004f );

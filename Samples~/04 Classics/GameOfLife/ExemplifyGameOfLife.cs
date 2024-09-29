@@ -31,11 +31,11 @@ namespace PlotExamples
 		void OnEnable()
 		{
 			Seed();
-			if( prewarm ) for( int i = 0; i < prewarmIterations; i++ ) Update();
+			if( prewarm ) for( int i = 0; i < prewarmIterations; i++ ) LateUpdate();
 		}
 
 
-		void Update()
+		void LateUpdate()
 		{
 			if( AllDeadOrNoChangeOrRepeating() ) Seed();
 

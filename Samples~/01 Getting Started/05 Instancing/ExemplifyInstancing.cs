@@ -33,7 +33,7 @@ namespace PlotExamples
 		public enum Mode { SingleShape, AlternatingShapes, MixedShapes, Sorted }
 
 
-		void Update()
+		void LateUpdate()
 		{
 			PushCanvasAndStyle();
 

@@ -1,8 +1,12 @@
 # Changelog
 
 
-## [1.0.2b] - 2024-09-28
+## [1.0.3] - 2024-09-29
 
+	- (hopefully) Fixed blend and antialiasing modes not consistent for DrawXNow().
+	- Fixed Blend.TransparentAdditive not blending correctly.
+	- Changed all components and examples to draw in LateUpdate to make them more Timeline friendly.
+	- Fixed fill texture not being drawn when fillColor is zero.
 	- Various minor example updates.
 	- Fix wrong argument naming for DrawPie() and DrawPieNow().
 	- Fix wrong naming for DrawPolylineNow().
@@ -14,10 +18,6 @@
 	- Added SpaceColonisationTree example.
 	- Added AppendPoint, PrependPoint, InsertPoint, and RemovePoint for Polyline and Polygon.
 	- Added independent capacity and point count for Polyline and Polygon.
-
-
-## [1.0.1b] - 2024-09-28
-
 	- Fixed SetFillColor not initialising Plot.
 	- Added BrownianMotionTrails example.
 
@@ -43,10 +43,6 @@
 	- Added GameOfLife example.
 	- Added Image and Text examples.
 	- Updated how polylines, polygons, and text is created and drawn.
-
-
-## [0.0.14b] - 2024-09-XX
-
 	- Removed an example.
 
 

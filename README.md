@@ -1,7 +1,7 @@
 
 # Plot
 
-An immediate mode (IM) procedural 2D drawing package for [Unity](https://unity.com). Usefull for smaller data visualisations, visual code sketches, and learning how to code. Plot is inspired by [Processing/p5](https://processing.org), so if you're familiar with that, you should be able to jump right in.
+An immediate mode (IM) procedural 2D drawing package for [Unity](https://unity.com). Useful for smaller data visualisations, visual code sketches, and learning how to code. Plot is inspired by [Processing/p5](https://processing.org), so if you're familiar with that, you should be able to jump right in.
 
 Tested with Unity 2022.3 and 6.0, supporting BiRP, URP, and HDRP.
 
@@ -32,14 +32,15 @@ Plot [API here](https://cec.dk/plot/api.html).
 
 ## Known issues
 
-	- SetFillTextureUVRect scaling textures from outer stroke edge instead of shape edge.
-	- Texts can vanish temporarily on code reload using ExecuteInEditMode.
-	- Image fill changes size inside DrawRect when stroke is enabled and disabled.
-	- Shrinking without flicker needs a review. See comment in Ring Shader.
-	- SetFillTexture() not implemented for Polygon. 
+	- SetFillTextureUVRect is scaling textures from outer stroke edge instead of shape edge.
+	- Rect shapes change fill texture size when stroke is enabled and disabled.
+	- Ring shapes flicker when shrinking. See comment in Ring Shader.
+	- Timeline ActivationTracks will cause invokation of OnDisable after Update. So if you are drawing a texture in Update() and relaseing it in OnDisable(), the texture may be null when rendered, causing a white blink (fallback to white). As a temporary workaround, use asset RenderTextures, or draw in LateUpdate().
+	- Polygon is not implementing SetFillTexture().
 	- Text ignores SetBlend().
-	- Polygons will flicker when very small and moving (won't fix).
+	- Text can vanish temporarily on code reload using ExecuteInEditMode.
 	- Text ignores SetAntiAliasing(). It is always on (won't fix).
+	- Polygon shapes flicker when very small and moving (won't fix).
 	- Polygon, Polyline, and Line ignores SetPivot() (by design).
 
 
@@ -55,7 +56,7 @@ When multiple instances of the same type of mesh are drawn in succession, Unity 
 Plot is designed for drawing only while Processing expands into math, input, IO, and more.
 
 Some main differencea are:
-- Use Awake(), Start(), or OnEnable() instead of setup(), and Update() instead of draw().
+- Use Awake(), Start(), or OnEnable() instead of setup(), and Update() or LateUpdate instead of draw().
 - Shape methods are named DrawX() instead of x(), i.e DrawRect() instead of rect().
 - Attribute altering methods are named SetX() instead of x(), i.e SetFillColor() instead of fill().
 - beginShape() and endShape() is replaced by Polygon and Polyline classes.

@@ -73,7 +73,7 @@ namespace PlotExamples
 		}
 		
 
-		void Update()
+		void LateUpdate()
 		{
 			// Only update text when data change. Text changes always generate garbage.
 			if( _dataChanged )

@@ -34,7 +34,7 @@ namespace PlotExamples
 			};
 			Reset();
 
-			if( prewarm ) for( int i = 0; i < prewarmIterations; i++ ) Update();
+			if( prewarm ) for( int i = 0; i < prewarmIterations; i++ ) LateUpdate();
 		}
 
 
@@ -45,7 +45,7 @@ namespace PlotExamples
 		}
 
 
-		void Update()
+		void LateUpdate()
 		{
 			if( _brushes == null || Input.GetMouseButtonDown( 0 ) ) Reset();
 
@@ -83,6 +83,7 @@ namespace PlotExamples
 
 		void DrawTextureRenderInScene()
 		{
+			SetCanvas( transform );
 			SetBlend( Blend.TransparentAdditive );
 			SetFillTexture( _rt );
 			SetFillColor( Color.black );

@@ -34,7 +34,7 @@ public class PlotRect : MonoBehaviour
 	public Pivot pivot = Pivot.Center;
 
 
-	void Update()
+	void LateUpdate()
 	{
 		PushCanvasAndStyle();
 		SetCanvas( transform );

@@ -24,7 +24,7 @@ public class PlotLine : MonoBehaviour
 	public bool antiAliasing = true;
 
 
-	void Update()
+	void LateUpdate()
 	{
 		PushCanvasAndStyle();
 		SetCanvas( transform );

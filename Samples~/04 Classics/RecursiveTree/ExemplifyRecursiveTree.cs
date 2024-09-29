@@ -22,7 +22,7 @@ namespace PlotExamples
 		void OnEnable() => _t = 0;
 
 
-		void Update()
+		void LateUpdate()
 		{
 			_t += Time.deltaTime;
 			float angle = startAngle + Mathf.Lerp( 10, 90, ( Mathf.Sin( _t ) + 1 ) / 2f );

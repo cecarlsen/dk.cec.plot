@@ -166,8 +166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e358ff54a4b9e477fba8dd6ceb56926b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showLines: 0
-  backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  prewarm: 1
+  iterationsPerUpdate: 5
+  alpha: 1
 --- !u!1 &868701052
 GameObject:
   m_ObjectHideFlags: 0

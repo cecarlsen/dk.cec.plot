@@ -13,17 +13,16 @@ namespace PlotExamples
 	{
 		public Color color = Color.red;
 
-		void Update()
+		void LateUpdate()
 		{
-			P.SetNoStroke();
-			P.SetFillColor( color );
-
-			P.PushCanvas();
+			P.PushCanvasAndStyle();
 			P.SetCanvas( transform );
 
+			P.SetNoStroke();
+			P.SetFillColor( color );
 			P.DrawCircle( 0, 0, 1 );
 
-			P.PopCanvas();
+			P.PopCanvasAndStyle();
 		}
 	}
 }

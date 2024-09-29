@@ -14,28 +14,26 @@ namespace PlotExamples
 	[ExecuteInEditMode]
 	public class BrownianMotionTrails : MonoBehaviour
 	{
-		[Range(0.1f,2f)] public float strokeWidth = 1f;
+		[Range(0.1f,5f)] public float strokeWidth = 1f;
 		[Range(0f,1f)] public float alpha = 0.5f;
-		[Range(1f,5f)]public float step = 7;
+		[Range(0.1f,5f)] public float step = 7;
+		[Range(1,20)] public int iterationsPerUpdate = 3;
 		public bool prewarm = true;
 
 		Vector2[] _brushes;
 		RenderTexture _rt;
 
-		const int brushCount = 256;
-		const int width = 3840;
-		const int height = 2180;
-		const int prewarmIterations = 32;
+		const int brushCount = 32;
+		const int prewarmIterations = 4;
 		
 
 		void OnEnable()
 		{
-			_rt = new RenderTexture( width, height, 0, RenderTextureFormat.ARGB32, mipCount: 4 ){
-				useMipMap = true // Render nicely when zooming out in the scene.
-			};
-
-			Reset();
-			if( prewarm ) for( int i = 0; i < prewarmIterations; i++ ) Update();
+			_rt = new RenderTexture( 3840, 2160, 0, RenderTextureFormat.ARGB32 );
+			ClearRenderTextureNow( _rt, Color.clear );
+			_brushes = new Vector2[ brushCount ];
+			for( int i = 0; i < brushCount; i++ ) _brushes[ i ] = new Vector2( _rt.width / 2f, _rt.height / 2f );
+			if( prewarm ) for( int i = 0; i < prewarmIterations; i++ ) LateUpdate();
 		}
 
 
@@ -46,51 +44,46 @@ namespace PlotExamples
 		}
 
 
-		void Update()
+		void LateUpdate()
 		{
-			if( _brushes == null || Input.GetMouseButtonDown( 0 ) ) Reset();
-
-			PushCanvasAndStyle();
-			SetBlend( Blend.TransparentAdditive );
-
-			MoveAndDrawBrushesToRenderTexture();
+			for( int i = 0; i < iterationsPerUpdate; i++ ) MoveAndDrawBrushesToRenderTexture();
 			DrawTextureRenderInScene();
-
-			PopCanvasAndStyle();
 		}
 
 
 		void MoveAndDrawBrushesToRenderTexture()
 		{
+			PushCanvasAndStyle();
 			BeginDrawNowToRenderTexture( _rt, Plot.Space.Pixels );
 
+			SetBlend( Blend.TransparentAdditive );
 			SetStrokeWidth( strokeWidth );
 			for( int i = 0; i < brushCount; i++ ){
 				var p0 = _brushes[ i ];
-				var p1 = p0 + Random.insideUnitCircle * height * step * Time.fixedDeltaTime;
+				var p1 = p0 + Random.insideUnitCircle * _rt.height * step * Time.fixedDeltaTime;
 				SetStrokeColor( Color.white, alpha );
 				DrawLineNow( p0, p1 );
 				_brushes[ i ] = p1;
 			}
 
 			EndDrawNowToRenderTexture();
+			PopCanvasAndStyle();
 		}
 
 
 		void DrawTextureRenderInScene()
 		{
-			SetFillTexture( _rt );
-			SetFillColor( Color.black );
+			PushCanvasAndStyle();
+			SetCanvas( transform );
+
+			SetBlend( Blend.Transparent );
 			SetNoStroke();
-			DrawRect( 0, 0, width / (float) height, 1 );
-		}
+			SetFillTextureTint( Color.white );
+			SetFillColor( Color.clear );
+			SetFillTexture( _rt );
+			DrawRect( 0f, 0f, _rt.width / (float) _rt.height, 1f );
 
-
-		void Reset()
-		{
-			ClearRenderTextureNow( _rt, Color.black );
-			_brushes = new Vector2[ brushCount ];
-			for( int i = 0; i < brushCount; i++ ) _brushes[ i ] = new Vector2( width / 2f, height / 2f );
+			PopCanvasAndStyle();
 		}
 	}
 }

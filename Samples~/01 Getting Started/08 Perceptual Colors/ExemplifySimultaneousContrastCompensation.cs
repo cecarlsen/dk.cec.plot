@@ -1,5 +1,5 @@
 ﻿/*
-	Copyright © Carl Emil Carlsen 2020
+	Copyright © Carl Emil Carlsen 2020-2024
 	http://cec.dk
 */
 
@@ -19,7 +19,7 @@ namespace PlotExamples
 		const float gradientWidth = 5;
 
 
-		void Update()
+		void LateUpdate()
 		{
 			SetNoStroke();
 			SetPivot( Pivot.Center );

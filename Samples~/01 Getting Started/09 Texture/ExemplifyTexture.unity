@@ -122,7 +122,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &1626887499
+--- !u!1 &807769117
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,9 +130,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1626887502}
-  - component: {fileID: 1626887501}
-  - component: {fileID: 1626887500}
+  - component: {fileID: 807769120}
+  - component: {fileID: 807769119}
+  - component: {fileID: 807769118}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -140,25 +140,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1626887500
+--- !u!81 &807769118
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1626887499}
+  m_GameObject: {fileID: 807769117}
   m_Enabled: 1
---- !u!20 &1626887501
+--- !u!20 &807769119
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1626887499}
+  m_GameObject: {fileID: 807769117}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.09, g: 0.09, b: 0.09, a: 0}
+  m_BackGroundColor: {r: 0.12, g: 0.12, b: 0.12, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -179,11 +179,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
-  far clip plane: 4
+  near clip plane: 0
+  far clip plane: 2
   field of view: 60
   orthographic: 1
-  orthographic size: 0.5
+  orthographic size: 0.7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -199,13 +199,13 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!4 &1626887502
+--- !u!4 &807769120
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1626887499}
+  m_GameObject: {fileID: 807769117}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -2}
@@ -214,7 +214,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1766186951
+--- !u!1 &1292844340
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,8 +222,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1766186952}
-  - component: {fileID: 1766186953}
+  - component: {fileID: 1292844341}
+  - component: {fileID: 1292844342}
   m_Layer: 0
   m_Name: Example
   m_TagString: Untagged
@@ -231,13 +231,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1766186952
+--- !u!4 &1292844341
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766186951}
+  m_GameObject: {fileID: 1292844340}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -246,26 +246,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1766186953
+--- !u!114 &1292844342
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766186951}
+  m_GameObject: {fileID: 1292844340}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d95e1e71ea156421691791e8f6d24f5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d25df2e91e874fa3841c08ce8993d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strokeWidth: 1.5
-  alpha: 0.612
-  step: 0.5
-  iterationsPerUpdate: 10
-  prewarm: 1
+  texture: {fileID: 2800000, guid: 2cea1817dda1c4e3d839ff861ecd2c88, type: 3}
+  textureBlend: 0
+  fillColor: {r: 0.071733706, g: 0.24705894, b: 0.49056602, a: 1}
+  textureTint: {r: 1, g: 1, b: 1, a: 1}
+  strokeColor: {r: 1, g: 1, b: 1, a: 0.5254902}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1626887502}
-  - {fileID: 1766186952}
+  - {fileID: 807769120}
+  - {fileID: 1292844341}
