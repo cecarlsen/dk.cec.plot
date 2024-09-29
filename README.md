@@ -55,6 +55,7 @@ When multiple instances of the same type of mesh are drawn in succession, Unity 
 Plot is designed for drawing only while Processing expands into math, input, IO, and more.
 
 Some main differencea are:
+- Use Awake(), Start(), or OnEnable() instead of setup(), and Update() instead of draw().
 - Shape methods are named DrawX() instead of x(), i.e DrawRect() instead of rect().
 - Attribute altering methods are named SetX() instead of x(), i.e SetFillColor() instead of fill().
 - beginShape() and endShape() is replaced by Polygon and Polyline classes.
