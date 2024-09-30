@@ -199,80 +199,81 @@ public partial class Plot
 	/// <summary>
 	/// Submit a circle shape instance for rendering.
 	/// </summary>
-	public static void DrawCircle( float x, float y, float diameter ){ P().DrawRingInternal( x, y, -_p._style.strokeWidth-diameter, diameter ); }
-	public static void DrawCircle( Vector2 position, float diameter ){ P().DrawRingInternal( position.x, position.y, -_p._style.strokeWidth - diameter, diameter ); }
+	public static void DrawCircle() => P().DrawRingInternal( 0, 0, -_p._style.strokeWidth-1f, 1f );
+	public static void DrawCircle( float x, float y, float diameter ) => P().DrawRingInternal( x, y, -_p._style.strokeWidth-diameter, diameter );
+	public static void DrawCircle( Vector2 position, float diameter ) => P().DrawRingInternal( position.x, position.y, -_p._style.strokeWidth - diameter, diameter );
 
 
 	/// <summary>
 	/// Submit a ring shape instance for rendering.
 	/// </summary>
-	public static void DrawRing( float x, float y, float innerDiameter, float outerDiameter ) { P().DrawRingInternal( x, y, innerDiameter, outerDiameter ); }
-	public static void DrawRing( Vector2 position, float innerDiameter, float OuterDiameter ){ P().DrawRingInternal( position.x, position.y, innerDiameter, OuterDiameter ); }
+	public static void DrawRing( float x, float y, float innerDiameter, float outerDiameter ) => P().DrawRingInternal( x, y, innerDiameter, outerDiameter );
+	public static void DrawRing( Vector2 position, float innerDiameter, float OuterDiameter ) => P().DrawRingInternal( position.x, position.y, innerDiameter, OuterDiameter );
 
 
 	/// <summary>
 	/// Submit a pie shape instance for rendering.
 	/// </summary>
-	public static void DrawPie( float x, float y, float diameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0 ) { P().DrawArcInternal( x, y, -_p._style.strokeWidth-diameter, diameter, beginAngle, deltaAngle, cutOff, roundness ); }
-	public static void DrawPie( Vector2 position, float diameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0 ){ P().DrawArcInternal( position.x, position.y, -_p._style.strokeWidth-diameter, diameter, beginAngle, deltaAngle, cutOff, roundness ); }
+	public static void DrawPie( float x, float y, float diameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0 ) => P().DrawArcInternal( x, y, -_p._style.strokeWidth-diameter, diameter, beginAngle, deltaAngle, cutOff, roundness );
+	public static void DrawPie( Vector2 position, float diameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0 ) => P().DrawArcInternal( position.x, position.y, -_p._style.strokeWidth-diameter, diameter, beginAngle, deltaAngle, cutOff, roundness );
 
 
 	/// <summary>
 	/// Submit an arc shape instance for rendering.
 	/// </summary>
-	public static void DrawArc( float x, float y, float innerDiameter, float outerDiameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) { P().DrawArcInternal( x, y, innerDiameter, outerDiameter, beginAngle, deltaAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness ); }
-	public static void DrawArc( Vector2 position, float innerDiameter, float outerDiameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) { P().DrawArcInternal( position.x, position.y, innerDiameter, outerDiameter, beginAngle, deltaAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness ); }
+	public static void DrawArc( float x, float y, float innerDiameter, float outerDiameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) => P().DrawArcInternal( x, y, innerDiameter, outerDiameter, beginAngle, deltaAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness );
+	public static void DrawArc( Vector2 position, float innerDiameter, float outerDiameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) => P().DrawArcInternal( position.x, position.y, innerDiameter, outerDiameter, beginAngle, deltaAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness );
 
 
 	/// <summary>
 	/// Submit a rect shape instance for rendering.
 	/// </summary>
-	public static void DrawRect( float x, float y, float width, float height ){ P().DrawRectInternal( x, y, width, height, 0, 0, 0, 0 ); }
-	public static void DrawRect( float x, float y, float width, float height, float roundness ){ P().DrawRectInternal( x, y, width, height, roundness, roundness, roundness, roundness ); }
-	public static void DrawRect( float x, float y, float width, float height, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ) { P().DrawRectInternal( x, y, width, height, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness ); }
-	public static void DrawRect( Vector2 position, float width, float height, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ){ P().DrawRectInternal( position.x, position.y, width, height, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness ); }
-	public static void DrawRect( Vector2 position, float width, float height, float roundness = 0 ) { P().DrawRectInternal( position.x, position.y, width, height, roundness, roundness, roundness, roundness ); }
+	public static void DrawRect( float x, float y, float width, float height ) => P().DrawRectInternal( x, y, width, height, 0, 0, 0, 0 );
+	public static void DrawRect( float x, float y, float width, float height, float roundness ) => P().DrawRectInternal( x, y, width, height, roundness, roundness, roundness, roundness );
+	public static void DrawRect( float x, float y, float width, float height, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ) => P().DrawRectInternal( x, y, width, height, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness );
+	public static void DrawRect( Vector2 position, float width, float height, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ) => P().DrawRectInternal( position.x, position.y, width, height, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness );
+	public static void DrawRect( Vector2 position, float width, float height, float roundness = 0 ) => P().DrawRectInternal( position.x, position.y, width, height, roundness, roundness, roundness, roundness );
 
 
 	/// <summary>
 	/// Submit a square shape instance for rendering.
 	/// </summary>
-	public static void DrawSquare( float x, float y, float size ){ P().DrawRectInternal( x, y, size, size, 0, 0, 0, 0 ); }
-	public static void DrawSquare( float x, float y, float size, float roundness ){ P().DrawRectInternal( x, y, size, size, roundness, roundness, roundness, roundness ); }
-	public static void DrawSquare( float x, float y, float size, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ){ P().DrawRectInternal( x, y, size, size, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness ); }
-	public static void DrawSquare( Vector2 position, float size, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ){ P().DrawRectInternal( position.x, position.y, size, size, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness ); }
+	public static void DrawSquare( float x, float y, float size ) => P().DrawRectInternal( x, y, size, size, 0f, 0f, 0f, 0f );
+	public static void DrawSquare( float x, float y, float size, float roundness ) => P().DrawRectInternal( x, y, size, size, roundness, roundness, roundness, roundness );
+	public static void DrawSquare( float x, float y, float size, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ) => P().DrawRectInternal( x, y, size, size, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness );
+	public static void DrawSquare( Vector2 position, float size, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ) => P().DrawRectInternal( position.x, position.y, size, size, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness );
 	public static void DrawSquare( Vector2 position, float size, float roundness = 0 ){ P().DrawRectInternal( position.x, position.y, size, size, roundness, roundness, roundness, roundness ); }
 
 
 	/// <summary>
 	/// Submit a line shape instance for rendering.
 	/// </summary>
-	public static void DrawLine( float ax, float ay, float bx, float by ){ P().DrawLineInternal( ax, ay, bx, by, StrokeCap.Round, StrokeCap.Round ); }
-	public static void DrawLine( float ax, float ay, float bx, float by, StrokeCap caps ){ P().DrawLineInternal( ax, ay, bx, by, caps, caps ); }
-	public static void DrawLine( float ax, float ay, float bx, float by, StrokeCap beginCap, StrokeCap endCap ) { P().DrawLineInternal( ax, ay, bx, by, beginCap, endCap ); }
-	public static void DrawLine( Vector2 positionA, Vector2 positionB, StrokeCap beginCap, StrokeCap endCap ){ P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, beginCap, endCap ); }
-	public static void DrawLine( Vector2 positionA, Vector2 positionB, StrokeCap caps ){ P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, caps, caps ); }
-	public static void DrawLine( Vector2 positionA, Vector2 positionB ){ P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, StrokeCap.Round, StrokeCap.Round ); }
+	public static void DrawLine( float ax, float ay, float bx, float by ) => P().DrawLineInternal( ax, ay, bx, by, StrokeCap.Round, StrokeCap.Round );
+	public static void DrawLine( float ax, float ay, float bx, float by, StrokeCap caps ) => P().DrawLineInternal( ax, ay, bx, by, caps, caps );
+	public static void DrawLine( float ax, float ay, float bx, float by, StrokeCap beginCap, StrokeCap endCap ) => P().DrawLineInternal( ax, ay, bx, by, beginCap, endCap );
+	public static void DrawLine( Vector2 positionA, Vector2 positionB, StrokeCap beginCap, StrokeCap endCap ) => P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, beginCap, endCap );
+	public static void DrawLine( Vector2 positionA, Vector2 positionB, StrokeCap caps ) => P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, caps, caps );
+	public static void DrawLine( Vector2 positionA, Vector2 positionB ) => P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, StrokeCap.Round, StrokeCap.Round );
 
 
 	/// <summary>
 	/// Submit a polygon shape instance for rendering.
 	/// </summary>
-	public static void DrawPolygon( Polygon polygon ) { P().DrawPolygonInternal( polygon ); }
+	public static void DrawPolygon( Polygon polygon ) => P().DrawPolygonInternal( polygon );
 
 
 	/// <summary>
 	/// Submit a polyline shape instance for rendering.
 	/// </summary>
-	public static void DrawPolyline( Polyline polyline, StrokeCap beginCap, StrokeCap endCap ) { P().DrawPolylineInternal( polyline, beginCap, endCap ); }
-	public static void DrawPolyline( Polyline polyline, StrokeCap caps = StrokeCap.Round ){ P().DrawPolylineInternal( polyline, caps, caps );}
+	public static void DrawPolyline( Polyline polyline, StrokeCap beginCap, StrokeCap endCap ) => P().DrawPolylineInternal( polyline, beginCap, endCap );
+	public static void DrawPolyline( Polyline polyline, StrokeCap caps = StrokeCap.Round ) => P().DrawPolylineInternal( polyline, caps, caps );
 
 
 	/// <summary>
 	/// Submit a text instance for rendering.
 	/// </summary>
-	public static void DrawText( Text text, float x, float y, float fieldwidth, float fieldHeight, bool drawDebugRect = false ) { P().DrawTextInternal( text, x, y, fieldwidth, fieldHeight, drawDebugRect ); }
-	public static void DrawText( Text text, Vector2 position, Vector2 fieldSize, bool drawDebugRect = false ) { P().DrawTextInternal( text, position.x, position.y, fieldSize.x, fieldSize.y, drawDebugRect ); }
+	public static void DrawText( Text text, float x, float y, float fieldwidth, float fieldHeight, bool drawDebugRect = false ) => P().DrawTextInternal( text, x, y, fieldwidth, fieldHeight, drawDebugRect );
+	public static void DrawText( Text text, Vector2 position, Vector2 fieldSize, bool drawDebugRect = false ) => P().DrawTextInternal( text, position.x, position.y, fieldSize.x, fieldSize.y, drawDebugRect );
 
 	#endregion // Draw
 
@@ -284,11 +285,11 @@ public partial class Plot
 	/// <summary>
 	/// Set the fill color to be used for subsequently drawn shapes.
 	/// </summary>
-	public static void SetFillColor( float brightness ) { SetFillColor( new Color( brightness, brightness, brightness ) ); }
-	public static void SetFillColor( float brightness, float alpha ) { SetFillColor( new Color( brightness, brightness, brightness, alpha ) ); }
-	public static void SetFillColor( float red, float green, float blue ) { SetFillColor( new Color( red, green, blue ) ); }
-	public static void SetFillColor( float red, float green, float blue, float alpha ) { SetFillColor( new Color( red, green, blue, alpha ) ); }
-	public static void SetFillColor( Color color, float alphaOverride ) { SetFillColor( ColorWithAlpha( color, alphaOverride ) ); }
+	public static void SetFillColor( float brightness ) => SetFillColor( new Color( brightness, brightness, brightness ) );
+	public static void SetFillColor( float brightness, float alpha ) => SetFillColor( new Color( brightness, brightness, brightness, alpha ) );
+	public static void SetFillColor( float red, float green, float blue ) => SetFillColor( new Color( red, green, blue ) );
+	public static void SetFillColor( float red, float green, float blue, float alpha ) => SetFillColor( new Color( red, green, blue, alpha ) );
+	public static void SetFillColor( Color color, float alphaOverride ) => SetFillColor( ColorWithAlpha( color, alphaOverride ) );
 	public static void SetFillColor( Color color )
 	{
 		P();
@@ -315,11 +316,11 @@ public partial class Plot
 	/// <summary>
 	/// Set the stroke color to be used for subsequently drawn shapes.
 	/// </summary>
-	public static void SetStrokeColor( float brightness ) { SetStrokeColor( new Color( brightness, brightness, brightness ) ); }
-	public static void SetStrokeColor( float brightness, float alpha ) { SetStrokeColor( new Color( brightness, brightness, brightness, alpha ) ); }
-	public static void SetStrokeColor( float red, float green, float blue ) { SetStrokeColor( new Color( red, green, blue ) ); }
-	public static void SetStrokeColor( float red, float green, float blue, float alpha ) { SetStrokeColor( new Color( red, green, blue, alpha ) ); }
-	public static void SetStrokeColor( Color color, float alphaOverride ){ SetStrokeColor( ColorWithAlpha( color, alphaOverride ) ); }
+	public static void SetStrokeColor( float brightness ) => SetStrokeColor( new Color( brightness, brightness, brightness ) );
+	public static void SetStrokeColor( float brightness, float alpha ) => SetStrokeColor( new Color( brightness, brightness, brightness, alpha ) );
+	public static void SetStrokeColor( float red, float green, float blue ) => SetStrokeColor( new Color( red, green, blue ) );
+	public static void SetStrokeColor( float red, float green, float blue, float alpha ) => SetStrokeColor( new Color( red, green, blue, alpha ) );
+	public static void SetStrokeColor( Color color, float alphaOverride ) => SetStrokeColor( ColorWithAlpha( color, alphaOverride ) );
 	public static void SetStrokeColor( Color color )
 	{
 		P();
@@ -332,7 +333,8 @@ public partial class Plot
 	/// <summary>
 	/// Set the stroke width (thickness) to be used for subsequently drawn shapes.
 	/// </summary>
-	public static void SetStrokeWidth( float width ){
+	public static void SetStrokeWidth( float width )
+	{
 		P();
 		bool strokeEnabedChange = width > 0 != _p._style.strokeWidth > 0;
 		//if( strokeEnabedChange ) foreach( PRenderer r in _p._allRenderers ) r.isStrokeColorDirty = true; // We need to update color when we change from no stroke to stroke.
@@ -538,11 +540,11 @@ public partial class Plot
 	/// <summary>
 	/// Set the texture tint to be used for subsequently drawn shapes that has a fill texture.
 	/// </summary>
-	public static void SetFillTextureTint( float brightness ) { SetFillTextureTint( new Color( brightness, brightness, brightness ) ); }
-	public static void SetFillTextureTint( float brightness, float alpha ) { SetFillTextureTint( new Color( brightness, brightness, brightness, alpha ) ); }
-	public static void SetFillTextureTint( float red, float green, float blue ) { SetFillTextureTint( new Color( red, green, blue ) ); }
-	public static void SetFillTextureTint( float red, float green, float blue, float alpha ) { SetFillTextureTint( new Color( red, green, blue, alpha ) ); }
-	public static void SetFillTextureTint( Color color, float alphaOverride ) { SetFillTextureTint( ColorWithAlpha( color, alphaOverride ) ); }
+	public static void SetFillTextureTint( float brightness ) => SetFillTextureTint( new Color( brightness, brightness, brightness ) );
+	public static void SetFillTextureTint( float brightness, float alpha ) => SetFillTextureTint( new Color( brightness, brightness, brightness, alpha ) );
+	public static void SetFillTextureTint( float red, float green, float blue ) => SetFillTextureTint( new Color( red, green, blue ) );
+	public static void SetFillTextureTint( float red, float green, float blue, float alpha ) => SetFillTextureTint( new Color( red, green, blue, alpha ) );
+	public static void SetFillTextureTint( Color color, float alphaOverride ) => SetFillTextureTint( ColorWithAlpha( color, alphaOverride ) );
 	public static void SetFillTextureTint( Color tint )
 	{
 		P();
@@ -596,28 +598,28 @@ public partial class Plot
 	/// <summary>
 	/// Translate the current canvas transformation matrix.
 	/// </summary>
-	public static void TranslateCanvas( float x, float y ){ P()._matrix.Translate3x4( x, y ); }
-	public static void TranslateCanvas( float x, float y, float z ){ P()._matrix.Translate3x4( x, y, z ); }
-	public static void TranslateCanvas( Vector2 translation ) { P()._matrix.Translate3x4( translation.x, translation.y ); }
-	public static void TranslateCanvas( Vector3 translation ) { P()._matrix.Translate3x4( translation.x, translation.y, translation.z ); }
+	public static void TranslateCanvas( float x, float y ) => P()._matrix.Translate3x4( x, y );
+	public static void TranslateCanvas( float x, float y, float z ) => P()._matrix.Translate3x4( x, y, z );
+	public static void TranslateCanvas( Vector2 translation ) => P()._matrix.Translate3x4( translation.x, translation.y );
+	public static void TranslateCanvas( Vector3 translation ) => P()._matrix.Translate3x4( translation.x, translation.y, translation.z );
 
 
 	/// <summary>
 	/// Rotate the current canvas transformation matrix by angle (in degrees).
 	/// </summary>
-	public static void RotateCanvas( float angleZ ){ P()._matrix.Rotate3x4( angleZ ); }
-	public static void RotateCanvas( float angleX, float angleY, float angleZ ) { P()._matrix *= Matrix4x4.Rotate( Quaternion.Euler( angleX, angleY, angleZ ) ); }
-	public static void RotateCanvas( Quaternion rotation ){ P()._matrix *= Matrix4x4.Rotate( rotation ); }
+	public static void RotateCanvas( float angleZ ) => P()._matrix.Rotate3x4( angleZ );
+	public static void RotateCanvas( float angleX, float angleY, float angleZ ) => P()._matrix *= Matrix4x4.Rotate( Quaternion.Euler( angleX, angleY, angleZ ) );
+	public static void RotateCanvas( Quaternion rotation ) => P()._matrix *= Matrix4x4.Rotate( rotation );
 
 
 	/// <summary>
 	/// Scale the current canvas transformation matrix.
 	/// </summary>
-	public static void ScaleCanvas( float scaleXYZ ){ P()._matrix.Scale3x4( scaleXYZ ); }
-	public static void ScaleCanvas( float scaleX, float scaleY ) { P()._matrix.Scale3x4( scaleX, scaleY ); }
-	public static void ScaleCanvas( float scaleX, float scaleY, float scaleZ ) { P()._matrix.Scale3x4( scaleX, scaleY, scaleZ ); }
-	public static void ScaleCanvas( Vector2 scale ) { P()._matrix.Scale3x4( scale.x, scale.y ); }
-	public static void ScaleCanvas( Vector3 scale ){ P()._matrix.Scale3x4( scale.x, scale.y, scale.z ); }
+	public static void ScaleCanvas( float scaleXYZ ) => P()._matrix.Scale3x4( scaleXYZ );
+	public static void ScaleCanvas( float scaleX, float scaleY ) => P()._matrix.Scale3x4( scaleX, scaleY );
+	public static void ScaleCanvas( float scaleX, float scaleY, float scaleZ ) => P()._matrix.Scale3x4( scaleX, scaleY, scaleZ );
+	public static void ScaleCanvas( Vector2 scale ) => P()._matrix.Scale3x4( scale.x, scale.y );
+	public static void ScaleCanvas( Vector3 scale ) => P()._matrix.Scale3x4( scale.x, scale.y, scale.z );
 
 	
 
@@ -631,10 +633,10 @@ public partial class Plot
 	/// Begin a DrawNowToRenderTexture session. Call DrawXNow subsequently (for example DrawCircleNow) and don't forget to call EndDrawNowToTexture when you are done.
 	/// For Space.Normalized 0,0 is center. Left, right, top and bottom is ( -aspect, aspect, -1, 1 ). For Space.Pixels 0,0 is in upper left corner.
 	/// </summary>
-	public static void BeginDrawNowToRenderTexture( RenderTexture rt ){ BeginDrawNowToRenderTextureInternal( rt, Space.Pixels, Color.clear, false ); }
-	public static void BeginDrawNowToRenderTexture( RenderTexture rt, Space space ) { BeginDrawNowToRenderTextureInternal( rt, space, Color.clear, false ); }
-	public static void BeginDrawNowToRenderTexture( RenderTexture rt, Color clearColor ) { BeginDrawNowToRenderTextureInternal( rt, Space.Pixels, clearColor, true ); }
-	public static void BeginDrawNowToRenderTexture( RenderTexture rt, Space space, Color clearColor ){ BeginDrawNowToRenderTextureInternal( rt, space, clearColor, true ); }
+	public static void BeginDrawNowToRenderTexture( RenderTexture rt ) => BeginDrawNowToRenderTextureInternal( rt, Space.Pixels, Color.clear, false );
+	public static void BeginDrawNowToRenderTexture( RenderTexture rt, Space space ) => BeginDrawNowToRenderTextureInternal( rt, space, Color.clear, false );
+	public static void BeginDrawNowToRenderTexture( RenderTexture rt, Color clearColor ) => BeginDrawNowToRenderTextureInternal( rt, Space.Pixels, clearColor, true );
+	public static void BeginDrawNowToRenderTexture( RenderTexture rt, Space space, Color clearColor ) => BeginDrawNowToRenderTextureInternal( rt, space, clearColor, true );
 
 	
 	/// <summary>
@@ -652,80 +654,81 @@ public partial class Plot
 	/// <summary>
 	/// Draw a circle immediately using Graphics.DrawMeshNow. Call this from OnPostRender or after calling BeginDrawNowToTexture.
 	/// </summary>
-	public static void DrawCircleNow( float x, float y, float diameter ) { P().DrawRingInternal( x, y, -_p._style.strokeWidth - diameter, diameter, true ); }
-	public static void DrawCircleNow( Vector2 position, float diameter ) { P().DrawRingInternal( position.x, position.y, -_p._style.strokeWidth - diameter, diameter, true ); }
+	public static void DrawCircleNow() => P().DrawRingInternal( 0f, 0f, -_p._style.strokeWidth - 1f, 1f, drawNow: true );
+	public static void DrawCircleNow( float x, float y, float diameter ) => P().DrawRingInternal( x, y, -_p._style.strokeWidth - diameter, diameter, drawNow: true );
+	public static void DrawCircleNow( Vector2 position, float diameter ) => P().DrawRingInternal( position.x, position.y, -_p._style.strokeWidth - diameter, diameter, drawNow: true );
 
 
 	/// <summary>
 	/// Draw a ring immediately using Graphics.DrawMeshNow. Call this from OnPostRender or after calling BeginDrawNowToTexture.
 	/// </summary>
-	public static void DrawRingNow( float x, float y, float innerDiameter, float OuterDiameter ) { P().DrawRingInternal( x, y, innerDiameter, OuterDiameter, true ); }
-	public static void DrawRingNow( Vector2 position, float innerDiameter, float OuterDiameter ) { P().DrawRingInternal( position.x, position.y, innerDiameter, OuterDiameter, true ); }
+	public static void DrawRingNow( float x, float y, float innerDiameter, float OuterDiameter ) => P().DrawRingInternal( x, y, innerDiameter, OuterDiameter, drawNow: true );
+	public static void DrawRingNow( Vector2 position, float innerDiameter, float OuterDiameter ) => P().DrawRingInternal( position.x, position.y, innerDiameter, OuterDiameter, drawNow: true );
 
 
 	/// <summary>
 	/// Draw a pie immediately using Graphics.DrawMeshNow. Call this from OnPostRender or after calling BeginDrawNowToTexture.
 	/// </summary>
-	public static void DrawPieNow( float x, float y, float diameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0 ) { P().DrawArcInternal( x, y, -_p._style.strokeWidth-diameter, diameter, beginAngle, deltaAngle, cutOff, roundness, false, false, true ); }
-	public static void DrawPieNow( Vector2 position, float diameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0 ){ P().DrawArcInternal( position.x, position.y, -_p._style.strokeWidth-diameter, diameter, beginAngle, deltaAngle, cutOff, roundness, false, false, true ); }
+	public static void DrawPieNow( float x, float y, float diameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0 ) => P().DrawArcInternal( x, y, -_p._style.strokeWidth-diameter, diameter, beginAngle, deltaAngle, cutOff, roundness, false, false, drawNow: true );
+	public static void DrawPieNow( Vector2 position, float diameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0 ) => P().DrawArcInternal( position.x, position.y, -_p._style.strokeWidth-diameter, diameter, beginAngle, deltaAngle, cutOff, roundness, false, false, drawNow: true );
 
 
 	/// <summary>
 	/// Draw a pie immediately using Graphics.DrawMeshNow. Call this from OnPostRender or after calling BeginDrawNowToTexture. Angles in degrees. AngleBegin must be smaller than AngleEnd.
 	/// </summary>
-	public static void DrawArcNow( float x, float y, float innerDiameter, float outerDiameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) { P().DrawArcInternal( x, y, innerDiameter, outerDiameter, beginAngle, deltaAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness, true ); }
-	public static void DrawArcNow( Vector2 position, float innerDiameter, float outerDiameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) { P().DrawArcInternal( position.x, position.y, innerDiameter, outerDiameter, beginAngle, deltaAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness, true ); }
+	public static void DrawArcNow( float x, float y, float innerDiameter, float outerDiameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) => P().DrawArcInternal( x, y, innerDiameter, outerDiameter, beginAngle, deltaAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness, drawNow: true );
+	public static void DrawArcNow( Vector2 position, float innerDiameter, float outerDiameter, float beginAngle, float deltaAngle, float cutOff = 0, float roundness = 0, bool useGeometricRoundness = false, bool constrainAngleSpanToRoundness = false ) => P().DrawArcInternal( position.x, position.y, innerDiameter, outerDiameter, beginAngle, deltaAngle, cutOff, roundness, useGeometricRoundness, constrainAngleSpanToRoundness, drawNow: true );
 
 
 	/// <summary>
 	/// Draw a rectangle immediately using Graphics.DrawMeshNow. Call this from OnPostRender or after calling BeginDrawNowToTexture.
 	/// </summary>
-	public static void DrawRectNow( float x, float y, float width, float height ) { P().DrawRectInternal( x, y, width, height, 0, 0, 0, 0, true ); } 
-	public static void DrawRectNow( float x, float y, float width, float height, float roundness ) { P().DrawRectInternal( x, y, width, height, roundness, roundness, roundness, roundness, true ); }
-	public static void DrawRectNow( float x, float y, float width, float height, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ) { P().DrawRectInternal( x, y, width, height, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness, true ); }
-	public static void DrawRectNow( Vector2 position, float width, float height, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ) { P().DrawRectInternal( position.x, position.y, width, height, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness, true ); }
-	public static void DrawRectNow( Vector2 position, float width, float height, float roundness = 0 ) { P().DrawRectInternal( position.x, position.y, width, height, roundness, roundness, roundness, roundness, true ); }
+	public static void DrawRectNow( float x, float y, float width, float height ) => P().DrawRectInternal( x, y, width, height, 0, 0, 0, 0, true );
+	public static void DrawRectNow( float x, float y, float width, float height, float roundness ) => P().DrawRectInternal( x, y, width, height, roundness, roundness, roundness, roundness, drawNow: true );
+	public static void DrawRectNow( float x, float y, float width, float height, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ) => P().DrawRectInternal( x, y, width, height, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness, drawNow: true );
+	public static void DrawRectNow( Vector2 position, float width, float height, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ) => P().DrawRectInternal( position.x, position.y, width, height, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness, drawNow: true );
+	public static void DrawRectNow( Vector2 position, float width, float height, float roundness = 0 ) => P().DrawRectInternal( position.x, position.y, width, height, roundness, roundness, roundness, roundness, drawNow: true );
 
 
 	/// <summary>
 	/// Draw a square immediately using Graphics.DrawMeshNow. Call this from OnPostRender or after calling BeginDrawNowToTexture.
 	/// </summary>
-	public static void DrawSquareNow( float x, float y, float size ) { P().DrawRectInternal( x, y, size, size, 0, 0, 0, 0, true ); }
-	public static void DrawSquareNow( float x, float y, float size, float roundness ) { P().DrawRectInternal( x, y, size, size, roundness, roundness, roundness, roundness, true ); }
-	public static void DrawSquareNow( float x, float y, float size, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ) { P().DrawRectInternal( x, y, size, size, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness, true ); }
-	public static void DrawSquareNow( Vector2 position, float size, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ) { P().DrawRectInternal( position.x, position.y, size, size, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness, true ); }
-	public static void DrawSquareNow( Vector2 position, float size, float roundness = 0 ) { P().DrawRectInternal( position.x, position.y, size, size, roundness, roundness, roundness, roundness, true ); }
+	public static void DrawSquareNow( float x, float y, float size ) => P().DrawRectInternal( x, y, size, size, 0, 0, 0, 0, true );
+	public static void DrawSquareNow( float x, float y, float size, float roundness ) => P().DrawRectInternal( x, y, size, size, roundness, roundness, roundness, roundness, drawNow: true );
+	public static void DrawSquareNow( float x, float y, float size, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ) => P().DrawRectInternal( x, y, size, size, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness, drawNow: true );
+	public static void DrawSquareNow( Vector2 position, float size, float lowerLeftRoundness, float upperLeftRoundness, float upperRightRoundness, float lowerRightRoundness ) => P().DrawRectInternal( position.x, position.y, size, size, lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness, drawNow: true );
+	public static void DrawSquareNow( Vector2 position, float size, float roundness = 0 ) => P().DrawRectInternal( position.x, position.y, size, size, roundness, roundness, roundness, roundness, drawNow: true );
 
 
 	/// <summary>
 	/// Draw a line immediately using Graphics.DrawMeshNow. Call this from OnPostRender or after calling BeginDrawNowToTexture.
 	/// </summary>
-	public static void DrawLineNow( float ax, float ay, float bx, float by ) { P().DrawLineInternal( ax, ay, bx, by, StrokeCap.Round, StrokeCap.Round, drawNow: true ); }
-	public static void DrawLineNow( float ax, float ay, float bx, float by, StrokeCap caps ) { P().DrawLineInternal( ax, ay, bx, by, caps, caps, drawNow: true ); }
-	public static void DrawLineNow( float ax, float ay, float bx, float by, StrokeCap beginCap, StrokeCap endCap ) { P().DrawLineInternal( ax, ay, bx, by, beginCap, endCap, drawNow: true ); }
-	public static void DrawLineNow( Vector2 positionA, Vector2 positionB, StrokeCap beginCap, StrokeCap endCap ) { P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, beginCap, endCap, drawNow: true ); }
-	public static void DrawLineNow( Vector2 positionA, Vector2 positionB, StrokeCap caps ) { P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, caps, caps, drawNow: true ); }
-	public static void DrawLineNow( Vector2 positionA, Vector2 positionB ) { P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, StrokeCap.Round, StrokeCap.Round, drawNow: true ); }
+	public static void DrawLineNow( float ax, float ay, float bx, float by ) => P().DrawLineInternal( ax, ay, bx, by, StrokeCap.Round, StrokeCap.Round, drawNow: true );
+	public static void DrawLineNow( float ax, float ay, float bx, float by, StrokeCap caps ) => P().DrawLineInternal( ax, ay, bx, by, caps, caps, drawNow: true );
+	public static void DrawLineNow( float ax, float ay, float bx, float by, StrokeCap beginCap, StrokeCap endCap ) => P().DrawLineInternal( ax, ay, bx, by, beginCap, endCap, drawNow: true );
+	public static void DrawLineNow( Vector2 positionA, Vector2 positionB, StrokeCap beginCap, StrokeCap endCap ) => P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, beginCap, endCap, drawNow: true );
+	public static void DrawLineNow( Vector2 positionA, Vector2 positionB, StrokeCap caps ) => P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, caps, caps, drawNow: true );
+	public static void DrawLineNow( Vector2 positionA, Vector2 positionB ) => P().DrawLineInternal( positionA.x, positionA.y, positionB.x, positionB.y, StrokeCap.Round, StrokeCap.Round, drawNow: true );
 
 
 	/// <summary>
 	/// Draw a polygon immediately using Graphics.DrawMeshNow. Call this from OnPostRender or after calling BeginDrawNowToTexture.
 	/// </summary>
-	public static void DrawPolygonNow( Polygon polygon ) { P().DrawPolygonInternal( polygon, true ); }
+	public static void DrawPolygonNow( Polygon polygon ) => P().DrawPolygonInternal( polygon, true );
 
 
 	/// <summary>
 	/// Draw a polygon immediately using Graphics.DrawMeshNow. Call this from OnPostRender or after calling BeginDrawNowToTexture.
 	/// </summary>
-	public static void DrawPolylineNow( Polyline polyline, StrokeCap beginCap, StrokeCap endCap ) { P().DrawPolylineInternal( polyline, beginCap, endCap, true ); }
-	public static void DrawPolylineNow( Polyline polyline, StrokeCap caps = StrokeCap.Round ) { P().DrawPolylineInternal( polyline, caps, caps, true ); }
+	public static void DrawPolylineNow( Polyline polyline, StrokeCap beginCap, StrokeCap endCap ) => P().DrawPolylineInternal( polyline, beginCap, endCap, drawNow: true );
+	public static void DrawPolylineNow( Polyline polyline, StrokeCap caps = StrokeCap.Round ) => P().DrawPolylineInternal( polyline, caps, caps, drawNow: true );
 
 
 	/// <summary>
 	/// Draw a text immediately using Graphics.DrawMeshNow. Call this from OnPostRender or after calling BeginDrawNowToTexture.
 	/// </summary>
-	public static void DrawTextNow( Text text, float x, float y, float fieldwidth, float fieldHeight, bool drawDebugRect = false ) { P().DrawTextInternal( text, x, y, fieldwidth, fieldHeight, drawDebugRect, drawNow: true ); }
-	public static void DrawTextNow( Text text, Vector2 position, Vector2 fieldSize, bool drawDebugRect = false ) { P().DrawTextInternal( text, position.x, position.y, fieldSize.x, fieldSize.y, drawDebugRect, drawNow: true ); }
+	public static void DrawTextNow( Text text, float x, float y, float fieldwidth, float fieldHeight, bool drawDebugRect = false ) => P().DrawTextInternal( text, x, y, fieldwidth, fieldHeight, drawDebugRect, drawNow: true );
+	public static void DrawTextNow( Text text, Vector2 position, Vector2 fieldSize, bool drawDebugRect = false ) => P().DrawTextInternal( text, position.x, position.y, fieldSize.x, fieldSize.y, drawDebugRect, drawNow: true );
 
 
 	#endregion // DrawNow

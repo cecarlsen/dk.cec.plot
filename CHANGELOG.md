@@ -3,6 +3,7 @@
 
 ## [1.0.3b] - 2024-09-30
 
+	- Added DrawCirlce() and DrawCirlceNow() without arguments to draw a unity circle at (0,0).
 	- Fixed null pointer in Polygon and Polyline.
 
 
