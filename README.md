@@ -30,6 +30,14 @@ Please go through the imported samples located here *Assets/Samples/Plot/_._._/S
 Plot [API here](https://cec.dk/plot/api.html).
 
 
+## Feature highlights
+	
+	- SDF based Circle, Ring, Arc, Rect, Line, Polygon, Polygon.
+	- Shape antialiasing (fragment based, indenpendent of Unity).
+	- Perceptual color model (JCh).
+	- Draw instanced with sorted transparency in the scene or directly to render textures.
+
+
 ## Known issues
 
 	- SetFillTextureUVRect is scaling textures from outer stroke edge instead of shape edge.
