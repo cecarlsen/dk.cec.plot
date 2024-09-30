@@ -259,9 +259,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frequency: 6.4
-  strokeWidth: 2
-  alpha: 0.1
   sampleOffset: {x: 46.23476, y: 8.81}
+  speed: 0.5
+  strokeWidth: 2
+  alpha: 0.8
+  prewarm: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -14,8 +14,6 @@ namespace PlotExamples
 	[ExecuteInEditMode]
 	public class ExemplifyRecursiveTree : MonoBehaviour
 	{
-		public float startAngle = 180;
-
 		float _t;
 
 
@@ -25,7 +23,7 @@ namespace PlotExamples
 		void LateUpdate()
 		{
 			_t += Time.deltaTime;
-			float angle = startAngle + Mathf.Lerp( 10, 90, ( Mathf.Sin( _t ) + 1 ) / 2f );
+			float angle = 240 + Mathf.Lerp( 10, 90, ( Mathf.Sin( _t ) + 1 ) / 2f );
 			
 			PushCanvasAndStyle();
 			SetCanvas( transform );

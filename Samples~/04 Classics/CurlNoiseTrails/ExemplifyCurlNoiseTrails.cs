@@ -68,7 +68,7 @@ namespace PlotExamples
 			for( int i = 0; i < brushCount; i++ ){
 				var p0 = _brushes[ i ];
 				var pSample = frequency * p0 / width + sampleOffset;
-				var delta = CurlNoise( pSample ) * height * speed * Time.deltaTime;
+				var delta = CurlNoise( pSample ) * height * speed * Time.fixedDeltaTime;
 				var p1 = p0 + delta;
 				DrawLineNow( p0, p1 );
 				if( p1.x <= 0 || p1.x >= width || p1.y < 0 || p1.y >= height ){
