@@ -64,6 +64,7 @@ namespace PlotExamples
 				TranslateCanvas( x, y -= offsetY );
 				RotateCanvas( rotation );
 				if( scaledCanvasInsteadOfShapeSize ) ScaleCanvas( thickness );
+				_polyline.SetPointCount( 2 );
 				_polyline.SetPoint( 0, 0, scaledCanvasInsteadOfShapeSize ? -scaledLineExtents : -lineExtents );
 				_polyline.SetPoint( 1, 0, scaledCanvasInsteadOfShapeSize ? scaledLineExtents : lineExtents );
 				DrawPolyline( _polyline, caps );

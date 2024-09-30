@@ -1,6 +1,11 @@
 # Changelog
 
 
+## [1.0.3b] - 2024-09-30
+
+	- Fixed null pointer in Polygon and Polyline.
+
+
 ## [1.0.3] - 2024-09-29
 
 	- (hopefully) Fixed blend and antialiasing modes not consistent for DrawXNow().

@@ -20,10 +20,9 @@ namespace PlotExamples
 
  
 		void LateUpdate() 
-		{
+		{ 
 			// Similar to Polyline and Polygon, we have to create an object for drawing.
 			if( !_text ) _text = CreateText( "Hello World" );
-			//text.SetContent( "Hello world" ); // BUG TESTING. Text won't vanish on code reload if we keep setting the content.
 
 			PushCanvasAndStyle();
 			SetCanvas( transform );
@@ -31,7 +30,7 @@ namespace PlotExamples
 			SetTextFont( font );
 			SetTextSize( 0.15f );
 			SetTextAlignment( TextAlignmentOptions.Center );
-			SetFillColor( color );
+			SetFillColor( color ); // Text is colored by the fill color.
 			DrawText( _text, 0, 0, 1, 1, drawDebugRect );
 
 			PopCanvasAndStyle();

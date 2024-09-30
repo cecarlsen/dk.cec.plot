@@ -225,7 +225,6 @@ namespace PlotInternals
 					} else {
 						_mesh = _framedMeshPool.Dequeue().Item2;
 					}
-					if( dirtyMesh ) ApplyMeshData();
 				}
 				_meshSubmissionFrame = currentFrame;
 			}
