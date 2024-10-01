@@ -20,7 +20,7 @@ Examples can be imported via the Package Manager under the Samples tab.
 
 ### Dependencies
 
-Plot depends on TextMeshPro for text rendering and Unity.UI for the samples scenes. Both should be installed automatically when you drop the package in your project.
+Plot depends on TextMeshPro for text rendering and Unity.UI for the samples scenes. Both should be installed automatically when you install the package as described above.
 
 
 ## Gettings started
