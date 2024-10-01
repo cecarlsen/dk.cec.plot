@@ -272,8 +272,8 @@ public partial class Plot
 	/// <summary>
 	/// Submit a text instance for rendering.
 	/// </summary>
-	public static void DrawText( Text text, float x, float y, float fieldwidth, float fieldHeight, bool drawDebugRect = false ) => P().DrawTextInternal( text, x, y, fieldwidth, fieldHeight, drawDebugRect );
-	public static void DrawText( Text text, Vector2 position, Vector2 fieldSize, bool drawDebugRect = false ) => P().DrawTextInternal( text, position.x, position.y, fieldSize.x, fieldSize.y, drawDebugRect );
+	public static void DrawText( Text text, float x, float y, float fieldwidth, float fieldHeight, bool drawFieldDebugRect = false ) => P().DrawTextInternal( text, x, y, fieldwidth, fieldHeight, drawFieldDebugRect );
+	public static void DrawText( Text text, Vector2 position, Vector2 fieldSize, bool drawFieldDebugRect = false ) => P().DrawTextInternal( text, position.x, position.y, fieldSize.x, fieldSize.y, drawFieldDebugRect );
 
 	#endregion // Draw
 

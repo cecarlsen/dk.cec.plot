@@ -1,9 +1,14 @@
 # Changelog
 
 
+## [1.0.3c] - 2024-10-01
+
+	- Fixed DrawText() drawFieldDebugRect issue.
+
+
 ## [1.0.3b] - 2024-09-30
 
-	- Added DrawCirlce() and DrawCirlceNow() without arguments to draw a unity circle at (0,0).
+	- Added DrawCirlce() and DrawCirlceNow() without arguments to draw a circle with diameter 1.0 at position (0,0).
 	- Fixed null pointer in Polygon and Polyline.
 
 

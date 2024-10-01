@@ -42,27 +42,31 @@ namespace PlotInternals
 			Graphics.DrawMesh( tmp.mesh, matrixCopy, tmp.fontSharedMaterial, layer: 0 );
 		}
 
-		if( drawDebugRect ) {
+		if( drawDebugRect )
+		{
 			float debugSize = Mathf.Min( fieldWidth, fieldHeight ) * 0.01f;
-			PushStyle();
-			PushCanvas();
+			PushCanvasAndStyle();
+			
+			// Draw field rect using the current pivot.
 			TranslateCanvas( 0, 0, -0.001f );
 			SetNoFill();
 			SetStrokeAlignement( StrokeAlignment.Edge );
 			SetStrokeCornerProfile( StrokeCornerProfile.Hard );
 			SetStrokeColor( Color.green );
 			SetStrokeWidth( debugSize );
-			// Draw using the current pivot.
+			SetNoFillTexture();
+			if( GetStyle().blend != Blend.Transparent ) SetBlend( Blend.Transparent );
 			if( drawNow ) DrawRectNow( x, y, fieldWidth, fieldHeight );
 			else DrawRect( x, y, fieldWidth, fieldHeight );
+			
 			// Then draw pivot.
 			TranslateCanvas( 0, 0, -0.001f );
 			SetPivot( Pivot.Center );
 			SetNoStroke();
 			SetFillColor( Color.red );
 			DrawCircle( x, y, debugSize * 4 );
-			PopCanvas();
-			PopStyle();
+
+			PopCanvasAndStyle();
 		}
 		}
 	}

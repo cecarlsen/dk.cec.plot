@@ -242,7 +242,7 @@ public partial class Plot
 	}
 
 
-	void DrawTextInternal( Text text, float x, float y, float fieldWidth, float fieldHeight, bool drawDebugRect, bool drawNow = false )
+	void DrawTextInternal( Text text, float x, float y, float fieldWidth, float fieldHeight, bool drawFieldDebugRect, bool drawNow = false )
 	{
 		if( !text ){
 			Debug.LogWarning( logPrepend + "DrawText failed. The text is null.\n" );
@@ -255,7 +255,7 @@ public partial class Plot
 			_textRenderer = new TextRenderer();
 		}
 
-		_textRenderer.Render( text, x, y, fieldWidth, fieldHeight, _pivotPosition, ref _matrix, ref _style, drawDebugRect, drawNow );
+		_textRenderer.Render( text, x, y, fieldWidth, fieldHeight, _pivotPosition, ref _matrix, ref _style, drawFieldDebugRect, drawNow );
 	}
 
 

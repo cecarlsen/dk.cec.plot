@@ -27,7 +27,7 @@ Plot depends on TextMeshPro for text rendering and Unity.UI for the samples scen
 
 Import the samples via the Package Manager and go through the scenes located here *Assets/Samples/Plot/_._._/Samples/01 Getting Started* in chronological order.
 
-Plot [API here](https://cec.dk/plot/api.html).
+Plot [API here](https://cec.dk/plot/api.html). Also included as PDF at *Packages/dk.cec.plot/Documents/PlotAPI.pdf*.
 
 
 ## Feature highlights
