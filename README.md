@@ -14,9 +14,7 @@ Install Plot via Unity's Package Manager. Select "Install package from git URL..
 
 	https://github.com/cecarlsen/dk.cec.plot.git
 
-If it doesn't work, check your error message and consult [this page](https://docs.unity3d.com/6000.0/Documentation/Manual/upm-ui-giturl.html).
-
-Examples can be imported via the Package Manager under the Samples tab. 
+If it doesn't work, check your error message and consult [this page](https://docs.unity3d.com/6000.0/Documentation/Manual/upm-ui-giturl.html). Examples can be imported via the Package Manager under the Samples tab. 
 
 ### Dependencies
 
