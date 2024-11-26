@@ -68,6 +68,7 @@ namespace PlotExamples
 			_spores.Clear();
 			_spores.Add( new Spore( Vector2.zero, Random.insideUnitCircle.normalized ) );
 			Random.state = prevSeed;
+			if( Application.isPlaying ) seed++;
 		}
 
 
