@@ -152,9 +152,6 @@ float4 EvaluateFillStrokeColor
 		float4 col = lerp( fillCol, strokeCol, saturate( ceil( d ) ) );
 	#endif
 
-	// Support fog.
-	UNITY_APPLY_FOG( i.fogCoord, col );
-
 	// Apply min alpha fade.
 	col.a *= minSizeAlpha;
 

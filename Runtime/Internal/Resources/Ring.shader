@@ -170,10 +170,16 @@ Shader "Hidden/Draw/Ring"
 				#ifdef _HAS_TEXTURE
 					i.uv = ( ( i.uv * 2 - 1 ) * ( 1 + ( ( data.z + data.w ) / ( data.x + data.y ) ) ) ) * 0.5 + 0.5;
 					half4 texTint = UNITY_ACCESS_INSTANCED_PROP( Props, _TexTint );
-					return EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol, i.uv, texTint );
+					half4 col = EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol, i.uv, texTint );
 				#else
-					return EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol );
+					half4 col =  EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol );
 				#endif
+
+				// Support fog.
+				UNITY_APPLY_FOG( i.fogCoord, col );
+
+				// Done.
+				return col;
 			}
 			ENDCG
 		}

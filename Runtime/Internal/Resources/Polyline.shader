@@ -178,7 +178,13 @@ Shader "Hidden/Draw/Polyline"
 				float d = SdPolylineSegment( i.posSS_shrinkFlag.xy, i.points.xy, i.points.zw, i.caps_pos1D.xy ) - strokeExtents;
 
 				// Evaluate color.
-				return EvaluateStrokeColor( d, fSizeSS, strokeCol );
+				half4 col = EvaluateStrokeColor( d, fSizeSS, strokeCol );
+
+				// Support fog.
+				UNITY_APPLY_FOG( i.fogCoord, col );
+
+				// Done.
+				return col;
 			}
 			ENDCG
 		}

@@ -155,7 +155,14 @@ Shader "Hidden/Draw/Polygon"
 					totalExtents += ANTIALIAS_EXTENTS;
 				#endif
 
-				return EvaluateFillStrokeColor( d, fSizeSS, totalExtents, strokeData.x, fillCol, strokeCol );
+				// Evaluate fill and stroke color.
+				half4 col = EvaluateFillStrokeColor( d, fSizeSS, totalExtents, strokeData.x, fillCol, strokeCol );
+
+				// Support fog.
+				UNITY_APPLY_FOG( i.fogCoord, col );
+
+				// Done.
+				return col;
 			}
 			ENDCG
 		}

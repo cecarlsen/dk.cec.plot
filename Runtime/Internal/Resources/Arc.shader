@@ -204,10 +204,16 @@ Shader "Hidden/Draw/Arc"
 					half strokeAlignmentExtension = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeAlignmentExtension );
 					half4 texTint = UNITY_ACCESS_INSTANCED_PROP( Props, _TexTint );
 					i.uv = ( ( i.uv * 2 - 1 ) * ( 1 + ( strokeAlignmentExtension / ( data.x + data.y - data.w ) ) ) ) * 0.5 + 0.5; // NOTE: could rewrite this to be transformed in the vert shader.
-					return EvaluateFillStrokeColor( d, fSize, totalExtents, strokeWidth, fillCol, strokeCol, i.uv, texTint );
+					half4 col = EvaluateFillStrokeColor( d, fSize, totalExtents, strokeWidth, fillCol, strokeCol, i.uv, texTint );
 				#else
-					return EvaluateFillStrokeColor( d, fSize, totalExtents, strokeWidth, fillCol, strokeCol );
+					half4 col =  EvaluateFillStrokeColor( d, fSize, totalExtents, strokeWidth, fillCol, strokeCol );
 				#endif
+
+				// Support fog.
+				UNITY_APPLY_FOG( i.fogCoord, col );
+
+				// Done.
+				return col;
 			}
 			
 			ENDCG

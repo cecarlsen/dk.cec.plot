@@ -163,10 +163,16 @@ Shader "Hidden/Draw/Rect"
 				#ifdef _HAS_TEXTURE
 					half4 texTint = UNITY_ACCESS_INSTANCED_PROP( Props, _TexTint );
 					i.uv = ( ( i.uv * 2 - 1 ) * ( 1 + ( ( data.z + data.w ) / ( data.xy ) ) ) ) * 0.5 + 0.5;
-					return EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol, i.uv, texTint );
+					half4 col = EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol, i.uv, texTint );
 				#else
-					return EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol );
+					half4 col = EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol );
 				#endif
+				
+				// Support fog.
+				UNITY_APPLY_FOG( i.fogCoord, col );
+
+				// Done.
+				return col;
 			}
 
 			ENDCG

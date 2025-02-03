@@ -1,6 +1,11 @@
 # Changelog
 
 
+## [1.0.4] - 2025-02-03
+
+	- Fixed "undeclared identifier 'i'" shader compile error appearing in Unity6.
+
+
 ## [1.0.3c] - 2024-10-01
 
 	- Fixed DrawText() drawFieldDebugRect issue.

@@ -138,7 +138,13 @@ Shader "Hidden/Draw/Line"
 				float d = SdCenteredHorizontalLineSegment( i.posSS, data.xy, data.zw );
 
 				// Evaluate color.
-				return EvaluateStrokeColor( d, fSizeShape, strokeCol );
+				half4 col = EvaluateStrokeColor( d, fSizeShape, strokeCol );
+
+				// Support fog.
+				UNITY_APPLY_FOG( i.fogCoord, col );
+
+				// Done.
+				return col;
 			}
 
 			ENDCG
