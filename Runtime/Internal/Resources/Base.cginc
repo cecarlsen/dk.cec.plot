@@ -175,7 +175,5 @@ float4 EvaluateStrokeColor( float d, float fSizeWS, float4 strokeCol )
 		if( d > 0 ) discard;
 	#endif
 
-	UNITY_APPLY_FOG( i.fogCoord, strokeCol ); // Support fog.
-
 	return strokeCol;
 }
