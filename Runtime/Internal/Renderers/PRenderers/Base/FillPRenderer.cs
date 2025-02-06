@@ -75,13 +75,20 @@ namespace PlotInternals
 				if( _fillTextureBlend == Plot.FillTextureBlend.Overlay ) {
 					_material.EnableKeyword( textureOverlayKeyword );
 					_material.DisableKeyword( textureMultiplyKeyword );
-				} else {
-					_material.EnableKeyword( textureMultiplyKeyword );
+					_material.DisableKeyword( textureReplaceKeyword );
+				} else if ( _fillTextureBlend == Plot.FillTextureBlend.Multiply ){
 					_material.DisableKeyword( textureOverlayKeyword );
+					_material.EnableKeyword( textureMultiplyKeyword );
+					_material.DisableKeyword( textureReplaceKeyword );
+				} else {
+					_material.DisableKeyword( textureOverlayKeyword );
+					_material.DisableKeyword( textureMultiplyKeyword );
+					_material.EnableKeyword( textureReplaceKeyword );
 				}
 			} else {
 				_material.DisableKeyword( textureOverlayKeyword );
 				_material.DisableKeyword( textureMultiplyKeyword );
+				_material.DisableKeyword( textureReplaceKeyword );
 			}
 
 			// Call base.

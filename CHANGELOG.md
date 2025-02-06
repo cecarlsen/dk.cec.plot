@@ -1,6 +1,11 @@
 # Changelog
 
 
+## [1.0.5] - 2025-02-06
+
+	- Added FillTextureBlend.Replace for ignoring fill color when drawing a texture.
+
+
 ## [1.0.4] - 2025-02-03
 
 	- Fixed "undeclared identifier 'i'" shader compile error appearing in Unity6.

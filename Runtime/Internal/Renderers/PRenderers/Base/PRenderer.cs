@@ -27,9 +27,11 @@ namespace PlotInternals
 
 		Shader _shader;
 
+		// TODO: replace these with LocalKeyword style integration
 		const string antialiasKeyword = "_ANTIALIAS";
 		protected const string textureOverlayKeyword = "_TEXTURE_OVERLAY";
 		protected const string textureMultiplyKeyword = "_TEXTURE_MULTIPLY";
+		protected const string textureReplaceKeyword = "_TEXTURE_REPLACE";
 
 
 		protected static class SharedShaderIDs

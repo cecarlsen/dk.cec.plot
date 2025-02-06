@@ -61,7 +61,7 @@ public partial class Plot
 	/// <summary>
 	/// Fill texture onto fill color blend options.
 	/// </summary>
-	[Serializable] public enum FillTextureBlend { Overlay, Multiply }
+	[Serializable] public enum FillTextureBlend { Overlay, Multiply, Replace }
 
 	/// <summary>
 	/// Spatial coordinate metrics.

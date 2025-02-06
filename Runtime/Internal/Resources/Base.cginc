@@ -120,12 +120,15 @@ float4 EvaluateFillStrokeColor
 
 	// Sample fill texture.
 	#ifdef _HAS_TEXTURE
+		//return float4( 1, 0, 0, 1 );
 		float4 texCol = tex2D( _Tex, uv ) * texTint;
 		#ifdef _TEXTURE_OVERLAY
 			fillCol.rgb = fillCol.rgb * ( 1 - texCol.a ) + texCol.rgb * texCol.a;
 			fillCol.a = saturate( fillCol.a + texCol.a );
-		#else // Multily.
+		#elif _TEXTURE_MULTIPLY
 			fillCol *= texCol;
+		#else // Replace.
+			fillCol = texCol;
 		#endif
 	#endif
 

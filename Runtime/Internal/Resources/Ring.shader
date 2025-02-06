@@ -38,9 +38,9 @@ Shader "Hidden/Draw/Ring"
 			#pragma multi_compile_fog 				// Support fog.
 			#pragma multi_compile_instancing		// Support instancing
 			#pragma multi_compile_local __ _ANTIALIAS
-			#pragma multi_compile_local __ _TEXTURE_OVERLAY _TEXTURE_MULTIPLY
+			#pragma multi_compile_local __ _TEXTURE_OVERLAY _TEXTURE_MULTIPLY _TEXTURE_REPLACE
 
-			#if defined( _TEXTURE_OVERLAY ) || defined( _TEXTURE_MULTIPLY )
+			#if defined( _TEXTURE_OVERLAY ) || defined( _TEXTURE_MULTIPLY ) || defined( _TEXTURE_REPLACE )
 				#define _HAS_TEXTURE
 			#endif
 			

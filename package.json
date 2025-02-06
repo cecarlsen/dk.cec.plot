@@ -1,6 +1,6 @@
 {
   "name": "dk.cec.plot",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "displayName": "Plot",
   "description": "Immediate mode procedural 2D drawing in Unity.",
   "documentationUrl": "https://github.com/cecarlsen/dk.cec.plot",
