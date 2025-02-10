@@ -158,6 +158,20 @@ float4 EvaluateFillStrokeColor
 	// Apply min alpha fade.
 	col.a *= minSizeAlpha;
 
+
+	// FEATHER TEST.
+
+	// Feather mode: StrokeOnly.
+	//float feather = 1;
+	//if( feather > 0.0 ) col.a *= saturate( 1.0 - (max(d,0.0) / ( strokeWidth * feather ) ) );
+
+	// Feather mode: FillOnly.
+	//if( feather > 0.0 ) col.a *= lerp( col.a, saturate( -d / ( totalExtents * feather ) ), saturate( ceil(-d) ) );
+
+	// Feather mode: StokeAndFill.
+	//if( feather > 0.0 ) col.a *= saturate( (strokeWidth-d) / ( (totalExtents+strokeWidth) * feather ) );
+	
+
 	return col;
 }
 
