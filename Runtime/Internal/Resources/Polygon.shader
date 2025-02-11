@@ -61,7 +61,7 @@ Shader "Hidden/Draw/Polygon"
 			UNITY_INSTANCING_BUFFER_START( Props )
 				UNITY_DEFINE_INSTANCED_PROP( half4, _FillColor )
 				UNITY_DEFINE_INSTANCED_PROP( half4, _StrokeColor )
-				UNITY_DEFINE_INSTANCED_PROP( half2, _StrokeData ) // x: strokeWidth, y: strokeOffsetMin
+				UNITY_DEFINE_INSTANCED_PROP( half3, _StrokeData ) // x: strokeWidth, y: strokeOffsetMin, z: stroke feather
 				UNITY_DEFINE_INSTANCED_PROP( half, _RoundStrokeCornersFlag )
 			UNITY_INSTANCING_BUFFER_END( Props )
 			
@@ -140,7 +140,7 @@ Shader "Hidden/Draw/Polygon"
 				if( !any( i.points ) ) return fillCol;
 
 				// Read properties.
-				half2 strokeData = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeData );
+				half3 strokeData = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeData );
 				bool useRoundStrokeCorners = UNITY_ACCESS_INSTANCED_PROP( Props, _RoundStrokeCornersFlag ) > 0;
 				fixed4 strokeCol = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeColor );
 
@@ -156,7 +156,7 @@ Shader "Hidden/Draw/Polygon"
 				#endif
 
 				// Evaluate fill and stroke color.
-				half4 col = EvaluateFillStrokeColor( d, fSizeSS, totalExtents, strokeData.x, fillCol, strokeCol );
+				half4 col = EvaluateFillStrokeColor( d, fSizeSS, totalExtents, strokeData.x, fillCol, strokeCol, strokeData.z );
 
 				// Support fog.
 				UNITY_APPLY_FOG( i.fogCoord, col );

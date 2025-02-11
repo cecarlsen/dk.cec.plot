@@ -25,6 +25,8 @@ public class PlotCircle : MonoBehaviour
 	public float strokeWidth = 0.05f;
 	public Color strokeColor = Color.black;
 	public StrokeAlignment strokeAlignment = StrokeAlignment.Outside;
+	public bool strokeFeatherEnabled = false;
+	[Range(0f,1f)] public float strokeFeather = 0.1f;
 
 	[Header("Rendering")]
 	public Blend blend = Blend.Transparent;
@@ -42,14 +44,6 @@ public class PlotCircle : MonoBehaviour
 		SetAntiAliasing( antiAliasing );
 		SetLayer( gameObject.layer );
 
-		if( stroke ) {
-			SetStrokeColor( strokeColor );
-			SetStrokeWidth( strokeWidth );
-			SetStrokeAlignement( strokeAlignment );
-		} else {
-			SetNoStroke();
-		}
-
 		if( fill ) {
 			SetFillColor( fillColor );
 			if( fillTexture ) {
@@ -60,6 +54,19 @@ public class PlotCircle : MonoBehaviour
 			}
 		} else {
 			SetNoFill();
+		}
+
+		if( stroke ) {
+			SetStrokeColor( strokeColor );
+			SetStrokeWidth( strokeWidth );
+			SetStrokeAlignement( strokeAlignment );
+			if( strokeFeatherEnabled ) {
+				SetStrokeFeather( strokeFeather );
+			} else {
+				SetNoStrokeFeather();
+			}
+		} else {
+			SetNoStroke();
 		}
 
 		DrawCircle( 0, 0, diameter );

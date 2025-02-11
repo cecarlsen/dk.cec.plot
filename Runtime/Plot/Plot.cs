@@ -64,6 +64,11 @@ public partial class Plot
 	[Serializable] public enum FillTextureBlend { Overlay, Multiply, Replace }
 
 	/// <summary>
+	/// Feather mode.
+	/// </summary>
+	//[Serializable] public enum FeatherMode { All, Stroke }
+
+	/// <summary>
 	/// Spatial coordinate metrics.
 	/// </summary>
 	[Serializable] public enum Space { Pixels, Normalized }
@@ -402,6 +407,26 @@ public partial class Plot
 
 
 	/// <summary>
+	/// Set the feather amount used for subsequently drawn stroke.
+	/// </summary>
+	public static void SetStrokeFeather( float normalizedValue )
+	{
+		P();
+		_p._style.strokeFeather = Mathf.Clamp01( normalizedValue );
+	}
+
+
+	/// <summary>
+	/// Disable feather.
+	/// </summary>
+	public static void SetNoStrokeFeather()
+	{
+		P();
+		_p._style.strokeFeather = -1f;
+	}
+
+
+	/// <summary>
 	/// Set the point from which Circle will be drawn. Default is Pivot.Center.
 	/// </summary>
 	public static void SetPivot( Pivot pivot ){
@@ -477,6 +502,17 @@ public partial class Plot
 		foreach( FillPRenderer r in _p._fillRenderers ) r.SetFillTextureBlendFeature( blend );
 		_p._style.fillTextureBlend = blend;
 	}
+
+
+	/// <summary>
+	/// Set the feather mode to be used for subsequently drawn shapes. Also see SetFeather().
+	/// </summary>
+	//public static void SetFeatherMode( FeatherMode featherMode )
+	//{
+	//	P();
+	//	foreach( FillPRenderer r in _p._fillRenderers ) r.SetFeatherModeFeature( featherMode );
+	//	_p._style.featherMode = featherMode;
+	//}
 
 
 	/// <summary>

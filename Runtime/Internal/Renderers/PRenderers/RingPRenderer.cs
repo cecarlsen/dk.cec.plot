@@ -66,30 +66,21 @@ namespace PlotInternals
 
 			EnsureAvailableMaterialBeforeSubmission( drawNow );
 
+			// Set constants.
 			if( isFillColorDirty || isStrokeColorDirty ) UpdateFillAndStroke( ref style, drawNow );
-
 			if( style.hasVisibleTextureEnabled ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission
-				if( drawNow ) {
-					_material.SetVector( FillShaderIDs._TexUVRect, style.fillTextureUVRect );
-					_material.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
-				} else {
-					_propBlock.SetVector( FillShaderIDs._TexUVRect, style.fillTextureUVRect );
-					_propBlock.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
-				}
+				SetVector( drawNow, FillShaderIDs._TexUVRect, style.fillTextureUVRect );
+				SetColor( drawNow, FillShaderIDs._TexTint, style.fillTextureTint );
 			}
+			SetVector( drawNow, ShaderIDs._VertData, new Vector4( meshScale, innerVertexFactor ) );
+			SetVector( drawNow, ShaderIDs._FragData, new Vector4( ringRadius, ringExtents, actualStrokeWidth, strokeOffsetMin ) );
+			SetFloat( drawNow, SharedShaderIDs._StrokeFeather, style.strokeFeather );
 
-			Vector4 vertData = new Vector4( meshScale, innerVertexFactor );
-			Vector4 fragData = new Vector4( ringRadius, ringExtents, actualStrokeWidth, strokeOffsetMin ); 
-
+			// Draw.
 			if( drawNow ) {
-				_material.SetVector( ShaderIDs._VertData, vertData );
-				_material.SetVector( ShaderIDs._FragData, fragData );
 				_material.SetPass( 0 );
 				Graphics.DrawMeshNow( mesh, matrix );
 			} else {
-				//Debug.Log( _material.enableInstancing + " " + _material.GetHashCode() );
-				_propBlock.SetVector( ShaderIDs._VertData, vertData );
-				_propBlock.SetVector( ShaderIDs._FragData, fragData );
 				Graphics.DrawMesh( mesh, matrix, _material, style.layer, camera: null, submeshIndex: 0, _propBlock, false, false, false );
 			}
 		}

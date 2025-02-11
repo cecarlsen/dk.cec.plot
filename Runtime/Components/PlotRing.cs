@@ -26,6 +26,8 @@ public class PlotRing : MonoBehaviour
 	public float strokeWidth = 0.1f;
 	public Color strokeColor = Color.black;
 	public StrokeAlignment strokeAlignment = StrokeAlignment.Outside;
+	public bool strokeFeatherEnabled = false;
+	[Range(0f,1f)] public float strokeFeather = 0.1f;
 
 	[Header( "Rendering" )]
 	public Blend blend = Blend.Transparent;
@@ -59,6 +61,11 @@ public class PlotRing : MonoBehaviour
 			SetStrokeColor( strokeColor );
 			SetStrokeWidth( strokeWidth );
 			SetStrokeAlignement( strokeAlignment );
+			if( strokeFeatherEnabled ) {
+				SetStrokeFeather( strokeFeather );
+			} else {
+				SetNoStrokeFeather();
+			}
 		} else {
 			SetNoStroke();
 		}

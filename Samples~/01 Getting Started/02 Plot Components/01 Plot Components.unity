@@ -169,6 +169,8 @@ MonoBehaviour:
   strokeColor: {r: 1, g: 0, b: 0.49685907, a: 0.78431374}
   strokeAlignment: 2
   strokeCornerProfile: 1
+  strokeFeatherEnabled: 0
+  strokeFeather: 0.503
   blend: 0
   antiAliasing: 1
   pivot: 0
@@ -583,6 +585,8 @@ MonoBehaviour:
   strokeColor: {r: 1, g: 0, b: 0.49685907, a: 0.78431374}
   strokeAlignment: 2
   strokeCornerProfile: 1
+  strokeFeatherEnabled: 0
+  strokeFeather: 0
   blend: 0
   antiAliasing: 1
   pivot: 0
@@ -648,6 +652,8 @@ MonoBehaviour:
   strokeWidth: 0.1
   strokeColor: {r: 1, g: 0, b: 0.49685907, a: 0.78431374}
   strokeAlignment: 2
+  strokeFeatherEnabled: 0
+  strokeFeather: 0
   blend: 0
   antiAliasing: 1
   pivot: 0
@@ -711,6 +717,8 @@ MonoBehaviour:
   strokeWidth: 0.1
   strokeColor: {r: 1, g: 0, b: 0.49685907, a: 0.78431374}
   strokeAlignment: 2
+  strokeFeatherEnabled: 0
+  strokeFeather: 0.324
   blend: 0
   antiAliasing: 1
   pivot: 0
@@ -900,6 +908,8 @@ MonoBehaviour:
   strokeColor: {r: 1, g: 0, b: 0.49685907, a: 0.78431374}
   strokeAlignment: 2
   strokeCornerProfile: 1
+  strokeFeatherEnabled: 0
+  strokeFeather: 0
   blend: 0
   antiAliasing: 1
   pivot: 0

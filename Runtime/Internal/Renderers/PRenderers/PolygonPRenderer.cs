@@ -40,23 +40,20 @@ namespace PlotInternals
 
 			EnsureAvailableMaterialBeforeSubmission( drawNow );
 
+			// Set constants.
 			if( isFillColorDirty || isStrokeColorDirty ) UpdateFillAndStroke( ref style, drawNow );
+			//if( style.fillTexture ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission TODO
+			//	_material.SetVector( FillShaderIDs._TexUVRect, style.fillTextureUVRect );
+			//	_material.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
+			//}
+			SetVector( drawNow, ShaderIDs._StrokeData, new Vector4( actualStrokeWidth, strokeOffsetMin, style.strokeFeather ) );
+			SetFloat( drawNow, ShaderIDs._RoundStrokeCornersFlag, roundStrokeCornersFlag ? 1 : 0 );
 
-			if( style.fillTexture ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission
-				_material.SetVector( FillShaderIDs._TexUVRect, style.fillTextureUVRect );
-				_material.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
-			}
-
-			Vector4 strokeData = new Vector4( actualStrokeWidth, strokeOffsetMin );
-
+			// Draw.
 			if( drawNow ) {
-				_material.SetVector( ShaderIDs._StrokeData, strokeData );
-				_material.SetFloat( ShaderIDs._RoundStrokeCornersFlag, roundStrokeCornersFlag ? 1 : 0 );
 				_material.SetPass( 0 );
 				Graphics.DrawMeshNow( mesh, matrix );
 			} else {
-				_propBlock.SetVector( ShaderIDs._StrokeData, strokeData );
-				_propBlock.SetFloat( ShaderIDs._RoundStrokeCornersFlag, roundStrokeCornersFlag ? 1 : 0 );
 				Graphics.DrawMesh( mesh, matrix, _material, style.layer, null, 0, _propBlock, false, false, false );
 			}
 		}

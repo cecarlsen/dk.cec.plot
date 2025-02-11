@@ -24,6 +24,7 @@ namespace PlotInternals
 
 		bool _isShapeAntialisationOn;
 		Plot.Blend _blend;
+		//Plot.FeatherMode _featherMode;
 
 		Shader _shader;
 
@@ -32,11 +33,13 @@ namespace PlotInternals
 		protected const string textureOverlayKeyword = "_TEXTURE_OVERLAY";
 		protected const string textureMultiplyKeyword = "_TEXTURE_MULTIPLY";
 		protected const string textureReplaceKeyword = "_TEXTURE_REPLACE";
+		//const string featherStrokeKeyword = "_FEATHER_STROKE";
 
 
 		protected static class SharedShaderIDs
 		{
 			public static readonly int _StrokeColor = Shader.PropertyToID( nameof( _StrokeColor ) );
+			public static readonly int _StrokeFeather = Shader.PropertyToID( nameof( _StrokeFeather ) );
 			public static readonly int _SrcBlend = Shader.PropertyToID( nameof( _SrcBlend ) );
 			public static readonly int _DstBlend = Shader.PropertyToID( nameof( _DstBlend ) );
 		}
@@ -74,6 +77,15 @@ namespace PlotInternals
 			_blend = blend;
 			_areFeaturesDirty = true;
 		}
+
+
+		//public void SetFeatherModeFeature( Plot.FeatherMode featherMode )
+		//{
+		//	if( _featherMode == featherMode ) return;
+//
+		//	_featherMode = featherMode;
+		//	_areFeaturesDirty = true;
+		//}
 
 
 		protected void UpdateStrokeColor( Color color, bool drawNow )
@@ -130,6 +142,17 @@ namespace PlotInternals
 					break;
 			}
 
+			// Feather.
+			//switch( _featherMode )
+			//{
+			//	case Plot.FeatherMode.Stroke:
+			//		_material.EnableKeyword( featherStrokeKeyword );
+			//		break;
+			//	case Plot.FeatherMode.All:
+			//		_material.DisableKeyword( featherStrokeKeyword );
+			//		break;
+			//}
+
 			// Reset flag.
 			_areFeaturesDirty = false;
 		}
@@ -170,6 +193,27 @@ namespace PlotInternals
 
 			// Update frame stamp.
 			_materialSubmissionFrame = currentFrame;
+		}
+
+
+		protected void SetVector( bool drawNow, int id, Vector4 value )
+		{
+			if( drawNow ) _material.SetVector( id, value );
+			else _propBlock.SetVector( id, value );
+		}
+
+
+		protected void SetColor( bool drawNow, int id, Color value )
+		{
+			if( drawNow ) _material.SetColor( id, value );
+			else _propBlock.SetColor( id, value );
+		}
+
+
+		protected void SetFloat( bool drawNow, int id, float value )
+		{
+			if( drawNow ) _material.SetFloat( id, value );
+			else _propBlock.SetFloat( id, value );
 		}
 	}
 }

@@ -39,6 +39,7 @@ Shader "Hidden/Draw/Rect"
 			#pragma multi_compile_instancing		// Support instancing
 			#pragma multi_compile_local __ _ANTIALIAS
 			#pragma multi_compile_local __ _TEXTURE_OVERLAY _TEXTURE_MULTIPLY _TEXTURE_REPLACE
+			//#pragma multi_compile_local __ _FEATHER_STROKE
 
 			#if defined( _TEXTURE_OVERLAY ) || defined( _TEXTURE_MULTIPLY ) || defined( _TEXTURE_REPLACE )
 				#define _HAS_TEXTURE
@@ -71,6 +72,7 @@ Shader "Hidden/Draw/Rect"
 				UNITY_DEFINE_INSTANCED_PROP( half4, _StrokeColor )
 				UNITY_DEFINE_INSTANCED_PROP( half4, _FragData )			// ( xy: fillExtents, z: strokeWidth, w: strokeOffsetMin )
 				UNITY_DEFINE_INSTANCED_PROP( half4, _Roundedness )
+				UNITY_DEFINE_INSTANCED_PROP( half, _StrokeFeather )
 				#ifdef _HAS_TEXTURE
 					UNITY_DEFINE_INSTANCED_PROP( half4, _TexUVRect )
 					UNITY_DEFINE_INSTANCED_PROP( half4, _TexTint )
@@ -149,6 +151,7 @@ Shader "Hidden/Draw/Rect"
 				half4 roundedness = UNITY_ACCESS_INSTANCED_PROP( Props, _Roundedness );
 				half4 fillCol = UNITY_ACCESS_INSTANCED_PROP( Props, _FillColor );
 				half4 strokeCol = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeColor );
+				half strokeFeather = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeFeather );
 
 				// Evaluate shape SDF.
 				float d = SDRoundedBox( i.posSS, data.xy, roundedness ) - data.w;
@@ -163,9 +166,9 @@ Shader "Hidden/Draw/Rect"
 				#ifdef _HAS_TEXTURE
 					half4 texTint = UNITY_ACCESS_INSTANCED_PROP( Props, _TexTint );
 					i.uv = ( ( i.uv * 2 - 1 ) * ( 1 + ( ( data.z + data.w ) / ( data.xy ) ) ) ) * 0.5 + 0.5;
-					half4 col = EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol, i.uv, texTint );
+					half4 col = EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol, strokeFeather, i.uv, texTint );
 				#else
-					half4 col = EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol );
+					half4 col = EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol, strokeFeather );
 				#endif
 				
 				// Support fog.

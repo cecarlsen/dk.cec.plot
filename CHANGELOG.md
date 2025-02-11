@@ -1,6 +1,11 @@
 # Changelog
 
 
+## [1.0.6] - 2025-02-11
+
+	- Added SetStrokeFeather() and SetNoStrokeFeather. Not yet working for Line and Polyline.
+
+
 ## [1.0.5] - 2025-02-06
 
 	- Added FillTextureBlend.Replace for ignoring fill color when drawing a texture.

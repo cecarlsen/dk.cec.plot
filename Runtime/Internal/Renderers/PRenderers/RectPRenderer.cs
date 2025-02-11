@@ -104,33 +104,24 @@ namespace PlotInternals
 
 			EnsureAvailableMaterialBeforeSubmission( drawNow );
 
-			if( isFillColorDirty || isStrokeColorDirty ) UpdateFillAndStroke( ref style, drawNow );
-
-			if( style.fillTexture ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission
-				if( drawNow ) {
-					_material.SetVector( FillShaderIDs._TexUVRect, style.fillTextureUVRect );
-					_material.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
-				} else {
-					_propBlock.SetVector( FillShaderIDs._TexUVRect, style.fillTextureUVRect );
-					_propBlock.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
-				}
-			}
-
 			//Debug.Log( "vertData.xy: " + meshExtentsX + ", " + meshExtentsY + ". fragData.xy: " + fillExtentsX + "," + fillExtentsY );
-			Vector4 vertData = new Vector4( meshExtentsX, meshExtentsY, innerVertexFactorX, innerVertexFactorY );
-			Vector4 fragData = new Vector4( fillExtentsX, fillExtentsY, actualStrokeWidth, strokeOffsetMin );
-			Vector4 roundness = new Vector4( lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness );
 
+			// Set constants.
+			if( isFillColorDirty || isStrokeColorDirty ) UpdateFillAndStroke( ref style, drawNow );
+			if( style.fillTexture ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission
+				SetVector( drawNow, FillShaderIDs._TexUVRect, style.fillTextureUVRect );
+				SetColor( drawNow, FillShaderIDs._TexTint, style.fillTextureTint );
+			}
+			SetVector( drawNow, ShaderIDs._VertData, new Vector4( meshExtentsX, meshExtentsY, innerVertexFactorX, innerVertexFactorY ) );
+			SetVector( drawNow, ShaderIDs._FragData, new Vector4( fillExtentsX, fillExtentsY, actualStrokeWidth, strokeOffsetMin ) );
+			SetVector( drawNow, ShaderIDs._Roundedness, new Vector4( lowerLeftRoundness, upperLeftRoundness, upperRightRoundness, lowerRightRoundness ) );
+			SetFloat( drawNow, SharedShaderIDs._StrokeFeather, style.strokeFeather );
+			
+			// Draw.
 			if( drawNow ) {
-				_material.SetVector( ShaderIDs._VertData, vertData );
-				_material.SetVector( ShaderIDs._FragData, fragData );
-				_material.SetVector( ShaderIDs._Roundedness, roundness );
 				_material.SetPass( 0 );
 				Graphics.DrawMeshNow( mesh, matrix );
 			} else {
-				_propBlock.SetVector( ShaderIDs._VertData, vertData );
-				_propBlock.SetVector( ShaderIDs._FragData, fragData );
-				_propBlock.SetVector( ShaderIDs._Roundedness, roundness );
 				Graphics.DrawMesh( mesh, matrix, _material, style.layer, null, 0, _propBlock, false, false, false );
 			}
 		}

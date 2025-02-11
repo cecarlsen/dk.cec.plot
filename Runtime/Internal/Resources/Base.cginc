@@ -99,7 +99,7 @@ void GetScales( float2 shapeScaleWithoutCanvasScale, out float2 shapeScaleWithCa
 // Compute color assuming that d == 0 is where fill ends and stroke begins.
 float4 EvaluateFillStrokeColor
 (
-	float d, float fSize, float totalExtents, float strokeWidth, float4 fillCol, float4 strokeCol
+	float d, float fSize, float totalExtents, float strokeWidth, float4 fillCol, float4 strokeCol, float strokeFeather
 	#ifdef _HAS_TEXTURE
 	, float2 uv, float4 texTint
 	#endif
@@ -158,20 +158,17 @@ float4 EvaluateFillStrokeColor
 	// Apply min alpha fade.
 	col.a *= minSizeAlpha;
 
-
-	// FEATHER TEST.
-
-	// Feather mode: StrokeOnly.
-	//float feather = 1;
-	//if( feather > 0.0 ) col.a *= saturate( 1.0 - (max(d,0.0) / ( strokeWidth * feather ) ) );
-
-	// Feather mode: FillOnly.
-	//if( feather > 0.0 ) col.a *= lerp( col.a, saturate( -d / ( totalExtents * feather ) ), saturate( ceil(-d) ) );
-
-	// Feather mode: StokeAndFill.
-	//if( feather > 0.0 ) col.a *= saturate( (strokeWidth-d) / ( (totalExtents+strokeWidth) * feather ) );
+	// Stroke feather.
+	if( strokeFeather > 0.0 ){
+		//#ifdef _FEATHER_FILL
+			//col.a = lerp( col.a, col.a * saturate( -d / ( totalExtents * feather ) ), saturate( ceil(-d) ) );
+		//#ifdef _FEATHER_STROKE
+			col.a *= saturate( ( 1.0 - ( max(d,0.0) / strokeWidth ) ) / strokeFeather );
+		//#else // ALL
+		//	col.a *= saturate( ( strokeWidth - d ) / ( ( totalExtents + strokeWidth ) * feather ) );
+		//#endif
+	}
 	
-
 	return col;
 }
 

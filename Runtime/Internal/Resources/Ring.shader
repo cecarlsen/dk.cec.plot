@@ -69,6 +69,7 @@ Shader "Hidden/Draw/Ring"
 				UNITY_DEFINE_INSTANCED_PROP( half4, _FillColor )
 				UNITY_DEFINE_INSTANCED_PROP( half4, _StrokeColor )
 				UNITY_DEFINE_INSTANCED_PROP( half4, _FragData )
+				UNITY_DEFINE_INSTANCED_PROP( half, _StrokeFeather )
 				#ifdef _HAS_TEXTURE
 					UNITY_DEFINE_INSTANCED_PROP( half4, _TexUVRect )
 					UNITY_DEFINE_INSTANCED_PROP( half4, _TexTint )
@@ -145,6 +146,7 @@ Shader "Hidden/Draw/Ring"
 				half4 data = UNITY_ACCESS_INSTANCED_PROP( Props, _FragData ); // ( x: ringRadius, y: ringExtents, z: strokeWidth, w: strokeOffMin ).
 				half4 fillCol = UNITY_ACCESS_INSTANCED_PROP( Props, _FillColor );
 				half4 strokeCol = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeColor );
+				half strokeFeather = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeFeather );
 
 				// Compute fragment size in shape space. We presume uniform shape space, so we only have to measure one dimension.
 				// It's the absolute difference between 'i.posSS.y' at this fragment and 'i.posSS.y' at the neighboring fragments.
@@ -170,9 +172,9 @@ Shader "Hidden/Draw/Ring"
 				#ifdef _HAS_TEXTURE
 					i.uv = ( ( i.uv * 2 - 1 ) * ( 1 + ( ( data.z + data.w ) / ( data.x + data.y ) ) ) ) * 0.5 + 0.5;
 					half4 texTint = UNITY_ACCESS_INSTANCED_PROP( Props, _TexTint );
-					half4 col = EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol, i.uv, texTint );
+					half4 col = EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol, strokeFeather, i.uv, texTint );
 				#else
-					half4 col =  EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol );
+					half4 col =  EvaluateFillStrokeColor( d, fSize, totalExtents, data.z, fillCol, strokeCol, strokeFeather );
 				#endif
 
 				// Support fog.

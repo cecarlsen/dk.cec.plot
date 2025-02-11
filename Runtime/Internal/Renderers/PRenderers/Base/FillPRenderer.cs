@@ -36,13 +36,11 @@ namespace PlotInternals
 		{
 			if( isFillColorDirty || ( !style.hasVisibleFill && isStrokeColorDirty ) ) {
 				Color color = style.hasVisibleFill ? style.fillColor : ColorWithAlpha( style.strokeColor, 0 );
-				if( drawNow ) _material.SetColor( FillShaderIDs._FillColor, color );
-				else _propBlock.SetColor( FillShaderIDs._FillColor, color );
+				SetColor( drawNow, FillShaderIDs._FillColor, color );
 			}
 			if( isStrokeColorDirty || ( !style.hasVisibleStroke && isFillColorDirty )) {
 				Color color = style.hasVisibleStroke ? style.strokeColor : ColorWithAlpha( style.fillColor, 0 );
-				if( drawNow ) _material.SetColor( SharedShaderIDs._StrokeColor, color );
-				else _propBlock.SetColor( SharedShaderIDs._StrokeColor, color );
+				SetColor( drawNow, SharedShaderIDs._StrokeColor, color );
 			}
 			isFillColorDirty = false;
 			isStrokeColorDirty = false;

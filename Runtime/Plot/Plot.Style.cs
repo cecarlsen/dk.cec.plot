@@ -104,6 +104,13 @@ public partial class Plot
 		/// </summary>
 		public int layer;
 
+		/// <summary>
+		/// The amount of feather to apply to stroke where 0.0 is hard and 1.0 is soft.
+		/// Default is -1 (disabled). Also see FeatherMode.
+		/// </summary>
+		public float strokeFeather;
+
+
 		// The following are "features" (depends on multi compiled shader)
 
 		/// <summary>
@@ -128,6 +135,13 @@ public partial class Plot
 		/// Default is FillTextureBlend.Overlay.
 		/// </summary>
 		public FillTextureBlend fillTextureBlend;
+
+		/// <summary>
+		/// Feather mode.
+		/// Default is All.
+		/// </summary>
+		//public FeatherMode featherMode;
+
 
 		static readonly Color defaultFillColor = Color.white;
 		static readonly Color defaultStrokeColor = Color.black;

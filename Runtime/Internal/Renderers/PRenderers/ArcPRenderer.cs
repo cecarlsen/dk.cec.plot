@@ -152,35 +152,24 @@ namespace PlotInternals
 
 			EnsureAvailableMaterialBeforeSubmission( drawNow );
 
+			// Set constants.
 			if( isFillColorDirty || isStrokeColorDirty ) UpdateFillAndStroke( ref style, drawNow );
-
 			if( style.fillTexture ) { // Texture is set in EnsureAvailableMaterialBeforeSubmission
-				if( drawNow ) {
-					_material.SetVector( FillShaderIDs._TexUVRect, style.fillTextureUVRect );
-					_material.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
-					_material.SetFloat( ShaderIDs._StrokeAlignmentExtension, strokeAlignmentExtension );
-				} else {
-					_propBlock.SetVector( FillShaderIDs._TexUVRect, style.fillTextureUVRect );
-					_propBlock.SetColor( FillShaderIDs._TexTint, style.fillTextureTint );
-					_propBlock.SetFloat( ShaderIDs._StrokeAlignmentExtension, strokeAlignmentExtension );
-				}
+				SetVector( drawNow, FillShaderIDs._TexUVRect, style.fillTextureUVRect );
+				SetColor( drawNow, FillShaderIDs._TexTint, style.fillTextureTint );
+				SetFloat( drawNow, ShaderIDs._StrokeAlignmentExtension, strokeAlignmentExtension );
 			}
-
-			Vector4 vertData = new Vector4( meshScale, innerVertexFactor, fragAngleExtents, vertAngleExtents );
-			Vector4 fragData = new Vector4( ringRadius, ringExtents, horseshoeExtention, fillDistOffset );
-
+			SetVector( drawNow, ShaderIDs._VertData, new Vector4( meshScale, innerVertexFactor, fragAngleExtents, vertAngleExtents ) );
+			SetFloat( drawNow, ShaderIDs._AngleOffset, angleOffset );
+			SetVector( drawNow, ShaderIDs._FragData, new Vector4( ringRadius, ringExtents, horseshoeExtention, fillDistOffset ) );
+			SetFloat( drawNow, ShaderIDs._StrokeWidth, actualStrokeWidth );
+			SetFloat( drawNow, SharedShaderIDs._StrokeFeather, style.strokeFeather );
+			
+			// Draw.
 			if( drawNow ) {
-				_material.SetVector( ShaderIDs._VertData, vertData );
-				_material.SetFloat( ShaderIDs._AngleOffset, angleOffset );
-				_material.SetVector( ShaderIDs._FragData, fragData );
-				_material.SetFloat( ShaderIDs._StrokeWidth, actualStrokeWidth );
 				_material.SetPass( 0 );
 				Graphics.DrawMeshNow( mesh, matrix );
 			} else {
-				_propBlock.SetVector( ShaderIDs._VertData, vertData );
-				_propBlock.SetFloat( ShaderIDs._AngleOffset, angleOffset );
-				_propBlock.SetVector( ShaderIDs._FragData, fragData );
-				_propBlock.SetFloat( ShaderIDs._StrokeWidth, actualStrokeWidth );
 				Graphics.DrawMesh( mesh, matrix, _material, style.layer, null, 0, _propBlock, false, false, false );
 			}
 		}

@@ -31,6 +31,8 @@ public class PlotPolygon : MonoBehaviour
 	public Color strokeColor = Color.black;
 	public StrokeAlignment strokeAlignment = StrokeAlignment.Outside;
 	public StrokeCornerProfile strokeCornerProfile = StrokeCornerProfile.Round;
+	public bool strokeFeatherEnabled = false;
+	[Range(0f,1f)] public float strokeFeather = 0.1f;
 
 	[Header( "Rendering" )]
 	public Blend blend = Blend.Transparent;
@@ -72,6 +74,11 @@ public class PlotPolygon : MonoBehaviour
 			SetStrokeWidth( strokeWidth );
 			SetStrokeAlignement( strokeAlignment );
 			SetStrokeCornerProfile( strokeCornerProfile );
+			if( strokeFeatherEnabled ) {
+				SetStrokeFeather( strokeFeather );
+			} else {
+				SetNoStrokeFeather();
+			}
 		} else {
 			SetNoStroke();
 		}

@@ -78,6 +78,7 @@ Shader "Hidden/Draw/Arc"
 				UNITY_DEFINE_INSTANCED_PROP( half, _StrokeWidth )
 				UNITY_DEFINE_INSTANCED_PROP( half4, _FillColor )
 				UNITY_DEFINE_INSTANCED_PROP( half4, _StrokeColor )
+				UNITY_DEFINE_INSTANCED_PROP( half, _StrokeFeather )
 				#ifdef _HAS_TEXTURE
 					UNITY_DEFINE_INSTANCED_PROP( half4, _TexUVRect )
 					UNITY_DEFINE_INSTANCED_PROP( half, _StrokeAlignmentExtension )
@@ -185,6 +186,7 @@ Shader "Hidden/Draw/Arc"
 				half strokeWidth = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeWidth );
 				half4 fillCol = UNITY_ACCESS_INSTANCED_PROP( Props, _FillColor );
 				half4 strokeCol = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeColor );
+				half strokeFeather = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeFeather );
 				
 				// Compute fragment size in shape space. We presume uniform shape space, so we only have to measure one dimension.
 				float fSize = fwidth( i.posSS.y );
@@ -204,9 +206,9 @@ Shader "Hidden/Draw/Arc"
 					half strokeAlignmentExtension = UNITY_ACCESS_INSTANCED_PROP( Props, _StrokeAlignmentExtension );
 					half4 texTint = UNITY_ACCESS_INSTANCED_PROP( Props, _TexTint );
 					i.uv = ( ( i.uv * 2 - 1 ) * ( 1 + ( strokeAlignmentExtension / ( data.x + data.y - data.w ) ) ) ) * 0.5 + 0.5; // NOTE: could rewrite this to be transformed in the vert shader.
-					half4 col = EvaluateFillStrokeColor( d, fSize, totalExtents, strokeWidth, fillCol, strokeCol, i.uv, texTint );
+					half4 col = EvaluateFillStrokeColor( d, fSize, totalExtents, strokeWidth, fillCol, strokeCol, strokeFeather, i.uv, texTint );
 				#else
-					half4 col =  EvaluateFillStrokeColor( d, fSize, totalExtents, strokeWidth, fillCol, strokeCol );
+					half4 col =  EvaluateFillStrokeColor( d, fSize, totalExtents, strokeWidth, fillCol, strokeCol, strokeFeather );
 				#endif
 
 				// Support fog.
