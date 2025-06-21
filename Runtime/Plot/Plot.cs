@@ -816,5 +816,14 @@ public partial class Plot
 		return Pivot.Center;
 	}
 
+
+
+	public static void DestroyInEditOrRuntime( UnityEngine.Object o )
+	{
+		if( Application.isPlaying ) UnityEngine.Object.Destroy( o );
+		else UnityEngine.Object.DestroyImmediate( o );
+	}
+
+
 	#endregion HelperMethods
 }

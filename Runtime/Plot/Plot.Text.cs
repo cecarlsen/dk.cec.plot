@@ -46,17 +46,18 @@ public partial class Plot
 
 
 		/// <summary>
-		/// Set the text content of the Test object.
+		/// Set the text content of the Text object.
 		/// </summary>
 		public void SetContent( string text )
 		{
 			_content = text;
+			_tmp.text = _content;
 		}
 
 
 		public TextMeshPro GetTextMeshPro( bool drawNow )
 		{
-			EnsureAvailableMeshBeforeSubmission( drawNow );
+			EnsureAvailableMeshBeforeSubmission( reuse: drawNow );
 			return _tmp;
 		}
 
