@@ -30,7 +30,7 @@ Plot [API here](https://cec.dk/plot/api.html). Also included as PDF at *Packages
 
 ## Feature highlights
 	
-	- SDF based Circle, Ring, Arc, Rect, Line, Polygon, Polygon.
+	- SDF based Circle, Ring, Arc, Rect, Line, Polygon, Polyline.
 	- Shape antialiasing (fragment based, indenpendent of Unity).
 	- Perceptual color model (JCh).
 	- Draw instanced with sorted transparency in the scene or directly to render textures.
